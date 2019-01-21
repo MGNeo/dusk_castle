@@ -3,11 +3,14 @@
 #include "render.h"
 #include "windows.h"
 #include "draw.h"
+#include "processing.h"
 
 #include <SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
+#include "window.h"// ТЕСТ
 
 // Вычисляет dt итерации игрового цикла.
 static float dt_calculate(void);
@@ -21,7 +24,7 @@ void editor(void)
     {
         const float dt = dt_calculate();
 
-        // Обрабатываем все события.
+        // Обработка всех накопившихся событий.
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
         {
@@ -30,21 +33,46 @@ void editor(void)
                 exit(0);
             }
 
+            switch (scene)
+            {
+                // Первое меню Открыть/Создать.
+                case (0):
+                {
+                    // Если какой-либо пункт меню был активирован, переходим редактированию.
+                    if (menu_1_processing(&event) != 0)
+                    {
+                        scene = 1;
+                    }
+                    break;
+                }
+
+                case (1):
+                {
+
+                    break;
+                }
+            }
         }
+
+        // Цвет очистки всех сцен - черный.
+        SDL_SetRenderDrawColor(render, 0, 0, 0, 255);// Тест.
 
         SDL_RenderClear(render);// ТЕСТ.
 
         // Обрабатываем сцены.
         switch (scene)
         {
-            // Выбор Открыть/Создать.
+            // Первое меню Открыть/Создать.
             case(0):
             {
+                // Рисуем первое меню.
+                menu_1_draw();
                 break;
             }
             // Редактирование уровня.
             case (1):
             {
+                draw_grid();
                 break;
             }
         }

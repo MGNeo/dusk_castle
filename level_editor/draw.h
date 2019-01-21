@@ -16,4 +16,8 @@ void text_draw(const char *const _text,
                const int _y,
                const text_align _align);
 
+void menu_1_draw(void);
+
+void draw_grid(void);
+
 #endif

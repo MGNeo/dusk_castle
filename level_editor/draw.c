@@ -3,11 +3,14 @@
 #include "render.h"
 #include "crash.h"
 #include "text.h"
+#include "menu_1.h"
+#include "window.h"
+#include "sprite.h"
 
 #include <string.h>
 #include <SDL.h>
 
-// Рисует нуль-терменированную строку в виде однострочного текста.
+// Рисует нуль-терминированную строку в виде однострочного текста.
 // Нультерминатор ресуется, если вдруг для него существует текстура.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
 void text_draw(const char *const _text,
@@ -152,5 +155,58 @@ void text_draw(const char *const _text,
             crash("text_draw(), для отрисовки текста задано неизвестное выравнивание");
             break;
         }
+    }
+}
+
+// Отрисовывает первое меню.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void menu_1_draw(void)
+{
+    int w, h;
+    // Пытаемся получить текущие размеры окна.
+    SDL_GetWindowSize(window, &w, &h);// Нужен размер клиентской области.
+
+    const size_t size = 20;
+
+    w = w / 2;
+    h = h / 2;
+
+    // Возможно, стоит получать размеры окна один раз в начале цикла...
+
+    // Отрисовываем меню.
+    if (menu_1_selected_item == MENU_1_NEW)
+    {
+        text_draw("- Создать новый уровень -", size, w, h - size, TEXT_ALIGN_CENTER);
+        text_draw("Открыть существующий уровень", size, w, h + size, TEXT_ALIGN_CENTER);
+
+        return;
+    }
+    if (menu_1_selected_item == MENU_1_OPEN)
+    {
+        text_draw("Создать новый уровень", size, w, h - size, TEXT_ALIGN_CENTER);
+        text_draw("- Открыть существующий уровень -", size, w, h + size, TEXT_ALIGN_CENTER);
+
+        return;
+    }
+}
+
+// Рисует сетку.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void draw_grid(void)
+{
+    // Задаем цвет сетки.
+    const int r_code = SDL_SetRenderDrawColor(render, 155, 155, 155, 255);
+    if (r_code != 0)
+    {
+        crash("draw_grid(), не удалось задать цвет сетки.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // ТЕСТ.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+    for (size_t x = 0; x < w; x += SPRITE_WIDTH)
+    {
+        SDL_RenderDrawLine(render, x, 0, x, h);
     }
 }

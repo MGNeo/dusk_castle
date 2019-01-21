@@ -42,6 +42,7 @@
 			<Add option="-lSDL2main" />
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_ttf" />
+			<Add option="-lcomdlg32" />
 			<Add directory="C:/SDL/SDL2-2.0.8/i686-w64-mingw32/lib" />
 			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/lib" />
 		</Linker>
@@ -68,10 +69,23 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="map.h" />
+		<Unit filename="menu_1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu_1.h" />
+		<Unit filename="processing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="processing.h" />
 		<Unit filename="render.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="render.h" />
+		<Unit filename="sprite.h" />
 		<Unit filename="text.h" />
 		<Unit filename="textures.c">
 			<Option compilerVar="CC" />
