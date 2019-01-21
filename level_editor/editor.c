@@ -1,6 +1,9 @@
 #include "editor.h"
 #include "crash.h"
-#include "resources_low.h"
+#include "render.h"
+#include "windows.h"
+#include "draw.h"
+
 #include <SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,7 +31,8 @@ void editor(void)
             }
 
         }
-        // А здесь не вариант обрабатывать события.
+
+        SDL_RenderClear(render);// ТЕСТ.
 
         // Обрабатываем сцены.
         switch (scene)
@@ -36,7 +40,6 @@ void editor(void)
             // Выбор Открыть/Создать.
             case(0):
             {
-
                 break;
             }
             // Редактирование уровня.

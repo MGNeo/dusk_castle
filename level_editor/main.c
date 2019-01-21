@@ -1,9 +1,11 @@
-#include "resources_high.h"
+#include "boot.h"
 #include "editor.h"
 
 int main(int argc, char **argv)
 {
-    resources_init_and_load();
+    system_init();
+    glyphs_load();
+    textures_load();
 
     editor();
 

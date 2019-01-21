@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1547747968 source:c:\users\nb529\desktop\dusk_castle\level_editor\crash.c
+1548055440 source:c:\users\nb529\desktop\dusk_castle\level_editor\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
@@ -7,8 +7,8 @@
 
 1547747968 c:\users\nb529\desktop\dusk_castle\level_editor\crash.h
 
-1547811162 source:c:\users\nb529\desktop\dusk_castle\level_editor\main.c
-	"resources_high.h"
+1548048294 source:c:\users\nb529\desktop\dusk_castle\level_editor\main.c
+	"boot.h"
 	"editor.h"
 
 1547810197 c:\users\nb529\desktop\dusk_castle\level_editor\resources_high.h
@@ -370,11 +370,71 @@
 
 1547810937 c:\users\nb529\desktop\dusk_castle\level_editor\editor.h
 
-1547814837 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
+1548056794 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
 	"editor.h"
 	"crash.h"
-	"resources_low.h"
+	"render.h"
+	"windows.h"
+	"draw.h"
 	<SDL.h>
 	<stdlib.h>
+	<stdio.h>
 	<time.h>
+
+1548056626 source:c:\users\nb529\desktop\dusk_castle\level_editor\boot.c
+	"boot.h"
+	"window.h"
+	"render.h"
+	"glyphs.h"
+	"textures.h"
+	"crash.h"
+	<windows.h>
+	<locale.h>
+	<SDL_ttf.h>
+
+1548048131 c:\users\nb529\desktop\dusk_castle\level_editor\boot.h
+
+1548047560 c:\users\nb529\desktop\dusk_castle\level_editor\window.h
+	"SDL.h"
+
+1548047560 c:\users\nb529\desktop\dusk_castle\level_editor\render.h
+	"SDL.h"
+
+1548056721 c:\users\nb529\desktop\dusk_castle\level_editor\glyphs.h
+	"SDL.h"
+
+1548048193 c:\users\nb529\desktop\dusk_castle\level_editor\textures.h
+	"SDL.h"
+
+1548048753 source:c:\users\nb529\desktop\dusk_castle\level_editor\glyphs.c
+	"glyphs.h"
+
+1548047108 source:c:\users\nb529\desktop\dusk_castle\level_editor\render.c
+	"render.h"
+
+1548048221 source:c:\users\nb529\desktop\dusk_castle\level_editor\textures.c
+	"textures.h"
+
+1548047560 source:c:\users\nb529\desktop\dusk_castle\level_editor\window.c
+	"window.h"
+
+1454362933 c:\sdl\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1548056721 source:c:\users\nb529\desktop\dusk_castle\level_editor\draw.c
+	"draw.h"
+	"glyphs.h"
+	"render.h"
+	"crash.h"
+	"text.h"
+	<string.h>
+	<SDL.h>
+
+1548054233 c:\users\nb529\desktop\dusk_castle\level_editor\draw.h
+	"text.h"
+	<stdlib.h>
+
+1548054611 c:\users\nb529\desktop\dusk_castle\level_editor\text.h
 
