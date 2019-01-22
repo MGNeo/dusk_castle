@@ -45,10 +45,13 @@ void editor(void)
                     }
                     break;
                 }
-
+                // Редактирование уровня.
                 case (1):
                 {
-
+                    // Обработка курсора.
+                    cursor_processing(&event);
+                    // Обработка точки рендеринга.
+                    render_point_processing();
                     break;
                 }
             }
@@ -72,7 +75,16 @@ void editor(void)
             // Редактирование уровня.
             case (1):
             {
-                draw_grid();
+                // Рисуем сетку.
+                grid_draw();
+                // Рисуем курсор.
+                cursor_draw();
+
+                // Рисуем информацию.
+                info_draw();
+
+                // Рисуем карту.
+                map_draw();
                 break;
             }
         }

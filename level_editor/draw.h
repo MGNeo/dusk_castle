@@ -18,6 +18,12 @@ void text_draw(const char *const _text,
 
 void menu_1_draw(void);
 
-void draw_grid(void);
+void grid_draw(void);
+
+void cursor_draw(void);
+
+void map_draw(void);
+
+void info_draw(void);
 
 #endif

@@ -1,7 +1,11 @@
 #include "processing.h"
 #include "menu_1.h"
+#include "cursor.h"
 #include "crash.h"
+#include "map.h"
 #include "window.h"// Тестовое.
+#include "sprite.h"
+#include "render_point.h"
 
 #include <windows.h>
 
@@ -12,7 +16,7 @@ int menu_1_processing(const SDL_Event *const _event)
 {
     if (_event == NULL)
     {
-        crash("menu_1_processing(), _event == NULL\n");
+        crash("menu_1_processing(), _event == NULL");
     }
 
     if (_event->type == SDL_KEYDOWN)
@@ -53,4 +57,112 @@ int menu_1_processing(const SDL_Event *const _event)
     }
 
     return 0;
+}
+
+// Обрабатывает курсор: перемещение, смену типа блока, активацию.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void cursor_processing(const SDL_Event *const _event)
+{
+    if (_event == NULL)
+    {
+        crash("cursor_processing(), _event == NULL");
+    }
+
+    if (_event->type == SDL_KEYDOWN)
+    {
+        switch (_event->key.keysym.sym)
+        {
+            case (SDLK_UP):
+            {
+                --cursor_y;
+                if (cursor_y < 0)
+                {
+                    cursor_y = 0;
+                }
+                break;
+            }
+            case (SDLK_RIGHT):
+            {
+                ++cursor_x;
+                if (cursor_x > MAP_WIDTH - 1)
+                {
+                    cursor_x = MAP_WIDTH - 1;
+                }
+                break;
+            }
+            case (SDLK_DOWN):
+            {
+                ++cursor_y;
+                if (cursor_y > MAP_HEIGHT - 1)
+                {
+                    cursor_y = MAP_HEIGHT - 1;
+                }
+                break;
+            }
+            case (SDLK_LEFT):
+            {
+                --cursor_x;
+                if (cursor_x < 0)
+                {
+                    cursor_x = 0;
+                }
+                break;
+            }
+            case (SDLK_SPACE):
+            {
+                map[cursor_x][cursor_y] = !map[cursor_x][cursor_y];
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
+}
+
+// Обрабатывает точку рендеринга.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void render_point_processing(void)
+{
+    // Контроль переполнения не нужен, так как границы карты лежат
+    // далеко от границ int.
+
+    // Определяем размеры окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    // Определяем размеры окна в клетках.
+    const int count_x = w / SPRITE_SIZE;
+    const int count_y = h / SPRITE_SIZE;
+
+    // Определяем положение курсора относительно точки рендеринга.
+    const int dx = cursor_x - render_point_x;
+    const int dy = cursor_y - render_point_y;
+
+    // Двигаем смещение, если курсор уехал за границу отображения.
+
+    // Курсор вылез за правую границу отображения.
+    if (dx > count_x - 1)
+    {
+        render_point_x += dx - (count_x - 1);
+    }
+
+    // Курсор вылез за левую границу отображения.
+    if (dx < 1)
+    {
+        render_point_x += dx;
+    }
+
+    // Курсор вылез за нижнюю границу отображения.
+    if (dy > count_y - 1)
+    {
+        render_point_y += dy - (count_y - 1);
+    }
+
+    // Курсор вылез за верхнюю границу отображения.
+    if (dy < 1)
+    {
+        render_point_y += dy;
+    }
 }

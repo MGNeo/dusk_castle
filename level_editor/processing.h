@@ -12,4 +12,8 @@
 
 int menu_1_processing(const SDL_Event *const _event);
 
+void cursor_processing(const SDL_Event *const _event);
+
+void render_point_processing(void);
+
 #endif

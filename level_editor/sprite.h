@@ -7,7 +7,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#define SPRITE_WIDTH 64
-#define SPRITE_HEIGHT SPRITE_WIDTH
+#define SPRITE_SIZE 64
 
 #endif

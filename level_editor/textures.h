@@ -9,4 +9,8 @@
 
 #include "SDL.h"
 
+#define TEXTURES_COUNT
+
+extern SDL_Texture *map[256];
+
 #endif

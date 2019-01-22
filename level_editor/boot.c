@@ -9,6 +9,10 @@
 #include <locale.h>
 #include <SDL_ttf.h>
 
+// Загружает текстуру.
+static void texture_load(const char *const _file_name,
+                         SDL_Texture **const _texture);
+
 // Инициализирует систему.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
 void system_init(void)
@@ -148,9 +152,57 @@ void glyphs_load(void)
     }
 }
 
+// Загружает текстуру.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+static void texture_load(const char *const _file_name,
+                         SDL_Texture **const _texture)
+{
+    if (_file_name == NULL)
+    {
+        crash("texture_load(), _file_name == NULL");
+    }
+
+    if (strlen(_file_name) == 0)
+    {
+        crash("texture_load(), strlen(_file_name) == 0");
+    }
+
+    if (_texture == NULL)
+    {
+        crash("texure_load(), _texure == NULL");
+    }
+
+    // Пытаемся создать поверхность, загрузив данные из файла.
+    SDL_Surface *h_surface = SDL_LoadBMP(_file_name);
+    if (h_surface == NULL)
+    {
+        crash("texture_load(), не удалось создать поверхность на основе файла: %s\nSDL_GetError() : %s",
+              _file_name,
+              SDL_GetError());
+    }
+
+    // Пытаемся создать текстуру на основе поверхности.
+    SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
+    if (h_texture == NULL)
+    {
+        crash("texture_load(), не удалось создать текстуру на основе поверхности.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    SDL_FreeSurface(h_surface);
+
+    *_texture = h_texture;
+}
+
 // Загружает текстуры.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
 void textures_load(void)
 {
+    // Защита от повторного вызова.
+    static size_t again = 0;
+    if (again++ != 0)
+    {
+        crash("textures_load(), попытка повторной загрузки текстур.");
+    }
 
 }

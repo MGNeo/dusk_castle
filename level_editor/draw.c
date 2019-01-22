@@ -6,9 +6,17 @@
 #include "menu_1.h"
 #include "window.h"
 #include "sprite.h"
+#include "cursor.h"
+#include "render_point.h"
+#include "map.h"
 
 #include <string.h>
 #include <SDL.h>
+
+// Отрисовка спрайта.
+static void sprite_draw(const SDL_Texture *const _texture,
+                        const int _x,
+                        const int _y);
 
 // Рисует нуль-терминированную строку в виде однострочного текста.
 // Нультерминатор ресуется, если вдруг для него существует текстура.
@@ -68,6 +76,7 @@ void text_draw(const char *const _text,
                 {
                     rect.h = glyphs[s][g].h;
                     rect.w = glyphs[s][g].w;
+
                     if (SDL_RenderCopy(render, glyphs[s][g].texture, NULL, &rect) != 0)
                     {
                         crash("text_draw(), не удалось отрисовать глиф при выводе текста с левым выравниванием\nSDL_GetError() : %s",
@@ -164,7 +173,7 @@ void menu_1_draw(void)
 {
     int w, h;
     // Пытаемся получить текущие размеры окна.
-    SDL_GetWindowSize(window, &w, &h);// Нужен размер клиентской области.
+    SDL_GetWindowSize(window, &w, &h);// Нужен размер клиентской области...
 
     const size_t size = 20;
 
@@ -192,21 +201,155 @@ void menu_1_draw(void)
 
 // Рисует сетку.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
-void draw_grid(void)
+void grid_draw(void)
 {
     // Задаем цвет сетки.
-    const int r_code = SDL_SetRenderDrawColor(render, 155, 155, 155, 255);
-    if (r_code != 0)
+    if (SDL_SetRenderDrawColor(render, 100, 100, 100, 200) != 0)
     {
-        crash("draw_grid(), не удалось задать цвет сетки.\nSDL_GetError() : %s",
+        crash("grid_draw(), не удалось задать цвет сетки.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // ТЕСТ.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
-    for (size_t x = 0; x < w; x += SPRITE_WIDTH)
+    for (size_t x = 0; x < w; x += SPRITE_SIZE)
     {
-        SDL_RenderDrawLine(render, x, 0, x, h);
+        if (SDL_RenderDrawLine(render, x, 0, x, h) != 0)
+        {
+            crash("grid_draw(), не удалось отрисовать вертикальную линию сетки\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
+    }
+    for (size_t y = 0; y < h; y += SPRITE_SIZE)
+    {
+        if (SDL_RenderDrawLine(render, 0, y, w, y) != 0)
+        {
+            crash("grid_draw(), не удалось отрисовать горизонтальную линию сетки\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
+    }
+
+}
+
+// Отрисовка курсора.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void cursor_draw(void)
+{
+    // Задаем цвет курсора.
+    if (SDL_SetRenderDrawColor(render, 0, 255, 0, 255) != 0)
+    {
+        crash("cursor_draw(), не удалось задать цвет курсора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    const int x = (cursor_x - render_point_x) * SPRITE_SIZE;
+    const int y = (cursor_y - render_point_y) * SPRITE_SIZE;
+
+    const int x_1 = x + 2;
+    const int y_1 = y + 2;
+
+    const int x_2 = x + SPRITE_SIZE - 2;
+    const int y_2 = y + SPRITE_SIZE - 2;
+
+    // Верх.
+    if (SDL_RenderDrawLine(render, x_1, y_1, x_2, y_1) != 0)
+    {
+        crash("cursor_draw(), не удалось отрисовать верхнюю часть курсора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Лево.
+    if (SDL_RenderDrawLine(render, x_1, y_1, x_1, y_2) != 0)
+    {
+        crash("cursor_draw(), не удалось отрисовать левую часть курсора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Низ.
+    if (SDL_RenderDrawLine(render, x_1, y_2, x_2, y_2) != 0)
+    {
+        crash("cursor_draw(), не удалось отрисовать нижнюю часть курсора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Право.
+    if (SDL_RenderDrawLine(render, x_2, y_2, x_2, y_1) != 0)
+    {
+        crash("cursor_draw(), не удалось отрисовать правую часть курсора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+}
+
+// Отрисовка информации.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void info_draw(void)
+{
+    // Информация о курсоре.
+    char info[100];
+
+    // Информация о курсоре.
+    sprintf(info, "Курсор    x: %i    y: %i",
+            cursor_x,
+            cursor_y);
+
+    text_draw(info, 12, 10, 10, TEXT_ALIGN_LEFT);
+
+    // Информация о точке рендеринга.
+    sprintf(info, "Точка рендеринга    x: %i    y: %i",
+            render_point_x,
+            render_point_y);
+    text_draw(info, 12, 10, 30, TEXT_ALIGN_LEFT);
+}
+
+// Отрисовка карты.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void map_draw(void)
+{
+    // Получаем размеры окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+    // Получаем размеры окна в клетках.
+    const int count_x = w / SPRITE_SIZE;
+    const int count_y = h / SPRITE_SIZE;
+
+    // Отрисовываем только те клетки, которые находятся в пределах видимости.
+    for (int x = render_point_x; x < render_point_x + count_x; ++x)
+    {
+        for (size_t y = render_point_y; y < render_point_y + count_y; ++y)
+        {
+            // Отрисовку клетки можно вынести во внутреннюю функцию.
+            if ( (x < MAP_WIDTH) && (y < MAP_HEIGHT) )
+            {
+                if (map[x][y] == 1)
+                SDL_RenderDrawPoint(render,
+                                    (x - render_point_x) * SPRITE_SIZE + SPRITE_SIZE / 2,
+                                    (y - render_point_y) * SPRITE_SIZE + SPRITE_SIZE / 2);
+            }
+        }
+    }
+}
+
+// Рисует спрайт.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+static void sprite_draw(const SDL_Texture *const _texture,
+                        const int _x,
+                        const int _y)
+{
+    if (_texture == NULL)
+    {
+        crash("sprite_draw(), _texture == NULL");
+    }
+
+    SDL_Rect rect;
+    rect.w = SPRITE_SIZE;
+    rect.h = SPRITE_SIZE;
+    rect.x = _x;
+    rect.y = _y;
+
+    if (SDL_RenderCopy(render, _texture, NULL, &rect) != 0)
+    {
+        crash("sprite_draw(), не удалось отрисовать спрайт.\nSDL_GetError() : %s",
+              SDL_GetError());
     }
 }
