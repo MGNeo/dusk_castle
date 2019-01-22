@@ -42,6 +42,10 @@ void editor(void)
                     if (menu_1_processing(&event) != 0)
                     {
                         scene = 1;
+                        // Сбрасываем положение курсора.
+                        cursor_reset();
+                        // Сбрасываем положение точки рендера.
+                        render_point_reset();
                     }
                     break;
                 }
@@ -50,6 +54,8 @@ void editor(void)
                 {
                     // Обработка курсора.
                     cursor_processing(&event);
+                    // Обработка меню №2.
+                    menu_2_processing(&event);
                     // Обработка точки рендеринга.
                     render_point_processing();
                     break;
@@ -75,16 +81,21 @@ void editor(void)
             // Редактирование уровня.
             case (1):
             {
+                // Рисуем карту.
+                map_draw();
+
                 // Рисуем сетку.
                 grid_draw();
+
                 // Рисуем курсор.
                 cursor_draw();
+
+                // Рисуем меню №2.
+                menu_2_draw();
 
                 // Рисуем информацию.
                 info_draw();
 
-                // Рисуем карту.
-                map_draw();
                 break;
             }
         }

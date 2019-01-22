@@ -84,6 +84,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu_1.h" />
+		<Unit filename="menu_2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu_2.h" />
 		<Unit filename="processing.c">
 			<Option compilerVar="CC" />
 		</Unit>

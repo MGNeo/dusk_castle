@@ -4,17 +4,28 @@
 #include "crash.h"
 #include "text.h"
 #include "menu_1.h"
+#include "menu_2.h"
 #include "window.h"
 #include "sprite.h"
 #include "cursor.h"
 #include "render_point.h"
 #include "map.h"
+#include "textures.h"
 
 #include <string.h>
 #include <SDL.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+// Отрисовка текста.
+static void text_draw(const char *const _text,
+                      const size_t _size,
+                      const int _x,
+                      const int _y,
+                      const text_align _align);
 
 // Отрисовка спрайта.
-static void sprite_draw(const SDL_Texture *const _texture,
+static void sprite_draw(SDL_Texture *const _texture,
                         const int _x,
                         const int _y);
 
@@ -206,7 +217,7 @@ void grid_draw(void)
     // Задаем цвет сетки.
     if (SDL_SetRenderDrawColor(render, 100, 100, 100, 200) != 0)
     {
-        crash("grid_draw(), не удалось задать цвет сетки.\nSDL_GetError() : %s",
+        crash("grid_draw(), не удалось задать цвет линий.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
@@ -239,7 +250,7 @@ void cursor_draw(void)
     // Задаем цвет курсора.
     if (SDL_SetRenderDrawColor(render, 0, 255, 0, 255) != 0)
     {
-        crash("cursor_draw(), не удалось задать цвет курсора.\nSDL_GetError() : %s",
+        crash("cursor_draw(), не удалось задать цвет линий курсора навигации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
@@ -309,22 +320,20 @@ void map_draw(void)
     // Получаем размеры окна.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
-    // Получаем размеры окна в клетках.
-    const int count_x = w / SPRITE_SIZE;
-    const int count_y = h / SPRITE_SIZE;
+    // Определяем, сколько клеток видно на экране.
+    const int count_x = w / SPRITE_SIZE + 1;
+    const int count_y = h / SPRITE_SIZE + 1;
 
     // Отрисовываем только те клетки, которые находятся в пределах видимости.
     for (int x = render_point_x; x < render_point_x + count_x; ++x)
     {
         for (size_t y = render_point_y; y < render_point_y + count_y; ++y)
         {
-            // Отрисовку клетки можно вынести во внутреннюю функцию.
             if ( (x < MAP_WIDTH) && (y < MAP_HEIGHT) )
             {
-                if (map[x][y] == 1)
-                SDL_RenderDrawPoint(render,
-                                    (x - render_point_x) * SPRITE_SIZE + SPRITE_SIZE / 2,
-                                    (y - render_point_y) * SPRITE_SIZE + SPRITE_SIZE / 2);
+                sprite_draw(textures[map[x][y]],
+                            (x - render_point_x) * SPRITE_SIZE,
+                            (y - render_point_y) * SPRITE_SIZE);
             }
         }
     }
@@ -332,7 +341,7 @@ void map_draw(void)
 
 // Рисует спрайт.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
-static void sprite_draw(const SDL_Texture *const _texture,
+static void sprite_draw(SDL_Texture *const _texture,
                         const int _x,
                         const int _y)
 {
@@ -351,5 +360,76 @@ static void sprite_draw(const SDL_Texture *const _texture,
     {
         crash("sprite_draw(), не удалось отрисовать спрайт.\nSDL_GetError() : %s",
               SDL_GetError());
+    }
+}
+
+// Рисует меню №2.
+// В случае ошибки показывает информацию о причине сбоя и кращит программу.
+void menu_2_draw(void)
+{
+    // Определяем размеры окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    // Определяем, сколько клеток умещается на экране.
+    const int count_x = w / SPRITE_SIZE + 1;
+    const int count_y = h / SPRITE_SIZE + 1;
+
+    // Рисуем список типов клеток в виде списка.
+    for (uint8_t t = 0; t < count_x; ++t)
+    {
+        // Определяем тип клетки списка.
+        // Выбранная клетка располагается в центре списка.
+        const auto uint8_t h_t = menu_2_selected_item - (count_x / 2) + t;
+
+        sprite_draw(textures[h_t],
+                    t * SPRITE_SIZE,
+                    h - SPRITE_SIZE);
+
+        // Вокруг центрального пункта списка рисуем курсор.
+        if (t == count_x / 2)
+        {
+            // Задаем цвет курсора.
+            if (SDL_SetRenderDrawColor(render, 255, 0, 0, 255) != 0)
+            {
+                crash("menu_2_draw(), не удалось задать цвет линий курсора выбора типа клетки.\nSDL_GetError() : %s",
+                      SDL_GetError());
+            }
+
+            const int x_1 = t * SPRITE_SIZE + 2;
+            const int y_1 = h - SPRITE_SIZE + 2;
+            const int x_2 = (t + 1) * SPRITE_SIZE - 2;
+            const int y_2 = h - 2;
+
+
+            // Верх.
+            SDL_RenderDrawLine(render,
+                               x_1,
+                               y_1,
+                               x_2,
+                               y_1);
+            // Лево.
+            SDL_RenderDrawLine(render,
+                               x_1,
+                               y_1,
+                               x_1,
+                               y_2);
+
+            // Низ.
+            SDL_RenderDrawLine(render,
+                               x_1,
+                               y_2,
+                               x_2,
+                               y_2);
+
+            // Право.
+            SDL_RenderDrawLine(render,
+                               x_2,
+                               y_2,
+                               x_2,
+                               y_1);
+
+        }
+
     }
 }

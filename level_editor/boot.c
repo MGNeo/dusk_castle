@@ -8,6 +8,8 @@
 #include <windows.h>
 #include <locale.h>
 #include <SDL_ttf.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 // Загружает текстуру.
 static void texture_load(const char *const _file_name,
@@ -203,6 +205,13 @@ void textures_load(void)
     if (again++ != 0)
     {
         crash("textures_load(), попытка повторной загрузки текстур.");
+    }
+    // Загружаем все текстуры в один массив.
+    for (size_t t = 0; t < TEXTURES_COUNT; ++t)
+    {
+        char file_name[] = "textures/texture****.bmp";
+        sprintf(file_name, "textures/texture%04Iu.bmp", t);// Желателен контроль отказа.
+        texture_load(file_name, &textures[t]);
     }
 
 }

@@ -6,6 +6,7 @@
 #include "window.h"// Тестовое.
 #include "sprite.h"
 #include "render_point.h"
+#include "menu_2.h"
 
 #include <windows.h>
 
@@ -110,7 +111,12 @@ void cursor_processing(const SDL_Event *const _event)
             }
             case (SDLK_SPACE):
             {
-                map[cursor_x][cursor_y] = !map[cursor_x][cursor_y];
+                if (map[cursor_x][cursor_y] == 0)
+                {
+                    map[cursor_x][cursor_y] = menu_2_selected_item;
+                } else {
+                    map[cursor_x][cursor_y] = 0;
+                }
                 break;
             }
             default:
@@ -164,5 +170,50 @@ void render_point_processing(void)
     if (dy < 1)
     {
         render_point_y += dy;
+    }
+}
+
+// Выставляет курсор в центр уровня.
+void cursor_reset(void)
+{
+    cursor_x = MAP_WIDTH / 2;
+    cursor_y = MAP_HEIGHT / 2;
+}
+
+// Выставляет точку рендера в центр уровня.
+void render_point_reset(void)
+{
+    render_point_x = MAP_WIDTH / 2;
+    render_point_y = MAP_HEIGHT / 2;
+}
+
+// Обработка меню №2.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void menu_2_processing(const SDL_Event *const _event)
+{
+    if (_event == NULL)
+    {
+        crash("menu_2_processing(), _event == NULL");
+    }
+
+    if (_event->type == SDL_KEYDOWN)
+    {
+        switch (_event->key.keysym.sym)
+        {
+            case (SDLK_PAGEUP):
+            {
+                ++menu_2_selected_item;
+                break;
+            }
+            case (SDLK_PAGEDOWN):
+            {
+                --menu_2_selected_item;
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
     }
 }
