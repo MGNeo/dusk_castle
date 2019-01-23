@@ -146,30 +146,36 @@ void render_point_processing(void)
     const int dx = cursor_x - render_point_x;
     const int dy = cursor_y - render_point_y;
 
+    // Границы контроля.
+    const int right_border = count_x - 1;
+    const int left_border = 0;
+    const int top_border = 1;
+    const int bottom_border = count_y - 2;
+
     // Двигаем смещение, если курсор уехал за границу отображения.
 
     // Курсор вылез за правую границу отображения.
-    if (dx > count_x - 1)
+    if (dx > right_border)
     {
-        render_point_x += dx - (count_x - 1);
+        render_point_x += dx - right_border;
     }
 
     // Курсор вылез за левую границу отображения.
-    if (dx < 1)
+    if (dx < left_border)
     {
         render_point_x += dx;
     }
 
-    // Курсор вылез за нижнюю границу отображения.
-    if (dy > count_y - 1)
+    // Курсор вылез под нижнюю панель.
+    if (dy > bottom_border)
     {
-        render_point_y += dy - (count_y - 1);
+        render_point_y += dy - bottom_border;
     }
 
-    // Курсор вылез за верхнюю границу отображения.
-    if (dy < 1)
+    // Курсор вылез под верхнюю панель.
+    if (dy < top_border)
     {
-        render_point_y += dy;
+        render_point_y += dy - top_border;
     }
 }
 

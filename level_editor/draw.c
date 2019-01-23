@@ -129,6 +129,7 @@ void text_draw(const char *const _text,
 
             break;
         }
+
         case (TEXT_ALIGN_CENTER):
         {
             // Вычислим, сколько пикселей на экране займет строка (включая нультерминатор).
@@ -266,28 +267,28 @@ void cursor_draw(void)
     // Верх.
     if (SDL_RenderDrawLine(render, x_1, y_1, x_2, y_1) != 0)
     {
-        crash("cursor_draw(), не удалось отрисовать верхнюю часть курсора.\nSDL_GetError() : %s",
+        crash("cursor_draw(), не удалось отрисовать верхнюю часть курсора навигации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // Лево.
     if (SDL_RenderDrawLine(render, x_1, y_1, x_1, y_2) != 0)
     {
-        crash("cursor_draw(), не удалось отрисовать левую часть курсора.\nSDL_GetError() : %s",
+        crash("cursor_draw(), не удалось отрисовать левую часть курсора навигации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // Низ.
     if (SDL_RenderDrawLine(render, x_1, y_2, x_2, y_2) != 0)
     {
-        crash("cursor_draw(), не удалось отрисовать нижнюю часть курсора.\nSDL_GetError() : %s",
+        crash("cursor_draw(), не удалось отрисовать нижнюю часть курсора навигации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // Право.
     if (SDL_RenderDrawLine(render, x_2, y_2, x_2, y_1) != 0)
     {
-        crash("cursor_draw(), не удалось отрисовать правую часть курсора.\nSDL_GetError() : %s",
+        crash("cursor_draw(), не удалось отрисовать правую часть курсора навигации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 }
@@ -296,6 +297,31 @@ void cursor_draw(void)
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
 void info_draw(void)
 {
+    // Задаем цвет панели информации.
+    if (SDL_SetRenderDrawColor(render, 100, 100, 100, 255) != 0)
+    {
+        crash("info_draw(), не удалось задать цвет панели информации.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Получаем размеры окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    // Определяем размер и расположение панели информации.
+    SDL_Rect rect;
+    rect.w = w - 8;
+    rect.h = SPRITE_SIZE - 8;
+    rect.x = 4;
+    rect.y = 4;
+
+    // Рисуем панель информации.
+    if (SDL_RenderFillRect(render, &rect) != 0)
+    {
+        crash("info_draw(), не удалось нарисовать панель информации.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
     // Информация о курсоре.
     char info[100];
 
@@ -324,6 +350,17 @@ void map_draw(void)
     const int count_x = w / SPRITE_SIZE + 1;
     const int count_y = h / SPRITE_SIZE + 1;
 
+    // Сперва задаем всем текстурам стопроцентную непрозрачность, потому что
+    // непрозрачность текстур могла быть изменена при отрисовке интерфейса.
+    for (size_t t = 0; t < TEXTURES_COUNT; ++t)
+    {
+        if (SDL_SetTextureAlphaMod(textures[t], 255) != 0)
+        {
+            crash("map_draw(), не удалось задать текстурам уровня стопроцентную непрозрачность.\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
+    }
+
     // Отрисовываем только те клетки, которые находятся в пределах видимости.
     for (int x = render_point_x; x < render_point_x + count_x; ++x)
     {
@@ -332,8 +369,8 @@ void map_draw(void)
             if ( (x < MAP_WIDTH) && (y < MAP_HEIGHT) )
             {
                 sprite_draw(textures[map[x][y]],
-                            (x - render_point_x) * SPRITE_SIZE,
-                            (y - render_point_y) * SPRITE_SIZE);
+                           (x - render_point_x) * SPRITE_SIZE,
+                           (y - render_point_y) * SPRITE_SIZE);
             }
         }
     }
@@ -356,6 +393,7 @@ static void sprite_draw(SDL_Texture *const _texture,
     rect.x = _x;
     rect.y = _y;
 
+    // Рисуем спрайт.
     if (SDL_RenderCopy(render, _texture, NULL, &rect) != 0)
     {
         crash("sprite_draw(), не удалось отрисовать спрайт.\nSDL_GetError() : %s",
@@ -367,69 +405,88 @@ static void sprite_draw(SDL_Texture *const _texture,
 // В случае ошибки показывает информацию о причине сбоя и кращит программу.
 void menu_2_draw(void)
 {
-    // Определяем размеры окна.
+    // Задаем цвет панели выбора типа блока.
+    if (SDL_SetRenderDrawColor(render, 100, 100, 100, 255) != 0)
+    {
+        crash("menu_2_draw(), не удалось задать цвет панели выбора типа блока.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Получаем размеры окна.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
 
-    // Определяем, сколько клеток умещается на экране.
+    // Определяем размер и расположение панели выбора типа блока.
+    SDL_Rect rect;
+    rect.w = w;
+    rect.h = SPRITE_SIZE + 8;
+    rect.x = 0;
+    rect.y = h - SPRITE_SIZE - 8;
+
+    // Рисуем панель выбора типа блока.
+    if (SDL_RenderFillRect(render, &rect) != 0)
+    {
+        crash("menu_2_draw(), не удалось нарисовать панель информации.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Определяем, сколько спрайтов умещается по ширине экрана.
     const int count_x = w / SPRITE_SIZE + 1;
-    const int count_y = h / SPRITE_SIZE + 1;
 
     // Рисуем список типов клеток в виде списка.
     for (uint8_t t = 0; t < count_x; ++t)
     {
-        // Определяем тип клетки списка.
-        // Выбранная клетка располагается в центре списка.
-        const auto uint8_t h_t = menu_2_selected_item - (count_x / 2) + t;
+        // Определяем положение элемента списка.
+        const int x = t * SPRITE_SIZE;
+        const int y = h - SPRITE_SIZE - 4;
 
-        sprite_draw(textures[h_t],
-                    t * SPRITE_SIZE,
-                    h - SPRITE_SIZE);
+        // Определяем тип клетки списка перед отрисовкой.
+        // Клетка выбранного типа располагается в центре списка.
+        const auto uint8_t type = menu_2_selected_item - (count_x / 2) + t;// Как это обозвать?
 
-        // Вокруг центрального пункта списка рисуем курсор.
-        if (t == count_x / 2)
+        // Определяем прозрачность элементов списка.
+        uint8_t alpha = 255;
+        // Индекс клетки, которая находится в центре списка.
+        const int half = count_x / 2;
+
+        // Защита от деления на ноль не нужна, так как
+        // count_x в любом случае >= 1.
+        //alpha = 255 * ( 1 - abs(half - t) / (float)(half) );
+
+        // Зададим текстуре прозрачность.
+        if (SDL_SetTextureAlphaMod(textures[type], alpha) != 0)
         {
-            // Задаем цвет курсора.
-            if (SDL_SetRenderDrawColor(render, 255, 0, 0, 255) != 0)
+            crash("menu_2_draw(), не удалось задать прозрачность текстуре.\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
+
+        // Под центральным (выбранным) элементом списка рисуется выделение.
+        if (t == half)
+        {
+            // Задаем цвет заливки.
+            if (SDL_SetRenderDrawColor(render, 0, 255, 0, 255) != 0)
             {
-                crash("menu_2_draw(), не удалось задать цвет линий курсора выбора типа клетки.\nSDL_GetError() : %s",
+                crash("menu_2_draw(), не удалось задать цвет заливки выделения выбранного типа блока.\nSDL_GetError() : %s",
                       SDL_GetError());
             }
 
-            const int x_1 = t * SPRITE_SIZE + 2;
-            const int y_1 = h - SPRITE_SIZE + 2;
-            const int x_2 = (t + 1) * SPRITE_SIZE - 2;
-            const int y_2 = h - 2;
+            // Рисуем выделение.
+
+            rect.h = SPRITE_SIZE + 8;
+            rect.w = SPRITE_SIZE;
+            rect.x = x;
+            rect.y = y - 4;
 
 
-            // Верх.
-            SDL_RenderDrawLine(render,
-                               x_1,
-                               y_1,
-                               x_2,
-                               y_1);
-            // Лево.
-            SDL_RenderDrawLine(render,
-                               x_1,
-                               y_1,
-                               x_1,
-                               y_2);
-
-            // Низ.
-            SDL_RenderDrawLine(render,
-                               x_1,
-                               y_2,
-                               x_2,
-                               y_2);
-
-            // Право.
-            SDL_RenderDrawLine(render,
-                               x_2,
-                               y_2,
-                               x_2,
-                               y_1);
+            if (SDL_RenderFillRect(render, &rect) != 0)
+            {
+                crash("menu_2_draw(), не удалось нарисовать верхнюю линюю подсветки выделенного типа блока.\nSDL_GetError() : %s",
+                      SDL_GetError());
+            }
 
         }
 
+        // Отрисуем спрайт.
+        sprite_draw(textures[type], x, y);
     }
 }
