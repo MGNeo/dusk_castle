@@ -9,6 +9,8 @@
 #include "menu_2.h"
 
 #include <windows.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 // Обрабатывает выделение и активацию пунктов меню.
 // Если пункт меню был активирован, возвращает 1, иначе 0.
@@ -23,15 +25,15 @@ int menu_1_processing(const SDL_Event *const _event)
     if (_event->type == SDL_KEYDOWN)
     {
         // Если нажали Up или Down, то выделяем другой пункт меню.
-        if ( (_event->key.keysym.sym == SDLK_UP) ||
-             (_event->key.keysym.sym == SDLK_DOWN) )
+        if ( (_event->key.keysym.sym == SDLK_w) ||
+             (_event->key.keysym.sym == SDLK_s) )
         {
             menu_1_selected_item = !menu_1_selected_item;
             return 0;
         }
 
         // Если нажали Enter, то активируем пункт меню.
-        if (_event->key.keysym.sym == SDLK_RETURN)
+        if (_event->key.keysym.sym == SDLK_SPACE)
         {
             /*char buffer1[1000];
             char* _buffer_=(char*)(buffer1);
@@ -73,7 +75,7 @@ void cursor_processing(const SDL_Event *const _event)
     {
         switch (_event->key.keysym.sym)
         {
-            case (SDLK_UP):
+            case (SDLK_w):
             {
                 --cursor_y;
                 if (cursor_y < 0)
@@ -82,7 +84,7 @@ void cursor_processing(const SDL_Event *const _event)
                 }
                 break;
             }
-            case (SDLK_RIGHT):
+            case (SDLK_d):
             {
                 ++cursor_x;
                 if (cursor_x > MAP_WIDTH - 1)
@@ -91,7 +93,7 @@ void cursor_processing(const SDL_Event *const _event)
                 }
                 break;
             }
-            case (SDLK_DOWN):
+            case (SDLK_s):
             {
                 ++cursor_y;
                 if (cursor_y > MAP_HEIGHT - 1)
@@ -100,7 +102,7 @@ void cursor_processing(const SDL_Event *const _event)
                 }
                 break;
             }
-            case (SDLK_LEFT):
+            case (SDLK_a):
             {
                 --cursor_x;
                 if (cursor_x < 0)
@@ -206,12 +208,12 @@ void menu_2_processing(const SDL_Event *const _event)
     {
         switch (_event->key.keysym.sym)
         {
-            case (SDLK_PAGEUP):
+            case (SDLK_e):
             {
                 ++menu_2_selected_item;
                 break;
             }
-            case (SDLK_PAGEDOWN):
+            case (SDLK_q):
             {
                 --menu_2_selected_item;
                 break;
@@ -219,6 +221,75 @@ void menu_2_processing(const SDL_Event *const _event)
             default:
             {
                 break;
+            }
+        }
+    }
+}
+
+// Обработка сохранения: детектирование нажатия Escape и процесс сохранения.
+// В случае ошибки показывает информацию о причине сбоя и крашит программу.
+void save_processing(const SDL_Event *const _event)
+{
+    if (_event == NULL)
+    {
+        crash("save_processing(), save_processing(), _event == NULL");
+    }
+
+    if (_event->type == SDL_KEYDOWN)
+    {
+        if (_event->key.keysym.sym == SDLK_ESCAPE)
+        {
+            char file_name[MAX_PATH];
+            file_name[0] = 0;
+
+            OPENFILENAME ofn;
+            memset(&ofn, 0, sizeof(ofn));
+            ofn.lStructSize = sizeof(ofn);
+
+            // Возможно, удастся получить хэндл окна,
+            // чтобы диалог выбора файла прицепился к окну редактора.
+
+            ofn.hwndOwner = NULL;
+            ofn.hInstance = NULL;
+            ofn.lpstrFilter = NULL;
+            ofn.lpstrCustomFilter = NULL;
+            ofn.lpstrFile = file_name;
+            ofn.nMaxFile = MAX_PATH;// Считается ли нультерминатор частью имени файла?
+            ofn.lpstrFileTitle = NULL;
+            ofn.lpstrInitialDir = NULL;
+            ofn.lpstrTitle = NULL;
+            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+            if (GetSaveFileName(&ofn) != 0)
+            {
+                printf("file_name: %s\n", file_name);
+
+                FILE *f = fopen(file_name, "wb");
+                // Не удалось открыть файл.
+                if (fopen == NULL)
+                {
+                    char message[1024];
+
+                    sprintf(message, "Невозможно сохранить карту в выбранный файл.\nGetLastError() : %lu",
+                            GetLastError());
+
+                    MessageBox(NULL, message, "Ошибка сохранения", MB_ICONSTOP);
+
+                    return;
+                }
+
+                // Записываем.
+                if (fwrite(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f) != 1)
+                {
+                    crash("save_processing(), произошла ошибка записи карты в файл.\n");
+                }
+
+                // Debug
+                fread(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f);
+
+                if (fclose(f) != 0)
+                {
+                    crash("save_processing(), невозможно закрыть файл, отказ fclose()");
+                }
             }
         }
     }

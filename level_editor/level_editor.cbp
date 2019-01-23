@@ -106,6 +106,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="textures.h" />
+		<Unit filename="units.h" />
 		<Unit filename="window.c">
 			<Option compilerVar="CC" />
 		</Unit>

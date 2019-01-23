@@ -11,6 +11,7 @@
 #include "render_point.h"
 #include "map.h"
 #include "textures.h"
+#include "units.h"
 
 #include <string.h>
 #include <SDL.h>
@@ -310,10 +311,10 @@ void info_draw(void)
 
     // Определяем размер и расположение панели информации.
     SDL_Rect rect;
-    rect.w = w - 8;
-    rect.h = SPRITE_SIZE - 8;
-    rect.x = 4;
-    rect.y = 4;
+    rect.w = w;
+    rect.h = 40;
+    rect.x = 0;
+    rect.y = 0;
 
     // Рисуем панель информации.
     if (SDL_RenderFillRect(render, &rect) != 0)
@@ -322,21 +323,100 @@ void info_draw(void)
               SDL_GetError());
     }
 
-    // Информация о курсоре.
+    // Буфер для формирования строк.
     char info[100];
 
     // Информация о курсоре.
-    sprintf(info, "Курсор    x: %i    y: %i",
-            cursor_x,
+    sprintf(info, "Курсор X: %i",
+            cursor_x);
+    text_draw(info, 12, 10, 4, TEXT_ALIGN_LEFT);
+    sprintf(info, "Курсор Y: %i",
             cursor_y);
-
-    text_draw(info, 12, 10, 10, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 10, 20, TEXT_ALIGN_LEFT);
 
     // Информация о точке рендеринга.
-    sprintf(info, "Точка рендеринга    x: %i    y: %i",
-            render_point_x,
+    sprintf(info, "Рендеринг X: %i",
+            render_point_x);
+    text_draw(info, 12, 150, 4, TEXT_ALIGN_LEFT);
+    sprintf(info, "Рендеринг Y: %i",
             render_point_y);
-    text_draw(info, 12, 10, 30, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 150, 20, TEXT_ALIGN_LEFT);
+
+    // id выбранного блока.
+    sprintf(info, "ID блока: %Iu", (size_t)menu_2_selected_item);
+    text_draw(info, 12, 300, 4, TEXT_ALIGN_LEFT);
+
+    // Краткое описание выбранного блока.
+
+    // Пустота.
+    if (menu_2_selected_item == U_EMPTY)
+    {
+        sprintf(info, "Тип блока: Проходимая пустота");
+        goto A;
+    }
+
+    // Монетка.
+    if (menu_2_selected_item == U_COIN)
+    {
+        sprintf(info, "Тип блока: Собираемая монетка");
+        goto A;
+    }
+
+    // Вход/выход.
+    if (menu_2_selected_item == U_RESPAWN)
+    {
+        sprintf(info, "Тип блока: Вход/выход");
+        goto A;
+    }
+
+    // Стена.
+    if ( (menu_2_selected_item >= U_WALL_START) && (menu_2_selected_item <= U_WALL_END) )
+    {
+        sprintf(info, "Тип блока: Непроходимая стена");
+        goto A;
+    }
+
+    // Декор.
+    if ( (menu_2_selected_item >= U_DECOR_START) && (menu_2_selected_item <= U_DECOR_END) )
+    {
+        sprintf(info, "Тип блока: Проходимая декорация");
+        goto A;
+    }
+
+    // Лестница.
+    if ( (menu_2_selected_item >= U_LADDER_START) && (menu_2_selected_item <= U_LADDER_END) )
+    {
+        sprintf(info, "Тип блока: Лестница");
+        goto A;
+    }
+
+    // Смертельная штука.
+    if ( (menu_2_selected_item >= U_FATAL_START) && (menu_2_selected_item <= U_FATAL_END) )
+    {
+        sprintf(info, "Тип блока: Смертельная вещь");
+        goto A;
+    }
+
+    // Призрак.
+    if ( (menu_2_selected_item >= U_GHOST_START) && (menu_2_selected_item <= U_GHOST_END) )
+    {
+        sprintf(info, "Тип блока: Место обитания призрака");
+        goto A;
+    }
+
+    A:;
+    text_draw(info, 12, 300, 20, TEXT_ALIGN_LEFT);
+
+    // Мини-справка.
+
+    sprintf(info, "Навигация: W, S, A, D");
+    text_draw(info, 12, 550, 4, TEXT_ALIGN_LEFT);
+
+    sprintf(info, "Выбор блока: Q, E");
+    text_draw(info, 12, 550, 20, TEXT_ALIGN_LEFT);
+
+    sprintf(info, "Сохранение результата - Escape");
+    text_draw(info, 12, 750, 4, TEXT_ALIGN_LEFT);
 }
 
 // Отрисовка карты.
@@ -349,17 +429,6 @@ void map_draw(void)
     // Определяем, сколько клеток видно на экране.
     const int count_x = w / SPRITE_SIZE + 1;
     const int count_y = h / SPRITE_SIZE + 1;
-
-    // Сперва задаем всем текстурам стопроцентную непрозрачность, потому что
-    // непрозрачность текстур могла быть изменена при отрисовке интерфейса.
-    for (size_t t = 0; t < TEXTURES_COUNT; ++t)
-    {
-        if (SDL_SetTextureAlphaMod(textures[t], 255) != 0)
-        {
-            crash("map_draw(), не удалось задать текстурам уровня стопроцентную непрозрачность.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-    }
 
     // Отрисовываем только те клетки, которые находятся в пределах видимости.
     for (int x = render_point_x; x < render_point_x + count_x; ++x)
@@ -430,38 +499,22 @@ void menu_2_draw(void)
               SDL_GetError());
     }
 
-    // Определяем, сколько спрайтов умещается по ширине экрана.
-    const int count_x = w / SPRITE_SIZE + 1;
+    // Определяем, сколько элементов списка умещается по ширине экрана.
+    const int elements_count = w / SPRITE_SIZE + 1;
 
-    // Рисуем список типов клеток в виде списка.
-    for (uint8_t t = 0; t < count_x; ++t)
+    // Рисуем элементы списка.
+    for (uint8_t e = 0; e < elements_count; ++e)
     {
         // Определяем положение элемента списка.
-        const int x = t * SPRITE_SIZE;
+        const int x = e * SPRITE_SIZE;
         const int y = h - SPRITE_SIZE - 4;
 
-        // Определяем тип клетки списка перед отрисовкой.
-        // Клетка выбранного типа располагается в центре списка.
-        const auto uint8_t type = menu_2_selected_item - (count_x / 2) + t;// Как это обозвать?
+        // Определяем, какой тип имеет элемент списка.
+        const auto uint8_t type = menu_2_selected_item - ((elements_count - 1) / 2) + e;
 
-        // Определяем прозрачность элементов списка.
-        uint8_t alpha = 255;
-        // Индекс клетки, которая находится в центре списка.
-        const int half = count_x / 2;
-
-        // Защита от деления на ноль не нужна, так как
-        // count_x в любом случае >= 1.
-        //alpha = 255 * ( 1 - abs(half - t) / (float)(half) );
-
-        // Зададим текстуре прозрачность.
-        if (SDL_SetTextureAlphaMod(textures[type], alpha) != 0)
-        {
-            crash("menu_2_draw(), не удалось задать прозрачность текстуре.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
-        // Под центральным (выбранным) элементом списка рисуется выделение.
-        if (t == half)
+        // Если тип элемента списка оказался идентичен выбранному типу,
+        // рисуем под элементом выделение.
+        if (type == menu_2_selected_item)
         {
             // Задаем цвет заливки.
             if (SDL_SetRenderDrawColor(render, 0, 255, 0, 255) != 0)
@@ -470,14 +523,13 @@ void menu_2_draw(void)
                       SDL_GetError());
             }
 
-            // Рисуем выделение.
-
+            // Определяем позицию и цвет выделения.
             rect.h = SPRITE_SIZE + 8;
             rect.w = SPRITE_SIZE;
             rect.x = x;
             rect.y = y - 4;
 
-
+            // Рисуем выделение.
             if (SDL_RenderFillRect(render, &rect) != 0)
             {
                 crash("menu_2_draw(), не удалось нарисовать верхнюю линюю подсветки выделенного типа блока.\nSDL_GetError() : %s",

@@ -56,8 +56,8 @@ void editor(void)
                     cursor_processing(&event);
                     // Обработка меню №2.
                     menu_2_processing(&event);
-                    // Обработка точки рендеринга.
-                    render_point_processing();
+                    // Обработка нажатия Escape и сохранения.
+                    save_processing(&event);
                     break;
                 }
             }
@@ -81,6 +81,9 @@ void editor(void)
             // Редактирование уровня.
             case (1):
             {
+                // Обработка точки рендеринга.
+                render_point_processing();
+
                 // Рисуем карту.
                 map_draw();
 

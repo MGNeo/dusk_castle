@@ -22,4 +22,6 @@ void render_point_reset(void);
 
 void menu_2_processing(const SDL_Event *const _event);
 
+void save_processing(const SDL_Event *const _event);
+
 #endif
