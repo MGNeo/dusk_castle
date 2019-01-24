@@ -21,7 +21,7 @@ static void map_reset(void);
 // Загрузка карты из файла.
 static int map_load(void);
 // Сохранение карты в файл.
-static void map_save(void);
+static int map_save(void);
 
 // Обрабатывает выделение и активацию пунктов меню.
 // Если пункт меню был активирован, возвращает 1, иначе 0.
@@ -289,8 +289,7 @@ void map_reset(void)
 }
 
 // Загрузка карты из файла.
-// В случае успешной загрузки возвращает 1.
-// В случае сбоя загрузки возвращает 0.
+// В случае успешной загрузки возвращает 1, иначе 0.
 int map_load(void)
 {
     char file_name[MAX_PATH];
@@ -411,7 +410,9 @@ int map_load(void)
     return 0;
 }
 // Сохранение карты в файл.
-void map_save(void)
+// В случае успешного сохранения возвращает 1.
+// Иначе возвращает 0.
+int map_save(void)
 {
     char file_name[MAX_PATH];
     file_name[0] = 0;
@@ -440,7 +441,7 @@ void map_save(void)
         if (f == NULL)
         {
             printf("map_save(), не удалось открыть файл.\n");
-            return;
+            return 0;
         }
         printf("map_save(), файл успешно открыт.\n");
 
@@ -451,10 +452,10 @@ void map_save(void)
             if (fclose(f) != 0)
             {
                 printf("map_save(), не удалось закрыть файл.\n");
-                return;
+                return 0;
             }
             printf("map_save(), файл успешно закрыт.\n");
-            return;
+            return 0;
         }
         printf("map_save(), файл успешно записан.\n");
 
@@ -462,10 +463,59 @@ void map_save(void)
         if (fclose(f) != 0)
         {
             printf("map_save(), не удалось закрыть файл.\n");
-            return;
+            return 0;
         }
         printf("map_save(), файл успешно закрыт.\n");
 
-        return;
+        return 1;
     }
+
+    return 0;
+}
+
+// Обработка Escape (возврат в первое меню).
+// Возвращает 1, давая согласие на переход к первой сцене.
+// Иначе возвращает 0.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+int escape_processing(const SDL_Event *const _event)
+{
+    if (_event == NULL)
+    {
+        crash("escape_processing(), _event == NULL");
+    }
+
+    if (_event->type == SDL_KEYDOWN)
+    {
+        if (_event->key.keysym.sym == SDLK_ESCAPE)
+        {
+            // Предлагаем пользователю сохранить результаты его работы.
+            const int m = MessageBox(NULL, "Сохранить карту?", "Уведомление", MB_YESNO);
+
+            switch (m)
+            {
+                // Пользователь не хочет сохранить карту.
+                case (IDNO):
+                {
+                    return 1;
+                }
+                // Пользователь хочет сохранить карту.
+                case (IDYES):
+                {
+                    // Пытаемся сохранить карту.
+                    if (map_save() == 1)
+                    {
+                        // Сохранить удалось.
+                        return 1;
+                    }
+                    // Сохранить не удалось.
+                    return 0;
+                }
+                default:
+                {
+                    crash("escape_processing(), неизвестный код возврата MessageBox().");
+                }
+            }
+        }
+    }
+    return 0;
 }
