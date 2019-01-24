@@ -7,7 +7,7 @@
 
 1547747968 c:\users\nb529\desktop\dusk_castle\level_editor\crash.h
 
-1548148614 source:c:\users\nb529\desktop\dusk_castle\level_editor\main.c
+1548310729 source:c:\users\nb529\desktop\dusk_castle\level_editor\main.c
 	"boot.h"
 	"editor.h"
 
@@ -370,7 +370,7 @@
 
 1547810937 c:\users\nb529\desktop\dusk_castle\level_editor\editor.h
 
-1548243203 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
+1548313351 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
 	"editor.h"
 	"crash.h"
 	"render.h"
@@ -383,7 +383,7 @@
 	<time.h>
 	"window.h"
 
-1548222209 source:c:\users\nb529\desktop\dusk_castle\level_editor\boot.c
+1548304816 source:c:\users\nb529\desktop\dusk_castle\level_editor\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -427,7 +427,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1548242441 source:c:\users\nb529\desktop\dusk_castle\level_editor\draw.c
+1548302360 source:c:\users\nb529\desktop\dusk_castle\level_editor\draw.c
 	"draw.h"
 	"glyphs.h"
 	"render.h"
@@ -459,7 +459,7 @@
 1548067786 c:\users\nb529\desktop\dusk_castle\level_editor\menu_1.h
 	<stdlib.h>
 
-1548243668 source:c:\users\nb529\desktop\dusk_castle\level_editor\processing.c
+1548313329 source:c:\users\nb529\desktop\dusk_castle\level_editor\processing.c
 	"processing.h"
 	"menu_1.h"
 	"cursor.h"
@@ -470,8 +470,10 @@
 	"render_point.h"
 	"menu_2.h"
 	<windows.h>
+	<stdlib.h>
+	<stdio.h>
 
-1548241901 c:\users\nb529\desktop\dusk_castle\level_editor\processing.h
+1548313368 c:\users\nb529\desktop\dusk_castle\level_editor\processing.h
 	"SDL.h"
 
 1548068590 source:c:\users\nb529\desktop\dusk_castle\level_editor\map.c

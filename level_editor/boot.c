@@ -15,6 +15,9 @@
 static void texture_load(const char *const _file_name,
                          SDL_Texture **const _texture);
 
+// Сбрасывает состояние карты.
+static void map_reset(void);
+
 // Инициализирует систему.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
 void system_init(void)

@@ -409,14 +409,17 @@ void info_draw(void)
 
     // Мини-справка.
 
-    sprintf(info, "Навигация: W, S, A, D");
+    sprintf(info, "Навигация и установка: W, S, A, D, SPACE");
     text_draw(info, 12, 550, 4, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Выбор блока: Q, E");
     text_draw(info, 12, 550, 20, TEXT_ALIGN_LEFT);
 
-    sprintf(info, "Сохранение результата - Escape");
-    text_draw(info, 12, 750, 4, TEXT_ALIGN_LEFT);
+    sprintf(info, "Сохранение результата: F8");
+    text_draw(info, 12, 850, 4, TEXT_ALIGN_LEFT);
+
+    sprintf(info, "Выход в первое меню: Escape");
+    text_draw(info, 12, 850, 20, TEXT_ALIGN_LEFT);
 }
 
 // Отрисовка карты.

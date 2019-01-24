@@ -12,6 +12,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Сброс положения курсора.
+static void cursor_reset(void);
+// Сброс положения точки рендера.
+static void render_point_reset(void);
+// Сброс состояния карты.
+static void map_reset(void);
+// Загрузка карты из файла.
+static int map_load(void);
+// Сохранение карты в файл.
+static void map_save(void);
+
 // Обрабатывает выделение и активацию пунктов меню.
 // Если пункт меню был активирован, возвращает 1, иначе 0.
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
@@ -32,30 +43,43 @@ int menu_1_processing(const SDL_Event *const _event)
             return 0;
         }
 
-        // Если нажали Enter, то активируем пункт меню.
+        // Если нажали Enter, то активируем выбранный пункт меню.
         if (_event->key.keysym.sym == SDLK_SPACE)
         {
-            /*char buffer1[1000];
-            char* _buffer_=(char*)(buffer1);
-            buffer1[0]=0;
-            OPENFILENAME w1;
-            memset(&w1,0,sizeof(OPENFILENAME));
-            w1.lStructSize=sizeof(OPENFILENAME);
-            // Возможно, удастся получить хэндл окна,
-            // чтобы диалог выбора файла прицепился к окну редактора.
-            w1.hwndOwner=NULL;
-            w1.hInstance=NULL;
-            w1.lpstrFilter=NULL;
-            w1.lpstrCustomFilter=NULL;
-            w1.lpstrFile=_buffer_;
-            w1.nMaxFile=1000;
-            w1.lpstrFileTitle=NULL;
-            w1.lpstrInitialDir=NULL;
-            w1.lpstrTitle=NULL;
-            w1.Flags=OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY OFN_;
-            GetOpenFileName(&w1);*/
+            switch (menu_1_selected_item)
+            {
+                case (MENU_1_NEW):
+                {
+                    // Сбрасываем положение курсора.
+                    cursor_reset();
+                    // Сбрасываем положение точки рендера.
+                    render_point_reset();
+                    // Сбрасываем состояние карты.
+                    map_reset();
 
-            return 1;
+                    return 1;
+                }
+                case (MENU_1_OPEN):
+                {
+                    // Загружаем карту из файла.
+                    if (map_load() == 1)
+                    {
+                        // Сбрасываем положение курсора.
+                        cursor_reset();
+                        // Сбрасываем положение точки рендера.
+                        render_point_reset();
+
+                        return 1;
+                    }
+                    return 0;
+                }
+                default:
+                {
+                    crash("menu_1_processing(), выбран неизвестный пункт меню: %Iu",
+                          menu_1_selected_item);
+                    break;
+                }
+            }
         }
     }
 
@@ -145,8 +169,15 @@ void render_point_processing(void)
     const int count_y = h / SPRITE_SIZE;
 
     // Определяем положение курсора относительно точки рендеринга.
-    const int dx = cursor_x - render_point_x;
-    const int dy = cursor_y - render_point_y;
+
+    // Такое решение приводит к дерганью точки рендеринга,
+    // если окно уменьшается слишком сильно.
+    //const int dx = cursor_x - render_point_x;
+    //const int dy = cursor_y - render_point_y;
+
+    // А такое не приводит.
+    #define RPP_DX (cursor_x - render_point_x)
+    #define RPP_DY (cursor_y - render_point_y)
 
     // Границы контроля.
     const int right_border = count_x - 1;
@@ -157,28 +188,31 @@ void render_point_processing(void)
     // Двигаем смещение, если курсор уехал за границу отображения.
 
     // Курсор вылез за правую границу отображения.
-    if (dx > right_border)
+    if (RPP_DX > right_border)
     {
-        render_point_x += dx - right_border;
+        render_point_x += RPP_DX - right_border;
     }
 
     // Курсор вылез за левую границу отображения.
-    if (dx < left_border)
+    if (RPP_DX < left_border)
     {
-        render_point_x += dx;
+        render_point_x += RPP_DX;
     }
 
     // Курсор вылез под нижнюю панель.
-    if (dy > bottom_border)
+    if (RPP_DY > bottom_border)
     {
-        render_point_y += dy - bottom_border;
+        render_point_y += RPP_DY - bottom_border;
     }
 
     // Курсор вылез под верхнюю панель.
-    if (dy < top_border)
+    if (RPP_DY < top_border)
     {
-        render_point_y += dy - top_border;
+        render_point_y += RPP_DY - top_border;
     }
+
+    #undef RPP_DX
+    #undef RPP_DY
 }
 
 // Выставляет курсор в центр уровня.
@@ -226,71 +260,212 @@ void menu_2_processing(const SDL_Event *const _event)
     }
 }
 
-// Обработка сохранения: детектирование нажатия Escape и процесс сохранения.
+// Обработка кнопки f8 (сохранение карты в файл).
 // В случае ошибки показывает информацию о причине сбоя и крашит программу.
-void save_processing(const SDL_Event *const _event)
+void f8_processing(const SDL_Event *const _event)
 {
     if (_event == NULL)
     {
         crash("save_processing(), save_processing(), _event == NULL");
     }
 
+    // Сохранять карту в temp файл каждые пять минут.
+    // ...
+
     if (_event->type == SDL_KEYDOWN)
     {
-        if (_event->key.keysym.sym == SDLK_ESCAPE)
+        if (_event->key.keysym.sym == SDLK_F8)
         {
-            char file_name[MAX_PATH];
-            file_name[0] = 0;
-
-            OPENFILENAME ofn;
-            memset(&ofn, 0, sizeof(ofn));
-            ofn.lStructSize = sizeof(ofn);
-
-            // Возможно, удастся получить хэндл окна,
-            // чтобы диалог выбора файла прицепился к окну редактора.
-
-            ofn.hwndOwner = NULL;
-            ofn.hInstance = NULL;
-            ofn.lpstrFilter = NULL;
-            ofn.lpstrCustomFilter = NULL;
-            ofn.lpstrFile = file_name;
-            ofn.nMaxFile = MAX_PATH;// Считается ли нультерминатор частью имени файла?
-            ofn.lpstrFileTitle = NULL;
-            ofn.lpstrInitialDir = NULL;
-            ofn.lpstrTitle = NULL;
-            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-            if (GetSaveFileName(&ofn) != 0)
-            {
-                printf("file_name: %s\n", file_name);
-
-                FILE *f = fopen(file_name, "wb");
-                // Не удалось открыть файл.
-                if (fopen == NULL)
-                {
-                    char message[1024];
-
-                    sprintf(message, "Невозможно сохранить карту в выбранный файл.\nGetLastError() : %lu",
-                            GetLastError());
-
-                    MessageBox(NULL, message, "Ошибка сохранения", MB_ICONSTOP);
-
-                    return;
-                }
-
-                // Записываем.
-                if (fwrite(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f) != 1)
-                {
-                    crash("save_processing(), произошла ошибка записи карты в файл.\n");
-                }
-
-                // Debug
-                fread(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f);
-
-                if (fclose(f) != 0)
-                {
-                    crash("save_processing(), невозможно закрыть файл, отказ fclose()");
-                }
-            }
+            // Пытаемся сохранить карту в файл.
+            map_save();
         }
+    }
+}
+
+// Сброс карты.
+void map_reset(void)
+{
+    memset(map, 1, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT);
+}
+
+// Загрузка карты из файла.
+// В случае успешной загрузки возвращает 1.
+// В случае сбоя загрузки возвращает 0.
+int map_load(void)
+{
+    char file_name[MAX_PATH];
+    file_name[0] = 0;
+
+    OPENFILENAME ofn;
+    memset(&ofn, 0, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+
+    ofn.hwndOwner = NULL;
+    ofn.hInstance = NULL;
+    ofn.lpstrFilter = NULL;
+    ofn.lpstrCustomFilter = NULL;
+    ofn.lpstrFile = file_name;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrFileTitle = NULL;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrTitle = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+
+    if (GetOpenFileName(&ofn) != 0)
+    {
+        printf("Для загрузки карты выбран файл: %s\n", file_name);
+
+        // Открываем.
+        FILE *f = fopen(file_name, "rb");
+        if (f == NULL)
+        {
+            printf("Не удалось открыть файл.\n");
+            return 0;
+        }
+        printf("map_load(), файл успешно открыт.\n");
+
+        // Определяем размер.
+
+        // Переходим в конец файла.
+        if (fseek(f, 0, SEEK_END) != 0)
+        {
+            printf("map_load(), не удалось перейти в конец файла.\n");
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+                return 0;
+            }
+            printf("map_load(), файл успешно закрыт.\n");
+            return 0;
+        }
+        printf("map_load(), переход в конец файла успешно осуществлен.\n");
+
+        // Определяем размер.
+        const long size = ftell(f);
+        if (size < 0)
+        {
+            printf("map_load(), не удалось определить размер файла.\n");
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+                return 0;
+            }
+            printf("map_load(), файл успешно закрыт.\n");
+            return 0;
+        }
+        printf("map_load(), размер файла успешно определен: %i байт.\n", size);
+
+        // Размер не соответствует требуемому.
+        const int required_size = sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT;
+        if (size != sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT)
+        {
+            printf("map_load(), неверный размер файла, требуемый: %i байт.\n", required_size);
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+                return 0;
+            }
+            printf("map_load(), файл успешно закрыт.\n");
+            return 0;
+        }
+        printf("map_load(), файл имеет правильнйы размер.\n");
+
+        // Переходим в начало файла.
+        if (fseek(f, 0, SEEK_SET) != 0)
+        {
+            printf("map_load(), не удалось перейти в начало файла.\n");
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+                return 0;
+            }
+            return 0;
+        }
+        printf("map_load(), переход в начало файла успешно осуществлен.\n");
+
+        // Грузим данные.
+        if (fread(map, size, 1, f) != 1)
+        {
+            printf("map_load(), не удалось загрузить данные из файла.\n");
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+                return 0;// От этого дублирования можно избавиться?
+            }
+            printf("map_load(), файл успешно закрыт.\n");
+            return 0;
+        }
+        printf("map_load(), данные успешно загружены из файла.\n");
+
+        // Закрываем файл.
+        if (fclose(f) != 0)
+        {
+            printf("map_load(), не удалось закрыть файл.\n");
+            return 0;
+        }
+        printf("map_load(), файл успешно закрыт.\n");
+
+        return 1;
+    }
+
+    return 0;
+}
+// Сохранение карты в файл.
+void map_save(void)
+{
+    char file_name[MAX_PATH];
+    file_name[0] = 0;
+
+    OPENFILENAME ofn;
+    memset(&ofn, 0, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+
+    ofn.hwndOwner = NULL;
+    ofn.hInstance = NULL;
+    ofn.lpstrFilter = NULL;
+    ofn.lpstrCustomFilter = NULL;
+    ofn.lpstrFile = file_name;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrFileTitle = NULL;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrTitle = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+
+    if (GetSaveFileName(&ofn) != 0)
+    {
+        printf("Для сохранения карты выбран файл: %s\n", file_name);
+
+        // Открываем.
+        FILE *f = fopen(file_name, "wb");
+        if (f == NULL)
+        {
+            printf("map_save(), не удалось открыть файл.\n");
+            return;
+        }
+        printf("map_save(), файл успешно открыт.\n");
+
+        // Записываем.
+        if (fwrite(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f) != 1)
+        {
+            printf("map_save(), не удалось записать данные в файл.\n");
+            if (fclose(f) != 0)
+            {
+                printf("map_save(), не удалось закрыть файл.\n");
+                return;
+            }
+            printf("map_save(), файл успешно закрыт.\n");
+            return;
+        }
+        printf("map_save(), файл успешно записан.\n");
+
+        // Закрываем файл.
+        if (fclose(f) != 0)
+        {
+            printf("map_save(), не удалось закрыть файл.\n");
+            return;
+        }
+        printf("map_save(), файл успешно закрыт.\n");
+
+        return;
     }
 }
