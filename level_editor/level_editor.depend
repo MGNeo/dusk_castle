@@ -370,7 +370,7 @@
 
 1547810937 c:\users\nb529\desktop\dusk_castle\level_editor\editor.h
 
-1548313811 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
+1548324724 source:c:\users\nb529\desktop\dusk_castle\level_editor\editor.c
 	"editor.h"
 	"crash.h"
 	"render.h"
@@ -381,9 +381,8 @@
 	<stdlib.h>
 	<stdio.h>
 	<time.h>
-	"window.h"
 
-1548304816 source:c:\users\nb529\desktop\dusk_castle\level_editor\boot.c
+1548326151 source:c:\users\nb529\desktop\dusk_castle\level_editor\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -407,8 +406,9 @@
 1548056721 c:\users\nb529\desktop\dusk_castle\level_editor\glyphs.h
 	"SDL.h"
 
-1548154328 c:\users\nb529\desktop\dusk_castle\level_editor\textures.h
+1548324987 c:\users\nb529\desktop\dusk_castle\level_editor\textures.h
 	"SDL.h"
+	"units.h"
 
 1548048753 source:c:\users\nb529\desktop\dusk_castle\level_editor\glyphs.c
 	"glyphs.h"
@@ -427,7 +427,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1548313497 source:c:\users\nb529\desktop\dusk_castle\level_editor\draw.c
+1548327199 source:c:\users\nb529\desktop\dusk_castle\level_editor\draw.c
 	"draw.h"
 	"glyphs.h"
 	"render.h"
@@ -442,10 +442,12 @@
 	"map.h"
 	"textures.h"
 	"units.h"
+	"statistics.h"
 	<string.h>
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
+	<time.h>
 
 1548158751 c:\users\nb529\desktop\dusk_castle\level_editor\draw.h
 	"text.h"
@@ -459,21 +461,22 @@
 1548067786 c:\users\nb529\desktop\dusk_castle\level_editor\menu_1.h
 	<stdlib.h>
 
-1548315058 source:c:\users\nb529\desktop\dusk_castle\level_editor\processing.c
+1548327276 source:c:\users\nb529\desktop\dusk_castle\level_editor\processing.c
 	"processing.h"
 	"menu_1.h"
 	"cursor.h"
 	"crash.h"
 	"map.h"
-	"window.h"
 	"sprite.h"
 	"render_point.h"
 	"menu_2.h"
+	"statistics.h"
+	"window.h"
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 
-1548313777 c:\users\nb529\desktop\dusk_castle\level_editor\processing.h
+1548326973 c:\users\nb529\desktop\dusk_castle\level_editor\processing.h
 	"SDL.h"
 
 1548068590 source:c:\users\nb529\desktop\dusk_castle\level_editor\map.c
@@ -509,6 +512,13 @@
 	<stdint.h>
 	"sprite.h"
 
-1548239466 c:\users\nb529\desktop\dusk_castle\level_editor\units.h
+1548324966 c:\users\nb529\desktop\dusk_castle\level_editor\units.h
 	<limits.h>
+
+1548327010 c:\users\nb529\desktop\dusk_castle\level_editor\statistics.h
+	<stdlib.h>
+	"units.h"
+
+1548326636 source:c:\users\nb529\desktop\dusk_castle\level_editor\statistics.c
+	"statistics.h"
 

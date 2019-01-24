@@ -12,11 +12,13 @@
 #include "map.h"
 #include "textures.h"
 #include "units.h"
+#include "statistics.h"
 
 #include <string.h>
 #include <SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 // Отрисовка текста.
 static void text_draw(const char *const _text,
@@ -491,9 +493,9 @@ void menu_2_draw(void)
     // Определяем размер и расположение панели выбора типа блока.
     SDL_Rect rect;
     rect.w = w;
-    rect.h = SPRITE_SIZE + 8;
+    rect.h = SPRITE_SIZE + 16;
     rect.x = 0;
-    rect.y = h - SPRITE_SIZE - 8;
+    rect.y = h - SPRITE_SIZE - 16;
 
     // Рисуем панель выбора типа блока.
     if (SDL_RenderFillRect(render, &rect) != 0)
@@ -510,7 +512,7 @@ void menu_2_draw(void)
     {
         // Определяем положение элемента списка.
         const int x = e * SPRITE_SIZE;
-        const int y = h - SPRITE_SIZE - 4;
+        const int y = h - SPRITE_SIZE;
 
         // Определяем, какой тип имеет элемент списка.
         const auto uint8_t type = menu_2_selected_item - ((elements_count - 1) / 2) + e;
@@ -520,17 +522,17 @@ void menu_2_draw(void)
         if (type == menu_2_selected_item)
         {
             // Задаем цвет заливки.
-            if (SDL_SetRenderDrawColor(render, 0, 255, 0, 255) != 0)
+            if (SDL_SetRenderDrawColor(render, 150, 150, 150, 255) != 0)
             {
                 crash("menu_2_draw(), не удалось задать цвет заливки выделения выбранного типа блока.\nSDL_GetError() : %s",
                       SDL_GetError());
             }
 
             // Определяем позицию и цвет выделения.
-            rect.h = SPRITE_SIZE + 8;
+            rect.h = SPRITE_SIZE + 16;
             rect.w = SPRITE_SIZE;
             rect.x = x;
-            rect.y = y - 4;
+            rect.y = y - 16;
 
             // Рисуем выделение.
             if (SDL_RenderFillRect(render, &rect) != 0)
@@ -543,5 +545,10 @@ void menu_2_draw(void)
 
         // Отрисуем спрайт.
         sprite_draw(textures[type], x, y);
+
+        // Отрисуем счетчик количества блуков данного типа.
+        char number[6];
+        sprintf(number, "%Iu", (size_t)statistics[type]);
+        text_draw(number, 10, x + SPRITE_SIZE / 2, y - 14, TEXT_ALIGN_CENTER);
     }
 }

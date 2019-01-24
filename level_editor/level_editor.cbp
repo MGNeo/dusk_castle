@@ -101,6 +101,10 @@
 		</Unit>
 		<Unit filename="render_point.h" />
 		<Unit filename="sprite.h" />
+		<Unit filename="statistics.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="statistics.h" />
 		<Unit filename="text.h" />
 		<Unit filename="textures.c">
 			<Option compilerVar="CC" />

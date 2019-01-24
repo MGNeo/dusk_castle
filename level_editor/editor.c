@@ -10,8 +10,6 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "window.h"// ТЕСТ
-
 // Вычисляет dt итерации игрового цикла.
 static float dt_calculate(void);
 
@@ -22,8 +20,6 @@ void editor(void)
     size_t scene = 0;
     while (1)
     {
-        const float dt = dt_calculate();
-
         // Обработка всех накопившихся событий.
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
@@ -35,12 +31,12 @@ void editor(void)
 
             switch (scene)
             {
-                // Первое меню Открыть/Создать.
+                // Первое меню Создать / Открыть.
                 case (0):
                 {
                     // Если какой-либо пункт меню был активирован,
                     // то переходим редактированию уровня.
-                    if (menu_1_processing(&event) != 0)
+                    if (menu_1_processing(&event) == 1)
                     {
                         scene = 1;
                     }
@@ -55,9 +51,10 @@ void editor(void)
                     menu_2_processing(&event);
                     // Обработка нажатия F8 (сохранения).
                     f8_processing(&event);
-                    // Обработка Escape.
-                    // Переход к первому меню происходит только в том случае, если ползователь решил
-                    // не сохранять результат работы, либо если решил сохранить результат и это сохранение
+                    // Обработка Escape (возврат в первое меню с возможным сохранением).
+                    // Переход к первому меню происходит только в том случае,
+                    // если пользователь решил не сохранять результат работы,
+                    // либо если решил сохранить результат, и это сохранение
                     // было выполнено удачно.
                     if (escape_processing(&event) == 1)
                     {
@@ -115,7 +112,7 @@ void editor(void)
 
 // Вычисляет dt игрового цикла.
 // За одну итерацию игрового цикла функция должна вызываться один раз.
-float dt_calculate(void)
+/*float dt_calculate(void)
 {
     static Uint64 t1, t2;
     t2 = t1;
@@ -135,4 +132,4 @@ float dt_calculate(void)
     } else {
         return (t1 - t2) / (float) SDL_GetPerformanceFrequency();
     }
-}
+}*/

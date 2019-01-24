@@ -3,10 +3,11 @@
 #include "cursor.h"
 #include "crash.h"
 #include "map.h"
-#include "window.h"// Тестовое.
 #include "sprite.h"
 #include "render_point.h"
 #include "menu_2.h"
+#include "statistics.h"
+#include "window.h"
 
 #include <windows.h>
 #include <stdlib.h>
@@ -22,6 +23,23 @@ static void map_reset(void);
 static int map_load(void);
 // Сохранение карты в файл.
 static int map_save(void);
+// Сброс меню 1.
+static void menu_1_reset(void);
+// Сброс меню 2.
+static void menu_2_reset(void);
+
+// Обрабатывает статистику, подсчитывая количество блоков каждого типа на карте.
+void statistics_reset(void)
+{
+    memset(statistics, 0, sizeof(size_t) * UNITS_COUNT);
+    for (size_t x = 0; x < MAP_WIDTH; ++x)// Что быстрее x->y или y->x?
+    {
+        for (size_t y = 0; y < MAP_HEIGHT; ++y)
+        {
+            ++statistics[map[x][y]];
+        }
+    }
+}
 
 // Обрабатывает выделение и активацию пунктов меню.
 // Если пункт меню был активирован, возвращает 1, иначе 0.
@@ -56,6 +74,10 @@ int menu_1_processing(const SDL_Event *const _event)
                     render_point_reset();
                     // Сбрасываем состояние карты.
                     map_reset();
+                    // Сбрасываем меню выбора блока,
+                    menu_2_reset();
+                    // Сбрасываем статистику.
+                    statistics_reset();
 
                     return 1;
                 }
@@ -68,6 +90,10 @@ int menu_1_processing(const SDL_Event *const _event)
                         cursor_reset();
                         // Сбрасываем положение точки рендера.
                         render_point_reset();
+                        // Сбрасываем первое меню.
+                        menu_1_reset();
+                        // Сбрасываем статистику.
+                        statistics_reset();
 
                         return 1;
                     }
@@ -140,8 +166,12 @@ void cursor_processing(const SDL_Event *const _event)
                 if (map[cursor_x][cursor_y] == 0)
                 {
                     map[cursor_x][cursor_y] = menu_2_selected_item;
+                    --statistics[0];
+                    ++statistics[menu_2_selected_item];
                 } else {
                     map[cursor_x][cursor_y] = 0;
+                    ++statistics[0];
+                    --statistics[menu_2_selected_item];
                 }
                 break;
             }
@@ -285,7 +315,7 @@ void f8_processing(const SDL_Event *const _event)
 // Сброс карты.
 void map_reset(void)
 {
-    memset(map, 1, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT);
+    memset(map, 0, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT);
 }
 
 // Загрузка карты из файла.
@@ -473,7 +503,7 @@ int map_save(void)
     return 0;
 }
 
-// Обработка Escape (возврат в первое меню).
+// Обработка нажатия Escape (возврат в первое меню).
 // Возвращает 1, давая согласие на переход к первой сцене.
 // Иначе возвращает 0.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
@@ -518,4 +548,15 @@ int escape_processing(const SDL_Event *const _event)
         }
     }
     return 0;
+}
+
+// Сброс меню 1.
+static void menu_1_reset(void)
+{
+    menu_1_selected_item = 0;
+}
+// Сброс меню 2.
+static void menu_2_reset(void)
+{
+    menu_2_selected_item = 0;
 }
