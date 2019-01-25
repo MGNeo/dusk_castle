@@ -1,4 +1,4 @@
-/*
+﻿,,,/*
  * Модуль юнитов.
  * Определяет количество юнитов и диапазоны их типов.
  *
@@ -19,9 +19,9 @@
 #define U_RESPAWN         2
 // Стены.
 #define U_WALL_START      3
-#define U_WALL_END        100
+#define U_WALL_END        106
 // Декорации.
-#define U_DECOR_START     101
+#define U_DECOR_START     107
 #define U_DECOR_END       200
 // Лестницы.
 #define U_LADDER_START    201
