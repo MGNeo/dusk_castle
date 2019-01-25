@@ -4,6 +4,9 @@
 #include "glyphs.h"
 #include "textures.h"
 #include "crash.h"
+#include "hwnd.h"
+
+#include "SDL_syswm.h"// Debug
 
 #include <windows.h>
 #include <locale.h>
@@ -57,6 +60,17 @@ void system_init(void)
         crash("system_init(), не удалось создать окно.\nSDL_GetError() : %s",
               SDL_GetError());
     }
+
+    // Для того, чтобы диалоговые окна правильно блокировали родительское окно,
+    // им необходим хэндл родительского окна.
+    SDL_SysWMinfo info;
+    SDL_VERSION(&info.version);
+    if (SDL_GetWindowWMInfo(window, &info) != 1)
+    {
+        crash("system_init(), не удалось получить hwnd окна редактора.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+    hwnd = info.info.win.window;
 
     // Создание рендера.
     render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);

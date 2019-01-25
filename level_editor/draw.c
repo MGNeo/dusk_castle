@@ -336,92 +336,83 @@ void info_draw(void)
             cursor_y);
     text_draw(info, 12, 10, 20, TEXT_ALIGN_LEFT);
 
-    // Информация о точке рендеринга.
-    sprintf(info, "Рендеринг X: %i",
-            render_point_x);
-    text_draw(info, 12, 150, 4, TEXT_ALIGN_LEFT);
-    sprintf(info, "Рендеринг Y: %i",
-            render_point_y);
-    text_draw(info, 12, 150, 20, TEXT_ALIGN_LEFT);
-
     // id выбранного блока.
     sprintf(info, "ID блока: %Iu", (size_t)menu_2_selected_item);
-    text_draw(info, 12, 300, 4, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 256, 4, TEXT_ALIGN_CENTER);
 
     // Краткое описание выбранного блока.
 
     // Пустота.
     if (menu_2_selected_item == U_EMPTY)
     {
-        sprintf(info, "Тип блока: Проходимая пустота");
+        sprintf(info, "Проходимая пустота");
         goto A;
     }
 
     // Монетка.
     if (menu_2_selected_item == U_COIN)
     {
-        sprintf(info, "Тип блока: Собираемая монетка");
+        sprintf(info, "Собираемая монетка");
         goto A;
     }
 
     // Вход/выход.
     if (menu_2_selected_item == U_RESPAWN)
     {
-        sprintf(info, "Тип блока: Вход/выход");
+        sprintf(info, "Вход/выход");
         goto A;
     }
 
     // Стена.
     if ( (menu_2_selected_item >= U_WALL_START) && (menu_2_selected_item <= U_WALL_END) )
     {
-        sprintf(info, "Тип блока: Непроходимая стена");
+        sprintf(info, "Непроходимая стена");
         goto A;
     }
 
     // Декор.
     if ( (menu_2_selected_item >= U_DECOR_START) && (menu_2_selected_item <= U_DECOR_END) )
     {
-        sprintf(info, "Тип блока: Проходимая декорация");
+        sprintf(info, "Проходимая декорация");
         goto A;
     }
 
     // Лестница.
     if ( (menu_2_selected_item >= U_LADDER_START) && (menu_2_selected_item <= U_LADDER_END) )
     {
-        sprintf(info, "Тип блока: Лестница");
+        sprintf(info, "Лестница");
         goto A;
     }
 
     // Смертельная штука.
     if ( (menu_2_selected_item >= U_FATAL_START) && (menu_2_selected_item <= U_FATAL_END) )
     {
-        sprintf(info, "Тип блока: Смертельная вещь");
+        sprintf(info, "Смертельная вещь");
         goto A;
     }
 
     // Призрак.
     if ( (menu_2_selected_item >= U_GHOST_START) && (menu_2_selected_item <= U_GHOST_END) )
     {
-        sprintf(info, "Тип блока: Место обитания призрака");
+        sprintf(info, "Место обитания призрака");
         goto A;
     }
 
     A:;
-    text_draw(info, 12, 300, 20, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 256, 20, TEXT_ALIGN_CENTER);
 
-    // Мини-справка.
-
-    sprintf(info, "Навигация и установка: W, S, A, D, SPACE");
-    text_draw(info, 12, 550, 4, TEXT_ALIGN_LEFT);
+    // Информация.
+    sprintf(info, "Навигация: W, S, A, D, SPACE");
+    text_draw(info, 12, 432, 4, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Выбор блока: Q, E");
-    text_draw(info, 12, 550, 20, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 432, 20, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Сохранение результата: F8");
-    text_draw(info, 12, 850, 4, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 732, 4, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Выход в первое меню: Escape");
-    text_draw(info, 12, 850, 20, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 732, 20, TEXT_ALIGN_LEFT);
 }
 
 // Отрисовка карты.
@@ -522,7 +513,7 @@ void menu_2_draw(void)
         if (type == menu_2_selected_item)
         {
             // Задаем цвет заливки.
-            if (SDL_SetRenderDrawColor(render, 150, 150, 150, 255) != 0)
+            if (SDL_SetRenderDrawColor(render, 0, 200, 0, 255) != 0)
             {
                 crash("menu_2_draw(), не удалось задать цвет заливки выделения выбранного типа блока.\nSDL_GetError() : %s",
                       SDL_GetError());

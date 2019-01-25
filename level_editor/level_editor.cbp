@@ -73,6 +73,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="glyphs.h" />
+		<Unit filename="hwnd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="hwnd.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

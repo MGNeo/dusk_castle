@@ -8,6 +8,7 @@
 #include "menu_2.h"
 #include "statistics.h"
 #include "window.h"
+#include "hwnd.h"
 
 #include <windows.h>
 #include <stdlib.h>
@@ -163,16 +164,16 @@ void cursor_processing(const SDL_Event *const _event)
             }
             case (SDLK_SPACE):
             {
+                --statistics[map[cursor_x][cursor_y]];
+                // Если клетка карты была пуста, устанавливаем выделенный тип блока.
                 if (map[cursor_x][cursor_y] == 0)
                 {
                     map[cursor_x][cursor_y] = menu_2_selected_item;
-                    --statistics[0];
-                    ++statistics[menu_2_selected_item];
                 } else {
+                    // Если клетка карты не пуста, делаем ее пустой.
                     map[cursor_x][cursor_y] = 0;
-                    ++statistics[0];
-                    --statistics[menu_2_selected_item];
                 }
+                ++statistics[map[cursor_x][cursor_y]];
                 break;
             }
             default:
@@ -329,7 +330,7 @@ int map_load(void)
     memset(&ofn, 0, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
 
-    ofn.hwndOwner = NULL;
+    ofn.hwndOwner = hwnd;
     ofn.hInstance = NULL;
     ofn.lpstrFilter = NULL;
     ofn.lpstrCustomFilter = NULL;
@@ -451,7 +452,7 @@ int map_save(void)
     memset(&ofn, 0, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
 
-    ofn.hwndOwner = NULL;
+    ofn.hwndOwner = hwnd;
     ofn.hInstance = NULL;
     ofn.lpstrFilter = NULL;
     ofn.lpstrCustomFilter = NULL;
@@ -519,7 +520,7 @@ int escape_processing(const SDL_Event *const _event)
         if (_event->key.keysym.sym == SDLK_ESCAPE)
         {
             // Предлагаем пользователю сохранить результаты его работы.
-            const int m = MessageBox(NULL, "Сохранить карту?", "Уведомление", MB_YESNO);
+            const int m = MessageBox(hwnd, "Сохранить карту?", "Выход в первое меню", MB_YESNO);
 
             switch (m)
             {
