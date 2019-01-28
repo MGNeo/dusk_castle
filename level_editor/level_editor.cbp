@@ -37,6 +37,7 @@
 			<Add directory="C:/SDL/SDL2-2.0.8/i686-w64-mingw32/include/SDL2" />
 			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/include/SDL2" />
 			<Add directory="C:/SDL/SDL2_image-2.0.3/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32" />

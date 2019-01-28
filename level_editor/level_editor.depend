@@ -522,7 +522,7 @@
 1548326636 source:c:\users\nb529\desktop\dusk_castle\level_editor\statistics.c
 	"statistics.h"
 
-1548415503 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -537,43 +537,43 @@
 	<stdlib.h>
 	<stdio.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.h
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\window.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\window.h
 	"SDL.h"
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\render.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\render.h
 	"SDL.h"
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
 	"SDL.h"
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.h
 	"SDL.h"
 	"units.h"
 
-1548414253 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
+1548649918 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
 	<limits.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 	"crash.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.c
 	"cursor.h"
 	"map.h"
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.h
 	<stdlib.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\map.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\map.h
 	<stdint.h>
 
-1548420529 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.c
+1548660158 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.c
 	"draw.h"
 	"glyphs.h"
 	"render.h"
@@ -595,28 +595,28 @@
 	<stdio.h>
 	<time.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.h
 	"text.h"
 	<stdlib.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\text.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\text.h
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.h
 	<stdlib.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.h
 	<stdint.h>
 	"sprite.h"
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\sprite.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\sprite.h
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.h
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.h
 	<stdlib.h>
 	"units.h"
 
-1548415833 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
 	"editor.h"
 	"crash.h"
 	"render.h"
@@ -628,28 +628,28 @@
 	<stdio.h>
 	<time.h>
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.h
 
-1548370582 c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.h
 	"SDL.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.c
 	"glyphs.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
 	"boot.h"
 	"editor.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\map.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\map.c
 	"map.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.c
 	"menu_1.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.c
 	"menu_2.h"
 
-1548420258 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.c
+1548661134 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.c
 	"processing.h"
 	"menu_1.h"
 	"cursor.h"
@@ -661,24 +661,26 @@
 	"statistics.h"
 	"window.h"
 	"hwnd.h"
+	<limits.h>
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
+	<stdint.h>
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render.c
 	"render.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.c
 	"render_point.h"
 	"map.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.c
 	"statistics.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.c
 	"textures.h"
 
-1548370582 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\window.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\window.c
 	"window.h"
 
 1548370582 source:c:\users\nb529\desktop\dusk_castle-master\level_editor\crash.c
@@ -873,9 +875,285 @@
 1548414776 source:c:\users\nb529\desktop\dusk_castle-master\level_editor\hwnd.c
 	"hwnd.h"
 
-1548415265 c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.h
+1548648336 c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.h
 	<windows.h>
 
-1548414776 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.c
+1548648336 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.c
 	"hwnd.h"
+
+1341006780 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006770 c:\program files (x86)\codeblocks\mingw\include\_mingw.h
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdlib.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\malloc.h
+	<_mingw.h>
+	<stdlib.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\memory.h
+	<string.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\string.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\strings.h
+	<string.h>
+
+1341006778 c:\program files (x86)\codeblocks\mingw\include\wchar.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<wctype.h>
+	<sys/types.h>
+	<stdio.h>
+	<stdint.h>
+	<stdint.h>
+
+1341006778 c:\program files (x86)\codeblocks\mingw\include\wctype.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
+	<stddef.h>
+
+1341006772 c:\program files (x86)\codeblocks\mingw\include\inttypes.h
+	<_mingw.h>
+	<stdint.h>
+	<stddef.h>
+
+1341006770 c:\program files (x86)\codeblocks\mingw\include\ctype.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\math.h
+	<_mingw.h>
+
+1341006772 c:\program files (x86)\codeblocks\mingw\include\float.h
+	<_mingw.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\signal.h
+	<_mingw.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\process.h
+	<_mingw.h>
+	<sys/types.h>
+	<stdint.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\limits.h
+	<_mingw.h>
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\windows.h
+	<winresrc.h>
+	<stdarg.h>
+	<windef.h>
+	<wincon.h>
+	<winbase.h>
+	<wingdi.h>
+	<winuser.h>
+	<winnls.h>
+	<winver.h>
+	<winnetwk.h>
+	<winreg.h>
+	<winsvc.h>
+	<cderr.h>
+	<dde.h>
+	<ddeml.h>
+	<dlgs.h>
+	<imm.h>
+	<lzexpand.h>
+	<mmsystem.h>
+	<nb30.h>
+	<rpc.h>
+	<shellapi.h>
+	<winperf.h>
+	<commdlg.h>
+	<winspool.h>
+	<winsock2.h>
+	<winsock.h>
+	<ole2.h>
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winresrc.h
+	<winuser.h>
+	<winnt.h>
+	<winver.h>
+	<dde.h>
+	<dlgs.h>
+	<commctrl.h>
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\winuser.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winnt.h
+	<winerror.h>
+	<string.h>
+	<basetsd.h>
+	<pshpack4.h>
+	<poppack.h>
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winerror.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\basetsd.h
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\pshpack4.h
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\poppack.h
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\winver.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\dde.h
+
+1301111150 c:\program files (x86)\codeblocks\mingw\include\dlgs.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\commctrl.h
+	<prsht.h>
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\prsht.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\windef.h
+	<winnt.h>
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\wincon.h
+
+1301111160 c:\program files (x86)\codeblocks\mingw\include\winbase.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\wingdi.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winnls.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winnetwk.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winreg.h
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\winsvc.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\cderr.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\ddeml.h
+
+1301111150 c:\program files (x86)\codeblocks\mingw\include\imm.h
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\lzexpand.h
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\mmsystem.h
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\nb30.h
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpc.h
+	<windows.h>
+	<rpcdce.h>
+	<rpcnsi.h>
+	<rpcnterr.h>
+	<winerror.h>
+	<excpt.h>
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcdce.h
+	<basetyps.h>
+	<rpcdcep.h>
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\basetyps.h
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcdcep.h
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcnsi.h
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcnterr.h
+
+1341006772 c:\program files (x86)\codeblocks\mingw\include\excpt.h
+	<_mingw.h>
+	<windef.h>
+
+1301111160 c:\program files (x86)\codeblocks\mingw\include\shellapi.h
+	<pshpack2.h>
+	<poppack.h>
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\pshpack2.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winperf.h
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\commdlg.h
+	<unknwn.h>
+	<prsht.h>
+
+1301111160 c:\program files (x86)\codeblocks\mingw\include\unknwn.h
+	<windows.h>
+	<objfwd.h>
+	<wtypes.h>
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\objfwd.h
+	<basetyps.h>
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\wtypes.h
+	<rpc.h>
+	<rpcndr.h>
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcndr.h
+	<rpcnsip.h>
+	<objfwd.h>
+
+1301111158 c:\program files (x86)\codeblocks\mingw\include\rpcnsip.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winspool.h
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winsock2.h
+	<windows.h>
+
+1301111162 c:\program files (x86)\codeblocks\mingw\include\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\mswsock.h
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\ole2.h
+	<winerror.h>
+	<objbase.h>
+	<olectlid.h>
+	<oleauto.h>
+	<oleidl.h>
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\objbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<stdlib.h>
+	<basetyps.h>
+	<wtypes.h>
+	<unknwn.h>
+	<objidl.h>
+	<cguid.h>
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\objidl.h
+	<objfwd.h>
+
+1301111148 c:\program files (x86)\codeblocks\mingw\include\cguid.h
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\olectlid.h
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\oleauto.h
+	<oaidl.h>
+
+1301111154 c:\program files (x86)\codeblocks\mingw\include\oaidl.h
+	<windows.h>
+	<ole2.h>
+
+1301111156 c:\program files (x86)\codeblocks\mingw\include\oleidl.h
+	<objfwd.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\locale.h
+	<_mingw.h>
+	<stddef.h>
+	<stddef.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\time.h
+	<_mingw.h>
+	<stddef.h>
 

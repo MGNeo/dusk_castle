@@ -10,9 +10,11 @@
 #include "window.h"
 #include "hwnd.h"
 
+#include <limits.h>
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 // Сброс положения курсора.
 static void cursor_reset(void);
@@ -276,11 +278,21 @@ void menu_2_processing(const SDL_Event *const _event)
             case (SDLK_e):
             {
                 ++menu_2_selected_item;
+                // Контролируем переполнение через верхнюю границу диапазона юнитов.
+                if (menu_2_selected_item == UNITS_COUNT)
+                {
+                    menu_2_selected_item = 0;
+                }
                 break;
             }
             case (SDLK_q):
             {
                 --menu_2_selected_item;
+                // Контролируем переполнение через нижнюю границу диапазона юнитов.
+                if (menu_2_selected_item == UINT8_MAX)
+                {
+                    menu_2_selected_item = UNITS_COUNT - 1;
+                }
                 break;
             }
             default:
@@ -343,7 +355,7 @@ int map_load(void)
 
     if (GetOpenFileName(&ofn) != 0)
     {
-        printf("Для загрузки карты выбран файл: %s\n", file_name);
+        printf("\nДля загрузки карты выбран файл: %s\n", file_name);
 
         // Открываем.
         FILE *f = fopen(file_name, "rb");
@@ -354,18 +366,24 @@ int map_load(void)
         }
         printf("map_load(), файл успешно открыт.\n");
 
+        // Для избавления от дублирования.
+        void file_close(void)
+        {
+            if (fclose(f) != 0)
+            {
+                printf("map_load(), не удалось закрыть файл.\n");
+            } else {
+                printf("map_load(), файл успешно закрыт.\n");
+            }
+        }
+
         // Определяем размер.
 
         // Переходим в конец файла.
         if (fseek(f, 0, SEEK_END) != 0)
         {
             printf("map_load(), не удалось перейти в конец файла.\n");
-            if (fclose(f) != 0)
-            {
-                printf("map_load(), не удалось закрыть файл.\n");
-                return 0;
-            }
-            printf("map_load(), файл успешно закрыт.\n");
+            file_close();
             return 0;
         }
         printf("map_load(), переход в конец файла успешно осуществлен.\n");
@@ -375,12 +393,7 @@ int map_load(void)
         if (size < 0)
         {
             printf("map_load(), не удалось определить размер файла.\n");
-            if (fclose(f) != 0)
-            {
-                printf("map_load(), не удалось закрыть файл.\n");
-                return 0;
-            }
-            printf("map_load(), файл успешно закрыт.\n");
+            file_close();
             return 0;
         }
         printf("map_load(), размер файла успешно определен: %i байт.\n", size);
@@ -390,12 +403,7 @@ int map_load(void)
         if (size != sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT)
         {
             printf("map_load(), неверный размер файла, требуемый: %i байт.\n", required_size);
-            if (fclose(f) != 0)
-            {
-                printf("map_load(), не удалось закрыть файл.\n");
-                return 0;
-            }
-            printf("map_load(), файл успешно закрыт.\n");
+            file_close();
             return 0;
         }
         printf("map_load(), файл имеет правильнйы размер.\n");
@@ -404,11 +412,7 @@ int map_load(void)
         if (fseek(f, 0, SEEK_SET) != 0)
         {
             printf("map_load(), не удалось перейти в начало файла.\n");
-            if (fclose(f) != 0)
-            {
-                printf("map_load(), не удалось закрыть файл.\n");
-                return 0;
-            }
+            file_close();
             return 0;
         }
         printf("map_load(), переход в начало файла успешно осуществлен.\n");
@@ -417,23 +421,28 @@ int map_load(void)
         if (fread(map, size, 1, f) != 1)
         {
             printf("map_load(), не удалось загрузить данные из файла.\n");
-            if (fclose(f) != 0)
-            {
-                printf("map_load(), не удалось закрыть файл.\n");
-                return 0;// От этого дублирования можно избавиться?
-            }
-            printf("map_load(), файл успешно закрыт.\n");
+            file_close();
             return 0;
         }
         printf("map_load(), данные успешно загружены из файла.\n");
 
         // Закрываем файл.
-        if (fclose(f) != 0)
+        file_close();
+
+        // Проверяем, все ли ячейки содержат корректный id.
+        for (size_t x = 0; x < MAP_WIDTH; ++x)
         {
-            printf("map_load(), не удалось закрыть файл.\n");
-            return 0;
+            for (size_t y = 0; y < MAP_HEIGHT; ++y)
+            {
+                if (map[x][y] >= UNITS_COUNT)
+                {
+                    printf("map_load(), некорректная карта.\n");
+                    printf("map[%Iu][%Iu] == %Iu\n", x, y, (size_t)map[x][y]);
+                    return 0;
+                }
+            }
         }
-        printf("map_load(), файл успешно закрыт.\n");
+        printf("map_load(), корректная карта.\n");
 
         return 1;
     }
@@ -465,7 +474,7 @@ int map_save(void)
 
     if (GetSaveFileName(&ofn) != 0)
     {
-        printf("Для сохранения карты выбран файл: %s\n", file_name);
+        printf("\nДля сохранения карты выбран файл: %s\n", file_name);
 
         // Открываем.
         FILE *f = fopen(file_name, "wb");

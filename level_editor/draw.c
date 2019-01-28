@@ -336,83 +336,19 @@ void info_draw(void)
             cursor_y);
     text_draw(info, 12, 10, 20, TEXT_ALIGN_LEFT);
 
-    // id выбранного блока.
-    sprintf(info, "ID блока: %Iu", (size_t)menu_2_selected_item);
-    text_draw(info, 12, 256, 4, TEXT_ALIGN_CENTER);
-
-    // Краткое описание выбранного блока.
-
-    // Пустота.
-    if (menu_2_selected_item == U_EMPTY)
-    {
-        sprintf(info, "Проходимая пустота");
-        goto A;
-    }
-
-    // Монетка.
-    if (menu_2_selected_item == U_COIN)
-    {
-        sprintf(info, "Собираемая монетка");
-        goto A;
-    }
-
-    // Вход/выход.
-    if (menu_2_selected_item == U_RESPAWN)
-    {
-        sprintf(info, "Вход/выход");
-        goto A;
-    }
-
-    // Стена.
-    if ( (menu_2_selected_item >= U_WALL_START) && (menu_2_selected_item <= U_WALL_END) )
-    {
-        sprintf(info, "Непроходимая стена");
-        goto A;
-    }
-
-    // Декор.
-    if ( (menu_2_selected_item >= U_DECOR_START) && (menu_2_selected_item <= U_DECOR_END) )
-    {
-        sprintf(info, "Проходимая декорация");
-        goto A;
-    }
-
-    // Лестница.
-    if ( (menu_2_selected_item >= U_LADDER_START) && (menu_2_selected_item <= U_LADDER_END) )
-    {
-        sprintf(info, "Лестница");
-        goto A;
-    }
-
-    // Смертельная штука.
-    if ( (menu_2_selected_item >= U_FATAL_START) && (menu_2_selected_item <= U_FATAL_END) )
-    {
-        sprintf(info, "Смертельная вещь");
-        goto A;
-    }
-
-    // Призрак.
-    if ( (menu_2_selected_item >= U_GHOST_START) && (menu_2_selected_item <= U_GHOST_END) )
-    {
-        sprintf(info, "Место обитания призрака");
-        goto A;
-    }
-
-    A:;
-    text_draw(info, 12, 256, 20, TEXT_ALIGN_CENTER);
 
     // Информация.
     sprintf(info, "Навигация: W, S, A, D, SPACE");
-    text_draw(info, 12, 432, 4, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 176, 4, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Выбор блока: Q, E");
-    text_draw(info, 12, 432, 20, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 176, 20, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Сохранение результата: F8");
-    text_draw(info, 12, 732, 4, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 432, 4, TEXT_ALIGN_LEFT);
 
     sprintf(info, "Выход в первое меню: Escape");
-    text_draw(info, 12, 732, 20, TEXT_ALIGN_LEFT);
+    text_draw(info, 12, 432, 20, TEXT_ALIGN_LEFT);
 }
 
 // Отрисовка карты.
@@ -476,7 +412,6 @@ void menu_2_draw(void)
         crash("menu_2_draw(), не удалось задать цвет панели выбора типа блока.\nSDL_GetError() : %s",
               SDL_GetError());
     }
-
     // Получаем размеры окна.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
@@ -494,20 +429,35 @@ void menu_2_draw(void)
         crash("menu_2_draw(), не удалось нарисовать панель информации.\nSDL_GetError() : %s",
               SDL_GetError());
     }
+    // Позиция элемента по y.
+    const int y = h - SPRITE_SIZE;
 
-    // Определяем, сколько элементов списка умещается по ширине экрана.
-    const int elements_count = w / SPRITE_SIZE + 1;
+    // ID центрального юнита.
+    // Необходим для того, чтобы выделенный элемент располагался в центре списка.
+    const uint8_t central_unit_id = (UNITS_COUNT - 1) / 2;
 
+    // Сдвиг списка.
+    const int list_shift = (w - UNITS_COUNT * SPRITE_SIZE) / 2 + SPRITE_SIZE / 2;
     // Рисуем элементы списка.
-    for (uint8_t e = 0; e < elements_count; ++e)
+    for (uint8_t e = 0; e < UNITS_COUNT; ++e)
     {
-        // Определяем положение элемента списка.
-        const int x = e * SPRITE_SIZE;
-        const int y = h - SPRITE_SIZE;
+        // Определяем положение элемента списка по x.
+        const int x = e * SPRITE_SIZE + list_shift;
+        // Если элемент списка находится за пределами экрана, то мы его не рисуем.
+        if ( (x < -SPRITE_SIZE) || (x > w) )
+        {
+            continue;
+        }
 
-        // Определяем, какой тип имеет элемент списка.
-        const auto uint8_t type = menu_2_selected_item - ((elements_count - 1) / 2) + e;
+        // Определяем, какой тип имеет отображаемый элемент списка.
+        // Выбранный элемент списка отображается в центре.
+        // Зацикливание отображения осуществляется при помощи переполнения через верхнюю границу
+        // диапазона юнитов и получения остатка от деления.
+        // Переполнение через нижнюю границу диапазона (0) использовать нельзя,
+        // т.к. UINT8_MAX не кратен UNITS_COUNT.
 
+        // Тип элемента списка.
+        const uint8_t type = (UNITS_COUNT - central_unit_id + menu_2_selected_item + e) % UNITS_COUNT;
         // Если тип элемента списка оказался идентичен выбранному типу,
         // рисуем под элементом выделение.
         if (type == menu_2_selected_item)
@@ -519,7 +469,7 @@ void menu_2_draw(void)
                       SDL_GetError());
             }
 
-            // Определяем позицию и цвет выделения.
+            // Определяем позицию выделения.
             rect.h = SPRITE_SIZE + 16;
             rect.w = SPRITE_SIZE;
             rect.x = x;
@@ -537,7 +487,7 @@ void menu_2_draw(void)
         // Отрисуем спрайт.
         sprite_draw(textures[type], x, y);
 
-        // Отрисуем счетчик количества блуков данного типа.
+        // Отрисуем счетчик количества блоков данного типа.
         char number[6];
         sprintf(number, "%Iu", (size_t)statistics[type]);
         text_draw(number, 10, x + SPRITE_SIZE / 2, y - 14, TEXT_ALIGN_CENTER);
