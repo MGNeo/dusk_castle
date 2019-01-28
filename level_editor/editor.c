@@ -11,7 +11,7 @@
 #include <time.h>
 
 // Вычисляет dt итерации игрового цикла.
-//static float dt_calculate(void);
+static float dt_calculate(void);
 
 void editor(void)
 {
@@ -20,6 +20,9 @@ void editor(void)
     size_t scene = 0;
     while (1)
     {
+        // Определяем время кадра.
+        const float dt = dt_calculate();
+
         // Обработка всех накопившихся событий.
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
@@ -83,6 +86,9 @@ void editor(void)
             // Редактирование уровня.
             case (1):
             {
+                // Обработка автоматического сохранения.
+                auto_save_processing(dt);
+
                 // Обработка точки рендеринга.
                 render_point_processing();
 
@@ -112,7 +118,7 @@ void editor(void)
 
 // Вычисляет dt игрового цикла.
 // За одну итерацию игрового цикла функция должна вызываться один раз.
-/*float dt_calculate(void)
+float dt_calculate(void)
 {
     static Uint64 t1, t2;
     t2 = t1;
@@ -132,4 +138,4 @@ void editor(void)
     } else {
         return (t1 - t2) / (float) SDL_GetPerformanceFrequency();
     }
-}*/
+}

@@ -200,7 +200,7 @@ void menu_1_draw(void)
     // Отрисовываем меню.
     if (menu_1_selected_item == MENU_1_NEW)
     {
-        text_draw("- Создать новый уровень -", size, w, h - size, TEXT_ALIGN_CENTER);
+        text_draw("[ Создать новый уровень ]", size, w, h - size, TEXT_ALIGN_CENTER);
         text_draw("Открыть существующий уровень", size, w, h + size, TEXT_ALIGN_CENTER);
 
         return;
@@ -208,7 +208,7 @@ void menu_1_draw(void)
     if (menu_1_selected_item == MENU_1_OPEN)
     {
         text_draw("Создать новый уровень", size, w, h - size, TEXT_ALIGN_CENTER);
-        text_draw("- Открыть существующий уровень -", size, w, h + size, TEXT_ALIGN_CENTER);
+        text_draw("[ Открыть существующий уровень ]", size, w, h + size, TEXT_ALIGN_CENTER);
 
         return;
     }

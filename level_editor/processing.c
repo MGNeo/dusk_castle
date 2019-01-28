@@ -312,9 +312,6 @@ void f8_processing(const SDL_Event *const _event)
         crash("save_processing(), save_processing(), _event == NULL");
     }
 
-    // Сохранять карту в temp файл каждые пять минут.
-    // ...
-
     if (_event->type == SDL_KEYDOWN)
     {
         if (_event->key.keysym.sym == SDLK_F8)
@@ -407,7 +404,7 @@ int map_load(void)
             file_close();
             return 0;
         }
-        printf("map_load(), файл имеет правильнйы размер.\n");
+        printf("map_load(), файл имеет правильный размер.\n");
 
         // Переходим в начало файла.
         if (fseek(f, 0, SEEK_SET) != 0)
@@ -455,7 +452,7 @@ int map_load(void)
 // Сохранение карты в файл.
 // В случае успешного сохранения возвращает 1.
 // Иначе возвращает 0.
-int map_save(void)
+int map_save(void)// dialog, сделать дополнительный уровень абстракции?
 {
     char file_name[MAX_PATH];
     file_name[0] = 0;
@@ -507,7 +504,7 @@ int map_save(void)
             file_close();
             return 0;
         }
-        printf("map_save(), файл успешно записан.\n");
+        printf("map_save(), данные успешно записаны в файл.\n");
 
         // Закрываем файл.
         file_close();
@@ -574,4 +571,53 @@ static void menu_1_reset(void)
 static void menu_2_reset(void)
 {
     menu_2_selected_item = 0;
+}
+
+// Обработка автоматического сохранения.
+void auto_save_processing(const float _dt)
+{
+    static float t = 0.f;
+    t += _dt;
+    if (t < 3)
+    {
+        return;
+    }
+    t = 0;
+
+    printf("\nАвтоматическое сохранение...\n");
+
+    FILE *f = fopen("maps/temp", "wb");
+    if (f == NULL)
+    {
+        printf("auto_save_processing(), не удалось открыть файл.\n");
+        return;
+    }
+    printf("auto_save_processing(), файл успешно открыт.\n");
+
+    // Закрытие файла.
+    // Для избавления от дублирования.
+    void file_close(void)
+    {
+        if (fclose(f) != 0)
+        {
+            printf("auto_save_processing(), не удалось закрыть файл.\n");
+        } else {
+            printf("auto_save_processing(), файл успешно закрыт.\n");
+        }
+    }
+
+    // Пытаемся записать в файл.
+    if (fwrite(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f) != 1)
+    {
+        printf("auto_save_processing(), не удалось записать данные в файл.\n");
+        file_close();
+        return;
+    }
+    printf("auto_save_processing(), данные успешно записаны в файл.\n");
+
+    // Странная бака с невозможностью выполнить автосохранение после ручного сохранения.
+
+    // Закрываем файл.
+    file_close();
+    return;
 }

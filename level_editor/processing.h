@@ -20,6 +20,8 @@ void menu_2_processing(const SDL_Event *const _event);
 
 void f8_processing(const SDL_Event *const _event);
 
+void auto_save_processing(const float _dt);
+
 int escape_processing(const SDL_Event *const _event);
 
 #endif
