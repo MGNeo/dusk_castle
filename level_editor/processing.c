@@ -366,6 +366,7 @@ int map_load(void)
         }
         printf("map_load(), файл успешно открыт.\n");
 
+        // Закрытие файла.
         // Для избавления от дублирования.
         void file_close(void)
         {
@@ -436,8 +437,10 @@ int map_load(void)
             {
                 if (map[x][y] >= UNITS_COUNT)
                 {
-                    printf("map_load(), некорректная карта.\n");
-                    printf("map[%Iu][%Iu] == %Iu\n", x, y, (size_t)map[x][y]);
+                    printf("map_load(), некорректная карта, map[%Iu][%Iu] == %Iu\n",
+                           x,
+                           y,
+                           (size_t)map[x][y]);
                     return 0;
                 }
             }
@@ -485,27 +488,29 @@ int map_save(void)
         }
         printf("map_save(), файл успешно открыт.\n");
 
+        // Закрытие файла.
+        // Для избавления от дублирования.
+        void file_close(void)
+        {
+            if (fclose(f) != 0)
+            {
+                printf("map_save(), не удалось закрыть файл.\n");
+            } else {
+                printf("map_save(), файл успешно закрыт.\n");
+            }
+        }
+
         // Записываем.
         if (fwrite(map, sizeof(uint8_t) * MAP_WIDTH * MAP_HEIGHT, 1, f) != 1)
         {
             printf("map_save(), не удалось записать данные в файл.\n");
-            if (fclose(f) != 0)
-            {
-                printf("map_save(), не удалось закрыть файл.\n");
-                return 0;
-            }
-            printf("map_save(), файл успешно закрыт.\n");
+            file_close();
             return 0;
         }
         printf("map_save(), файл успешно записан.\n");
 
         // Закрываем файл.
-        if (fclose(f) != 0)
-        {
-            printf("map_save(), не удалось закрыть файл.\n");
-            return 0;
-        }
-        printf("map_save(), файл успешно закрыт.\n");
+        file_close();
 
         return 1;
     }

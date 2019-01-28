@@ -11,7 +11,7 @@
 #include <time.h>
 
 // Вычисляет dt итерации игрового цикла.
-static float dt_calculate(void);
+//static float dt_calculate(void);
 
 void editor(void)
 {

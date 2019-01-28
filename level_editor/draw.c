@@ -228,7 +228,7 @@ void grid_draw(void)
     // ТЕСТ.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
-    for (size_t x = 0; x < w; x += SPRITE_SIZE)
+    for (int x = 0; x < w; x += SPRITE_SIZE)
     {
         if (SDL_RenderDrawLine(render, x, 0, x, h) != 0)
         {
@@ -236,7 +236,7 @@ void grid_draw(void)
                   SDL_GetError());
         }
     }
-    for (size_t y = 0; y < h; y += SPRITE_SIZE)
+    for (int y = 0; y < h; y += SPRITE_SIZE)
     {
         if (SDL_RenderDrawLine(render, 0, y, w, y) != 0)
         {
@@ -365,7 +365,7 @@ void map_draw(void)
     // Отрисовываем только те клетки, которые находятся в пределах видимости.
     for (int x = render_point_x; x < render_point_x + count_x; ++x)
     {
-        for (size_t y = render_point_y; y < render_point_y + count_y; ++y)
+        for (int y = render_point_y; y < render_point_y + count_y; ++y)
         {
             if ( (x < MAP_WIDTH) && (y < MAP_HEIGHT) )
             {
