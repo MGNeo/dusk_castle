@@ -13,6 +13,8 @@
 // Вычисляет dt итерации игрового цикла.
 static float dt_calculate(void);
 
+// Реализация функциональности редактора.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 void editor(void)
 {
     srand(time(NULL));
@@ -37,8 +39,8 @@ void editor(void)
                 // Первое меню Создать / Открыть.
                 case (0):
                 {
-                    // Если какой-либо пункт меню был активирован,
-                    // то переходим к редактированию уровня.
+                    // Если пункт меню был активирован, и активация
+                    // прошла успешно, переходим к редактированию уровня.
                     if (menu_1_processing(&event) == 1)
                     {
                         scene = 1;
@@ -68,10 +70,19 @@ void editor(void)
             }
         }
 
-        // Цвет очистки всех сцен - черный.
-        SDL_SetRenderDrawColor(render, 0, 0, 0, 255);// Тест.
+        // Задаем цвет очистки всех сцен.
+        if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
+        {
+            crash("editor(), SDL_SetRenderDrawColor() != 0\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
 
-        SDL_RenderClear(render);// ТЕСТ.
+        // Очищаем рендер.
+        if (SDL_RenderClear(render) != 0)
+        {
+            crash("editor(), SDL_RenderClear() != 0\nSDL_GetError() : %s",
+                  SDL_GetError());
+        }
 
         // Обрабатываем сцены.
         switch (scene)
