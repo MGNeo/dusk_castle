@@ -348,7 +348,7 @@ int map_load(void)
     ofn.lpstrFileTitle = NULL;
     ofn.lpstrInitialDir = NULL;
     ofn.lpstrTitle = NULL;
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
 
     if (GetOpenFileName(&ofn) != 0)
     {
@@ -470,7 +470,7 @@ int map_save(void)// dialog, сделать дополнительный уро�
     ofn.lpstrFileTitle = NULL;
     ofn.lpstrInitialDir = NULL;
     ofn.lpstrTitle = NULL;
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
 
     if (GetSaveFileName(&ofn) != 0)
     {
@@ -576,17 +576,27 @@ static void menu_2_reset(void)
 // Обработка автоматического сохранения.
 void auto_save_processing(const float _dt)
 {
+    // Резервное сохранение выполняется раз в пять минут.
     static float t = 0.f;
     t += _dt;
-    if (t < 3)
+    if (t < 300.f)
     {
         return;
     }
     t = 0;
 
+    // Храним пять последних сохранений.
+    static size_t index = 4;
+    ++index;
+    index %= 5;
+
+    // Формируем имя файла.
+    char file_name[MAX_PATH] = {0};
+    sprintf(file_name, "maps/temp%Iu", index);
+
     printf("\nАвтоматическое сохранение...\n");
 
-    FILE *f = fopen("maps/temp", "wb");
+    FILE *f = fopen(file_name, "wb");
     if (f == NULL)
     {
         printf("auto_save_processing(), не удалось открыть файл.\n");
@@ -614,8 +624,6 @@ void auto_save_processing(const float _dt)
         return;
     }
     printf("auto_save_processing(), данные успешно записаны в файл.\n");
-
-    // Странная бака с невозможностью выполнить автосохранение после ручного сохранения.
 
     // Закрываем файл.
     file_close();
