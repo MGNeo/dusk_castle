@@ -1,4 +1,4 @@
-#include "boot.h"
+﻿#include "boot.h"
 #include "window.h"
 #include "render.h"
 #include "glyphs.h"
@@ -6,7 +6,7 @@
 #include "crash.h"
 #include "hwnd.h"
 
-#include "SDL_syswm.h"// Debug
+#include "SDL_syswm.h"
 
 #include <windows.h>
 #include <locale.h>
@@ -51,7 +51,7 @@ void system_init(void)
     window = SDL_CreateWindow(u8"Редактор уровней Сумеречного замка",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              640,// Вынести в константы...
+                              640,
                               480,
                               SDL_WINDOW_RESIZABLE);
 

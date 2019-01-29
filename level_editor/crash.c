@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "crash.h"
+#include "hwnd.h"
 
 #define MAX_MESSAGE_SIZE 4096
 
@@ -30,7 +31,7 @@ void crash(const char *const _str,
         // Отказ _vsprintf().
         if (r_code < 0)
         {
-            MessageBox(NULL,
+            MessageBox(hwnd,
                        "Невозможно сформировать сообщение с информацией об ошибке, отказ _vsnprintf()",
                        "Ожидаемая критическая ошибка",
                        MB_ICONSTOP);
@@ -38,7 +39,7 @@ void crash(const char *const _str,
         }
 
         // Показываем сообщение.
-        MessageBox(NULL,
+        MessageBox(hwnd,
                    message,
                    "Ожидаемая критическая ошибка",
                    MB_ICONSTOP);

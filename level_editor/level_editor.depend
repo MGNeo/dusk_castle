@@ -522,8 +522,7 @@
 1548326636 source:c:\users\nb529\desktop\dusk_castle\level_editor\statistics.c
 	"statistics.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
-	"boot.h"
+1548765203 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
 	"window.h"
 	"render.h"
 	"glyphs.h"
@@ -557,11 +556,12 @@
 
 1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
+1548765153 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 	"crash.h"
+	"hwnd.h"
 
 1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.c
 	"cursor.h"

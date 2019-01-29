@@ -30,10 +30,51 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c11" />
+			<Add option="-finput-charset=utf-8" />
+			<Add option="-fexec-charset=cp1251" />
+			<Add directory="C:/SDL/SDL2-2.0.8/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/SDL/SDL2_mixer-2.0.2/i686-w64-mingw32/include/SDL2" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32" />
+			<Add option="-lSDL2main" />
+			<Add option="-lSDL2" />
+			<Add option="-lSDL2_ttf" />
+			<Add option="-lSDL2_mixer" />
+			<Add option="-lcomdlg32" />
+			<Add directory="C:/SDL/SDL2-2.0.8/i686-w64-mingw32/lib" />
+			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/lib" />
+			<Add directory="C:/SDL/SDL2_mixer-2.0.2/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="boot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="boot.h" />
+		<Unit filename="crash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="crash.h" />
+		<Unit filename="game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="game.h" />
+		<Unit filename="hwnd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="hwnd.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="render.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="render.h" />
+		<Unit filename="window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="window.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
