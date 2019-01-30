@@ -50,6 +50,7 @@
 			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/lib" />
 			<Add directory="C:/SDL/SDL2_mixer-2.0.2/i686-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="animation.h" />
 		<Unit filename="boot.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -86,6 +87,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="player.h" />
 		<Unit filename="processing.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -95,7 +100,7 @@
 		</Unit>
 		<Unit filename="render.h" />
 		<Unit filename="scenes.h" />
-		<Unit filename="sprites.h" />
+		<Unit filename="sprite.h" />
 		<Unit filename="text.h" />
 		<Unit filename="textures.c">
 			<Option compilerVar="CC" />

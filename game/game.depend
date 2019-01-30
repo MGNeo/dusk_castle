@@ -483,12 +483,28 @@
 1548844288 c:\users\nb529\desktop\dusk_castle_master\game\menu.h
 	<stdlib.h>
 
-1548847726 source:c:\users\nb529\desktop\dusk_castle_master\game\processing.c
+1548852461 source:c:\users\nb529\desktop\dusk_castle_master\game\processing.c
 	"processing.h"
 	"crash.h"
 	"menu.h"
+	"player.h"
+	"animation.h"
 
 1548845456 c:\users\nb529\desktop\dusk_castle_master\game\scenes.h
 
 1548844184 c:\users\nb529\desktop\dusk_castle_master\game\text.h
+
+1548848273 source:c:\users\nb529\desktop\dusk_castle_master\game\map.c
+	"map.h"
+
+1548848149 c:\users\nb529\desktop\dusk_castle_master\game\map.h
+	<stdint.h>
+
+1548849275 source:c:\users\nb529\desktop\dusk_castle_master\game\player.c
+	"player.h"
+
+1548849275 c:\users\nb529\desktop\dusk_castle_master\game\player.h
+
+1548850242 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
+	<stdlib.h>
 
