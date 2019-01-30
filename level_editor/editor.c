@@ -135,10 +135,10 @@ float dt_calculate(void)
     t2 = t1;
     t1 = SDL_GetPerformanceCounter();
     // dt первого кадра определить невозможно.
-    static size_t first = 1;
-    if (first == 1)
+    static size_t first;
+    if (first == 0)
     {
-        first = 0;
+        ++first;
         return 0;
     }
 

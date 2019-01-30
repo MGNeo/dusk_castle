@@ -60,6 +60,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="game.h" />
+		<Unit filename="glyphs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="glyphs.h" />
 		<Unit filename="hwnd.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -71,6 +75,12 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="render.h" />
+		<Unit filename="sprites.h" />
+		<Unit filename="textures.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="textures.h" />
+		<Unit filename="units.h" />
 		<Unit filename="window.c">
 			<Option compilerVar="CC" />
 		</Unit>

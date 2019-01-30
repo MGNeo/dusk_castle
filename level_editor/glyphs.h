@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Модуль глифов.
  * Предоставляет ресурсы-глифы.
  *
@@ -11,7 +11,7 @@
 
 #define MIN_FONT_SIZE 10
 #define MAX_FONT_SIZE 30
-#define FONTS_COUNT (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)// ?
+#define FONTS_COUNT (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)
 
 typedef struct s_glyph
 {

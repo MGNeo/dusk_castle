@@ -19,21 +19,21 @@
 #define U_START           2
 // Финиш.
 #define U_FINISH          3
-// Монетка.
-#define U_COIN            4
 // Стена.
-#define U_WALL            5
+#define U_WALL            4
 // Лестница.
-#define U_LADDER          6
+#define U_LADDER          5
 // Шипы.
-#define U_DAMAGE          7
+#define U_DAMAGE          6
 // Токсичная слизь.
-#define U_TOXIC           8
+#define U_TOXIC           7
 // Призрак.
-#define U_GHOST           9
+#define U_GHOST           8
 // Летучая мышь.
-#define U_BAT            10
-// Жизнь.
-#define U_LIFE           11
+#define U_BAT             9
+// Серебрянная монетка.
+#define U_SILVER_COIN    10
+// Золотая монетка.
+#define U_GOLD_COIN      11
 
 #endif

@@ -522,13 +522,15 @@
 1548326636 source:c:\users\nb529\desktop\dusk_castle\level_editor\statistics.c
 	"statistics.h"
 
-1548821991 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
+1548831131 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
+	"boot.h"
 	"window.h"
 	"render.h"
 	"glyphs.h"
 	"textures.h"
 	"crash.h"
 	"hwnd.h"
+	"sprite.h"
 	"SDL_syswm.h"
 	<windows.h>
 	<locale.h>
@@ -544,14 +546,14 @@
 1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\render.h
 	"SDL.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
+1548824678 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
 	"SDL.h"
 
 1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.h
 	"SDL.h"
 	"units.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
+1548828010 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
 	<limits.h>
 
 1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
@@ -616,7 +618,7 @@
 	<stdlib.h>
 	"units.h"
 
-1548745960 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
+1548824944 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
 	"editor.h"
 	"crash.h"
 	"render.h"

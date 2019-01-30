@@ -14,13 +14,17 @@
 
 1548761997 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1548763164 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1548828862 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
 
-1548766005 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1548830216 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
+	"glyphs.h"
+	"textures.h"
+	"crash.h"
+	"sprites.h"
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
@@ -414,7 +418,7 @@
 1548765403 c:\users\nb529\desktop\dusk_castle_master\game\hwnd.h
 	<windows.h>
 
-1548765436 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
+1548766056 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
 	"hwnd.h"
 
 1548766017 source:c:\users\nb529\desktop\dusk_castle_master\game\render.c
@@ -422,4 +426,21 @@
 
 1548764611 source:c:\users\nb529\desktop\dusk_castle_master\game\window.c
 	"window.h"
+
+1548824738 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
+	"SDL.h"
+
+1548824787 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
+	"glyphs.h"
+
+1548829727 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
+	"textures.h"
+
+1548829727 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
+	"SDL.h"
+
+1548828330 c:\users\nb529\desktop\dusk_castle_master\game\units.h
+	<limits.h>
+
+1548829935 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
 

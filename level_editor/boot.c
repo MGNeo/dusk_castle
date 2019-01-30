@@ -1,10 +1,11 @@
-﻿#include "boot.h"
+#include "boot.h"
 #include "window.h"
 #include "render.h"
 #include "glyphs.h"
 #include "textures.h"
 #include "crash.h"
 #include "hwnd.h"
+#include "sprite.h"
 
 #include "SDL_syswm.h"
 
@@ -150,7 +151,7 @@ void glyphs_load(void)
                 SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
                 if (h_texture == NULL)
                 {
-                    crash("font_load(), не удалось создать текстуру на основе поверхности с символом\nSDL_GetError() : %s",
+                    crash("glyphs_load(), не удалось создать текстуру на основе поверхности с символом.\nSDL_GetError() : %s",
                           SDL_GetError());
                 }
 
@@ -197,6 +198,18 @@ static void texture_load(const char *const _file_name,
               SDL_GetError());
     }
 
+    // Проверяем размеры поверхности.
+    if (h_surface->w != SPRITE_SIZE)
+    {
+        crash("texture_load(), ширина текстуры должна составлять %i пикселя.",
+              SPRITE_SIZE);
+    }
+    if (h_surface->h != SPRITE_SIZE)
+    {
+        crash("texture_load(), высота текстуры должна составлять %i пикселя.",
+              SPRITE_SIZE);
+    }
+
     // Пытаемся создать текстуру на основе поверхности.
     SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
     if (h_texture == NULL)
@@ -215,7 +228,7 @@ static void texture_load(const char *const _file_name,
 void textures_load(void)
 {
     // Защита от повторного вызова.
-    static size_t again = 0;
+    static size_t again;
     if (again++ != 0)
     {
         crash("textures_load(), попытка повторной загрузки текстур.");

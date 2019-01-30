@@ -1,6 +1,10 @@
 #include "boot.h"
 #include "window.h"
 #include "render.h"
+#include "glyphs.h"
+#include "textures.h"
+#include "crash.h"
+#include "sprites.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -11,7 +15,8 @@
 
 // Загружает текстуру.
 static void texture_load(const char *const _file_name,
-                         SDL_Texture **const _texture);
+                         SDL_Texture **const _texture,
+                         const size_t _frames_count);
 
 // Инициализирует систему.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
@@ -21,7 +26,7 @@ void system_init(void)
     static size_t again;
     if (again++ != 0)
     {
-        crash("system_init(), попытка повторной инициализации системы.\n");
+        crash("system_init(), попытка повторной инициализации системы.");
     }
 
     setlocale(LC_ALL, "rus");
@@ -97,14 +102,94 @@ void system_init(void)
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 void glyphs_load(void)
 {
-    // ...
+    // Защита от повторного вызова.
+    static size_t again;
+    if (again++ != 0)
+    {
+        crash("glyphs_load(), попытка повторной загрузки глифов.");
+    }
+
+    // Цвет шрифта.
+    SDL_Color h_color = {255, 255, 255, 255};
+
+    // Загружаем шрифты нужного размера.
+    for (size_t s = 0; s < FONTS_COUNT; ++s)
+    {
+        TTF_Font *h_font = TTF_OpenFont("font/font.ttf", MIN_FONT_SIZE + s);
+        if (h_font == NULL)
+        {
+            crash("glyphs_load(), не удалось загрузить шрифт размера: %Iu\nTTF_GetError() : %s",
+                  MIN_FONT_SIZE + s,
+                  TTF_GetError());
+        }
+
+        // Заполним глифы.
+        for (size_t g = 0; g < 255; ++g)
+        {
+            const char ansi_char = (char)g;
+            // Защита от переполнения, если символ представлен суррогатной парой.
+            Uint16 unicode_char[2] = {0};
+            // Преобразуем символ из текущей кодировки (cp1251) в юникод.
+            const int r_code = MultiByteToWideChar(1251,
+                                                   0,
+                                                   &ansi_char,
+                                                   1,
+                                                   unicode_char,
+                                                   1);
+
+            if (r_code != 1)
+            {
+                crash("glyphs_load(), не удалось конвертировать символ из cp1251 в unicode.\nGetLastError() : %lu",
+                      GetLastError());
+            }
+
+            if (unicode_char[1] != 0)
+            {
+                crash("glyphs_load(), при конвертации ANSI символа [%c] получилась суррогатная пара UTF16-LE, а не единственный 16-ти битный символ.",
+                      ansi_char);
+            }
+
+            // Отрендерим символ в поверхность.
+            SDL_Surface *h_surface = TTF_RenderGlyph_Blended(h_font, unicode_char[0], h_color);
+
+            // Если для символа есть графическое представление.
+            // Важно, для символа может быть графическое представление со всеми прозрачными пикселями.
+            if (h_surface != NULL)
+            {
+                // Сформируем текстуру на основе поверхности.
+                SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
+                if (h_texture == NULL)
+                {
+                    crash("font_load(), не удалось создать текстуру на основе поверхности с символом.\nSDL_GetError() : %s",
+                          SDL_GetError());
+                }
+
+                // Инициализируем глиф.
+                glyphs[s][g].w = h_surface->w;
+                glyphs[s][g].h = h_surface->h;
+                glyphs[s][g].texture = h_texture;
+
+                // Освобождаем вспомогательную поверхность.
+                SDL_FreeSurface(h_surface);
+            }
+        }
+
+        TTF_CloseFont(h_font);
+    }
 }
 
 // Загружает текстуры.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 void textures_load(void)
 {
-    // ...
+    // Защита от повторного вызова.
+    static size_t again;
+    if (again++ != 0)
+    {
+        crash("textures_load(), попытка повторной загрузки текстур.\n");
+    }
+
+    // Загружаем игрока.
 }
 
 // Загружает звуки.
@@ -117,7 +202,70 @@ void sounds_load(void)
 // Загружает текстуру.
 // В случае критической ошибки показывает ионформацию о причине сбоя и крашит программу.
 static void texture_load(const char *const _file_name,
-                         SDL_Texture **const _texture)
+                         SDL_Texture **const _texture,
+                         const size_t _frames_count)
 {
+    if (_file_name == NULL)
+    {
+        crash("texture_load(), _file_name == NULL");
+    }
 
+    if (strlen(_file_name) == 0)
+    {
+        crash("texture_load(), strlen(_file_name) == 0");
+    }
+
+    if (_texture == NULL)
+    {
+        crash("texture_load(), _texture == NULL");
+    }
+
+    if (_frames_count == 0)
+    {
+        crash("texture_load(), _frames_count == 0");
+    }
+
+    if (_frames_count > MAX_FRAMES_COUNT)
+    {
+        crash("texture_load(), _frames_count > MAX_FRAMES_COUNT");
+    }
+
+    // Пытаемся создать поверхность, загрузив данные из файла.
+    SDL_Surface *h_surface = SDL_LoadBMP(_file_name);
+    if (h_surface == NULL)
+    {
+        crash("texture_load(), не удалось создать поверхность на оснвое файла: %s\nSDL_GetError() : %s",
+              _file_name,
+              SDL_GetError());
+    }
+
+    // Проверяем высоту текстуры на соответствие требованиям.
+    if (h_surface->h != SPRITE_SIZE)
+    {
+        crash("texture_load(), неверная высота текстуры.\nТекущая: %i\nТребуемая: %i",
+              h_surface->h,
+              SPRITE_SIZE);
+    }
+    // Вычисляем заданную ширину.
+    // Целочисленное переполнение знакового возникнуть не может.
+    const int required_w = SPRITE_SIZE * _frames_count;
+    // Проверяем ширину текстуры на соответствие требованиям.
+    if (h_surface->w != required_w)
+    {
+        crash("texture_load(), неверная ширина текстуры.\nТекущая: %i\nТребуемая: %i",
+              h_surface->w,
+              required_w);
+    }
+
+    // Пытаемся создать текстуру на основе поверхности.
+    SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
+    if (h_surface == NULL)
+    {
+        crash("texture_load(), не удалось создать текстуру на основе поверхности.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    SDL_FreeSurface(h_surface);
+
+    *_texture = h_texture;
 }
