@@ -29,6 +29,8 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-pedantic" />
+			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add option="-std=c11" />
 			<Add option="-finput-charset=utf-8" />
@@ -56,6 +58,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="crash.h" />
+		<Unit filename="draw.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="draw.h" />
 		<Unit filename="frames.h" />
 		<Unit filename="game.c">
 			<Option compilerVar="CC" />
@@ -72,11 +78,25 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="map.h" />
+		<Unit filename="menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu.h" />
+		<Unit filename="processing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="processing.h" />
 		<Unit filename="render.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="render.h" />
+		<Unit filename="scenes.h" />
 		<Unit filename="sprites.h" />
+		<Unit filename="text.h" />
 		<Unit filename="textures.c">
 			<Option compilerVar="CC" />
 		</Unit>

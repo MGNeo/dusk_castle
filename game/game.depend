@@ -8,17 +8,24 @@
 
 1548734984 c:\users\nb529\desktop\dusk_castle_master\game\crash.h
 
-1548762638 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
+1548847902 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
 	"game.h"
 	"crash.h"
+	"render.h"
+	"scenes.h"
+	"processing.h"
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
 
 1548761997 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1548830829 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1548840176 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
 	"boot.h"
 
-1548833292 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1548839903 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -435,7 +442,7 @@
 1548824787 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
 	"glyphs.h"
 
-1548829727 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
+1548835026 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
 	"textures.h"
 
 1548834650 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
@@ -447,4 +454,41 @@
 1548833074 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
 
 1548834821 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
+
+1548845880 source:c:\users\nb529\desktop\dusk_castle_master\game\draw.c
+	"draw.h"
+	"crash.h"
+	"text.h"
+	"glyphs.h"
+	"render.h"
+	"window.h"
+	"menu.h"
+	<SDL.h>
+	<stdlib.h>
+
+1548846282 c:\users\nb529\desktop\dusk_castle_master\game\draw.h
+
+1548843504 source:c:\users\nb529\desktop\dusk_castle_master\game\menu_1.c
+	"menu_1.h"
+
+1548843506 c:\users\nb529\desktop\dusk_castle_master\game\menu_1.h
+	<stdlib.h>
+
+1548846287 c:\users\nb529\desktop\dusk_castle_master\game\processing.h
+	<SDL.h>
+
+1548844286 source:c:\users\nb529\desktop\dusk_castle_master\game\menu.c
+	"menu.h"
+
+1548844288 c:\users\nb529\desktop\dusk_castle_master\game\menu.h
+	<stdlib.h>
+
+1548847726 source:c:\users\nb529\desktop\dusk_castle_master\game\processing.c
+	"processing.h"
+	"crash.h"
+	"menu.h"
+
+1548845456 c:\users\nb529\desktop\dusk_castle_master\game\scenes.h
+
+1548844184 c:\users\nb529\desktop\dusk_castle_master\game\text.h
 

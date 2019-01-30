@@ -190,25 +190,39 @@ void textures_load(void)
         crash("textures_load(), попытка повторной загрузки текстур.\n");
     }
 
-    // Загружаем игрока.
+    // Игрок.
     texture_load("textures/player.bmp", &texture_player, PLAYER_FRAMES_COUNT);
 
-    // Загружаем старт.
+    // Старт.
     texture_load("textures/start.bmp", &texture_start, START_FRAMES_COUNT);
 
-    // Загружаем финиш.
+    // Финиш.
     texture_load("textures/finish.bmp", &texture_finish, FINISH_FRAMES_COUNT);
 
-    // Загружаем стену.
-    texture_load("textures/wall.bmp", &textures_wall, WALL_FRAMES_COUNT);
+    // Стена.
+    texture_load("textures/wall.bmp", &texture_wall, WALL_FRAMES_COUNT);
 
-    // Загружаем лестницу.
-    texture_load("textures_ladder.bmp", &textures_ladder, LADDER_FRAMES_COUNT);
+    // Лестница.
+    texture_load("textures/ladder.bmp", &texture_ladder, LADDER_FRAMES_COUNT);
 
-    // Загружаем шипы.
-    textures_load("textures/stakes.bmp", &textures_stakes, STAKES_FRAMES_COUNT);
+    // Шипы.
+    texture_load("textures/stakes.bmp", &texture_stakes, STAKES_FRAMES_COUNT);
 
-    // Загружаем токсичную слизь.
+    // Токсичная слизь.
+    texture_load("textures/toxic.bmp", &texture_toxic, TOXIC_FRAMES_COUNT);
+
+    // Призрак.
+    texture_load("textures/ghost.bmp", &texture_ghost, GHOST_FRAMES_COUNT);
+
+    // Летучая мышь.
+    texture_load("textures/bat.bmp", &texture_bat, BAT_FRAMES_COUNT);
+
+    // Серебрянная монетка.
+    texture_load("textures/silver coin.bmp", &texture_silver_coin, SILVER_COIN_FRAMES_COUNT);
+
+    // Золотая монетка.
+    texture_load("textures/gold coin.bmp", &texture_gold_coin, GOLD_COIN_FRAMES_COUNT);
+
 }
 
 // Загружает звуки.

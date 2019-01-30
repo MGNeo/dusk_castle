@@ -11,5 +11,7 @@ int main(int argc, char **argv)
 
     sounds_load();
 
+    game();
+
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "editor.h"
+﻿#include "editor.h"
 #include "crash.h"
 #include "render.h"
 #include "windows.h"
@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <time.h>
 
-// Вычисляет dt итерации игрового цикла.
+// Вычисляет dt итерации главного цикла.
 static float dt_calculate(void);
 
 // Реализация функциональности редактора.
@@ -128,7 +128,7 @@ void editor(void)
 }
 
 // Вычисляет dt игрового цикла.
-// За одну итерацию игрового цикла функция должна вызываться один раз.
+// За одну итерацию главного цикла функция должна вызываться один раз.
 float dt_calculate(void)
 {
     static Uint64 t1, t2;
