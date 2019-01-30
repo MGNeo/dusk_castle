@@ -14,10 +14,11 @@
 
 1548761997 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1548828862 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1548830829 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
+	"boot.h"
 
-1548830216 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1548833292 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -25,6 +26,7 @@
 	"textures.h"
 	"crash.h"
 	"sprites.h"
+	"frames.h"
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
@@ -436,11 +438,13 @@
 1548829727 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
 	"textures.h"
 
-1548829727 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
+1548834650 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
 	"SDL.h"
 
 1548828330 c:\users\nb529\desktop\dusk_castle_master\game\units.h
 	<limits.h>
 
-1548829935 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
+1548833074 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
+
+1548834821 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
 

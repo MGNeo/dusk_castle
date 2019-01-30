@@ -23,8 +23,8 @@
 #define U_WALL            4
 // Лестница.
 #define U_LADDER          5
-// Шипы.
-#define U_DAMAGE          6
+// Колья.
+#define U_STAKES          6
 // Токсичная слизь.
 #define U_TOXIC           7
 // Призрак.

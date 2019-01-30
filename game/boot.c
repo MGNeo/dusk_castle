@@ -5,6 +5,7 @@
 #include "textures.h"
 #include "crash.h"
 #include "sprites.h"
+#include "frames.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -190,6 +191,24 @@ void textures_load(void)
     }
 
     // Загружаем игрока.
+    texture_load("textures/player.bmp", &texture_player, PLAYER_FRAMES_COUNT);
+
+    // Загружаем старт.
+    texture_load("textures/start.bmp", &texture_start, START_FRAMES_COUNT);
+
+    // Загружаем финиш.
+    texture_load("textures/finish.bmp", &texture_finish, FINISH_FRAMES_COUNT);
+
+    // Загружаем стену.
+    texture_load("textures/wall.bmp", &textures_wall, WALL_FRAMES_COUNT);
+
+    // Загружаем лестницу.
+    texture_load("textures_ladder.bmp", &textures_ladder, LADDER_FRAMES_COUNT);
+
+    // Загружаем шипы.
+    textures_load("textures/stakes.bmp", &textures_stakes, STAKES_FRAMES_COUNT);
+
+    // Загружаем токсичную слизь.
 }
 
 // Загружает звуки.
