@@ -5,9 +5,13 @@
 #include "render.h"
 #include "window.h"
 #include "menu.h"
+#include "textures.h"
+#include "sprite.h"
+#include "player.h"
 
 #include <SDL.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Отрисовка текста.
 static void text_draw(const char *const _text,
@@ -183,4 +187,23 @@ void menu_draw(void)
         text_draw("Играть", 20, w / 2, h / 2 - 10, TEXT_ALIGN_CENTER);
         text_draw("[Выход]", 20, w / 2, h / 2 + 10, TEXT_ALIGN_CENTER);
     }
+}
+
+// Отрисовка игрока.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+void player_draw(void)
+{
+    SDL_Rect sr, dr;
+
+    sr.w = SPRITE_SIZE;
+    sr.h = SPRITE_SIZE;
+    sr.x = SPRITE_SIZE * player.anim.current_frame;
+    sr.y = 0;
+
+    dr.w = SPRITE_SIZE;
+    dr.h = SPRITE_SIZE;
+    dr.x = 100;
+    dr.y = 100;
+
+    SDL_RenderCopy(render, texture_player, &sr, &dr);
 }

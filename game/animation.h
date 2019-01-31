@@ -11,12 +11,12 @@
 
 typedef struct s_animation_state
 {
-    float fps;
+    float fps,
+          t;
 
     size_t first_frame,
-           last_frame;
-
-    float current_frame;
+           last_frame,
+           current_frame;
 } animation_state;
 
 #endif

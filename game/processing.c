@@ -3,6 +3,9 @@
 #include "menu.h"
 #include "player.h"
 #include "animation.h"
+#include "frames.h"
+
+#include <math.h>
 
 // Сброс игрока.
 static void player_reset(void);
@@ -35,6 +38,7 @@ int menu_processing(const SDL_Event *const _event)
         {
             if (menu_selected_item == 0)
             {
+                player_reset();
                 return 1;
             } else {
                 return -1;
@@ -45,23 +49,38 @@ int menu_processing(const SDL_Event *const _event)
 
 static void player_reset(void)
 {
-    //player.x = MAP_WIDTH / 2;
-    //player.y = MAP_HEIGHT / 2;
+    player.anim.current_frame = PLAYER_CLIMB_FIRST;
+    player.anim.first_frame = PLAYER_CLIMB_FIRST;
+    player.anim.last_frame = PLAYER_CLIMB_LAST;//PLAYER_FRAMES_COUNT - 1;
+    player.anim.fps = 2.f;
+    player.anim.t = 0.f;
+}
+
+// Обработка всех анимаций.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+void animations_processing(const float _dt)
+{
+    animation_processing(&player.anim, _dt);
 }
 
 // Обработка анимации.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void animation_processing(animation_state *const _state,
+static void animation_processing(animation_state *const _animation_state,
                                  const float _dt)
 {
-    if (_state == NULL)
+    if (_animation_state == NULL)
     {
         crash("animation_state(), _animation_state == NULL");
     }
-    _state->current_frame += _state->first_frame * _dt;
-    if (_state->current_frame > _state->first_frame)
+    _animation_state->t += _dt * _animation_state->fps;
+    if (_animation_state->t > 1.f)
     {
-        _state->current_frame = _state->first_frame;
-        // А что если  size_t->float->size_t приведет к 3 -> 2.99997 -> 2?
+        _animation_state->current_frame += _animation_state->t + 0.5f;
+        _animation_state->t = 0.f;
+        if (_animation_state->current_frame > _animation_state->last_frame)
+        {
+            _animation_state->current_frame -=
+            (_animation_state->last_frame - _animation_state->first_frame) + 1;
+        }
     }
 }

@@ -102,7 +102,10 @@ void game(void)
             }
             case (SCENE_LEVEL):
             {
-
+                // Обрабатываем все анимации.
+                animations_processing(dt);
+                // Рисуем игрока.
+                player_draw();
                 break;
             }
             case (SCENE_LOSE):

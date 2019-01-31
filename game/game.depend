@@ -8,7 +8,7 @@
 
 1548734984 c:\users\nb529\desktop\dusk_castle_master\game\crash.h
 
-1548847902 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
+1548917318 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
 	"game.h"
 	"crash.h"
 	"render.h"
@@ -21,18 +21,18 @@
 
 1548761997 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1548840176 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1548915915 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
 	"boot.h"
 
-1548839903 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1548916209 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
 	"glyphs.h"
 	"textures.h"
 	"crash.h"
-	"sprites.h"
+	"sprite.h"
 	"frames.h"
 	<SDL.h>
 	<SDL_ttf.h>
@@ -455,7 +455,7 @@
 
 1548834821 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
 
-1548845880 source:c:\users\nb529\desktop\dusk_castle_master\game\draw.c
+1548917099 source:c:\users\nb529\desktop\dusk_castle_master\game\draw.c
 	"draw.h"
 	"crash.h"
 	"text.h"
@@ -463,10 +463,14 @@
 	"render.h"
 	"window.h"
 	"menu.h"
+	"textures.h"
+	"sprite.h"
+	"player.h"
 	<SDL.h>
 	<stdlib.h>
+	<string.h>
 
-1548846282 c:\users\nb529\desktop\dusk_castle_master\game\draw.h
+1548916891 c:\users\nb529\desktop\dusk_castle_master\game\draw.h
 
 1548843504 source:c:\users\nb529\desktop\dusk_castle_master\game\menu_1.c
 	"menu_1.h"
@@ -474,7 +478,7 @@
 1548843506 c:\users\nb529\desktop\dusk_castle_master\game\menu_1.h
 	<stdlib.h>
 
-1548846287 c:\users\nb529\desktop\dusk_castle_master\game\processing.h
+1548917318 c:\users\nb529\desktop\dusk_castle_master\game\processing.h
 	<SDL.h>
 
 1548844286 source:c:\users\nb529\desktop\dusk_castle_master\game\menu.c
@@ -483,12 +487,14 @@
 1548844288 c:\users\nb529\desktop\dusk_castle_master\game\menu.h
 	<stdlib.h>
 
-1548852461 source:c:\users\nb529\desktop\dusk_castle_master\game\processing.c
+1548918132 source:c:\users\nb529\desktop\dusk_castle_master\game\processing.c
 	"processing.h"
 	"crash.h"
 	"menu.h"
 	"player.h"
 	"animation.h"
+	"frames.h"
+	<math.h>
 
 1548845456 c:\users\nb529\desktop\dusk_castle_master\game\scenes.h
 
@@ -500,11 +506,15 @@
 1548848149 c:\users\nb529\desktop\dusk_castle_master\game\map.h
 	<stdint.h>
 
-1548849275 source:c:\users\nb529\desktop\dusk_castle_master\game\player.c
+1548916815 source:c:\users\nb529\desktop\dusk_castle_master\game\player.c
 	"player.h"
 
-1548849275 c:\users\nb529\desktop\dusk_castle_master\game\player.h
-
-1548850242 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
+1548916818 c:\users\nb529\desktop\dusk_castle_master\game\player.h
 	<stdlib.h>
+	"animation.h"
+
+1548916565 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
+	<stdlib.h>
+
+1548850204 c:\users\nb529\desktop\dusk_castle_master\game\sprite.h
 

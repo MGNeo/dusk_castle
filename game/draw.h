@@ -9,4 +9,6 @@
 
 void menu_draw(void);
 
+void player_draw(void);
+
 #endif

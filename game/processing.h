@@ -11,4 +11,6 @@
 
 int menu_processing(const SDL_Event *const _event);
 
+void animations_processing(const float _dt);
+
 #endif

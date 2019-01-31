@@ -4,7 +4,7 @@
 #include "glyphs.h"
 #include "textures.h"
 #include "crash.h"
-#include "sprites.h"
+#include "sprite.h"
 #include "frames.h"
 
 #include <SDL.h>
