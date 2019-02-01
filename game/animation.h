@@ -9,10 +9,13 @@
 
 #include <stdlib.h>
 
+#define ANIMATIONS_FPS 3
+
 typedef struct s_animation_state
 {
     float fps,
           t;
+    float t;
 
     size_t first_frame,
            last_frame,

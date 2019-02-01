@@ -12,6 +12,8 @@
 
 typedef struct s_player_unit
 {
+    float x, y, vx, vy;
+
     animation_state anim;
 } player_unit;
 

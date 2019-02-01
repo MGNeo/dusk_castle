@@ -76,6 +76,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="hwnd.h" />
+		<Unit filename="level.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="level.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

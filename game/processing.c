@@ -4,15 +4,48 @@
 #include "player.h"
 #include "animation.h"
 #include "frames.h"
+#include "level.h"
+#include "map.h"
 
-#include <math.h>
-
+#include <stdlib.h>
+#include <stdio.h>
 // Сброс игрока.
 static void player_reset(void);
+
+// Сброс уровня.
+static void level_reset(void);
 
 // Обработка анимации.
 static void animation_processing(animation_state *const _animation_state,
                                  const float _dt);
+
+// Загрузка карты.
+static void map_load(void);
+
+// Загрузка карты.
+// В случае критической ошибки показывает информацию о причине ошибки и крашит программу.
+static void map_load(void)
+{
+    if (level == LEVELS_COUNT)
+    {
+        return;
+    }
+
+    // Формируем имя уровня, который нужно загрузить.
+    char file_name[] = "map/level0123456789";
+    sprintf(file_name, "map/level%10Iu", level);
+
+    // Попытаемся открыть файл.
+    FILE *f = fopen(file_name, "rb");
+
+    //if ()
+}
+
+// Сброс уровня.
+static void level_reset(void)
+{
+    level = 0;
+}
 
 // Обработка выбора и активации пунктов меню.
 // Возвращает -1, давая команду на выход.
@@ -52,7 +85,6 @@ static void player_reset(void)
     player.anim.current_frame = PLAYER_CLIMB_FIRST;
     player.anim.first_frame = PLAYER_CLIMB_FIRST;
     player.anim.last_frame = PLAYER_CLIMB_LAST;//PLAYER_FRAMES_COUNT - 1;
-    player.anim.fps = 2.f;
     player.anim.t = 0.f;
 }
 
@@ -72,7 +104,7 @@ static void animation_processing(animation_state *const _animation_state,
     {
         crash("animation_state(), _animation_state == NULL");
     }
-    _animation_state->t += _dt * _animation_state->fps;
+    _animation_state->t += _dt * ANIMATIONS_FPS;
     if (_animation_state->t > 1.f)
     {
         _animation_state->current_frame += _animation_state->t + 0.5f;
