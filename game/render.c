@@ -1,5 +1,6 @@
 #include "render.h"
 #include "window.h"
+#include "crash.h"
 
 SDL_Renderer *render;
 

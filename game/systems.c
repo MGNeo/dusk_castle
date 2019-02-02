@@ -1,4 +1,5 @@
 #include "systems.h"
+#include "crash.h"
 
 #include <stdlib.h>
 #include <locale.h>

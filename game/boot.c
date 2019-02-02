@@ -4,6 +4,8 @@
 #include "hwnd.h"
 #include "glyphs.h"
 #include "textures.h"
+#include "crash.h"
+#include "systems.h"
 
 #include <stdlib.h>
 

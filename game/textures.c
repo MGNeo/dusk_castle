@@ -2,6 +2,8 @@
 #include "frames.h"
 #include "sprite.h"
 #include "render.h"
+#include "crash.h"
+
 #include <string.h>
 
 SDL_Texture *texture_player,
