@@ -1,18 +1,13 @@
 /*
- * Модуль начальной инициализации и загрузки.
- * Предоставляет для main.c функции инициализации всех систем и загрузки всех ресурсов.
+ * Модуль начальной инициализации.
+ * Предоставляет для main.c единую функцию инициализации всех систем и
+ * загрузки всех ресурсов.
  *
  */
 
 #ifndef BOOT_H
 #define BOOT_H
 
-void system_init(void);
-
-void glyphs_load(void);
-
-void textures_load(void);
-
-void sounds_load(void);
+extern void boot(void);
 
 #endif

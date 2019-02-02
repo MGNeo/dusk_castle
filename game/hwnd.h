@@ -12,4 +12,6 @@
 
 extern HANDLE hwnd;
 
+extern void hwnd_create(void);
+
 #endif

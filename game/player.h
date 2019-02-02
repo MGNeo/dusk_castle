@@ -12,11 +12,13 @@
 
 typedef struct s_player_unit
 {
+<<<<<<< HEAD
+    animation anim;
+=======
     float x, y, vx, vy;
 
     animation_state anim;
+>>>>>>> 9af60c69fe74b8746afa6cb674ef69b85eae1608
 } player_unit;
-
-extern player_unit player;
 
 #endif

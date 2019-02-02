@@ -11,4 +11,6 @@
 
 extern SDL_Renderer *render;
 
+extern void render_create(void);
+
 #endif

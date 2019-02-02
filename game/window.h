@@ -10,4 +10,6 @@
 
 extern SDL_Window *window;
 
+extern void window_create(void);
+
 #endif

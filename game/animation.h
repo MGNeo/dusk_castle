@@ -1,6 +1,6 @@
-/*
+﻿/*
  * Модуль анимации.
- * Предоставляет ресурс - состояние анимации.
+ * Предоставляет ресурс - состояние анимации и функцию обработки анимации.
  *
  */
 
@@ -11,13 +11,16 @@
 
 #define ANIMATIONS_FPS 3
 
-typedef struct s_animation_state
+typedef struct s_animation
 {
     float t;
 
     size_t first_frame,
            last_frame,
            current_frame;
-} animation_state;
+} animation;
+
+extern void animation_processing(animation *const _animation,
+                                 const float _dt);
 
 #endif

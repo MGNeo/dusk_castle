@@ -22,4 +22,6 @@ typedef struct s_glyph
 
 extern glyph glyphs[FONTS_COUNT][256];
 
+extern void glyphs_load(void);
+
 #endif

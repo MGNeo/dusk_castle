@@ -3,8 +3,6 @@
 #include "render.h"
 #include "scenes.h"
 
-#include "processing.h"
-
 #include <SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -19,6 +17,15 @@ void game(void)
 {
     srand(time(NULL));
 
+    scene_return_value (*scenes[2])(const size_t) = {scene_menu,
+                                                     scene_game};
+
+    scene_return_value srv = { SCENE_MENU, 0 };
+    while (1)
+    {
+        srv = scenes[srv.scene](srv.param);
+    }
+
     size_t scene = SCENE_MENU;
     while (1)
     {
@@ -32,47 +39,6 @@ void game(void)
             if (event.type == SDL_QUIT)
             {
                 exit(0);
-            }
-
-            // Обрабатываем события текущей сцены.
-            switch (scene)
-            {
-                case (SCENE_MENU):
-                {
-                    // Обрабатываем меню.
-                    switch (menu_processing(&event))
-                    {
-                        case (-1):
-                        {
-                            exit(0);
-                        }
-                        case (1):
-                        {
-                            scene = SCENE_LEVEL;
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case (SCENE_LEVEL):
-                {
-
-                    break;
-                }
-                case (SCENE_LOSE):
-                {
-
-                    break;
-                }
-                case (SCENE_WIN):
-                {
-
-                    break;
-                }
-                default:
-                {
-                    crash("game(), неизвестная сцена.");
-                }
             }
         }
 
@@ -90,34 +56,6 @@ void game(void)
         {
             crash("game(), SDL_RenderClear() != 0\nSDL_GetError() : %s",
                   SDL_GetError());
-        }
-
-        // Просчитываем и рисуем текущую сцену.
-        switch (scene)
-        {
-            case (SCENE_MENU):
-            {
-                menu_draw();
-                break;
-            }
-            case (SCENE_LEVEL):
-            {
-                // Обрабатываем все анимации.
-                animations_processing(dt);
-                // Рисуем игрока.
-                player_draw();
-                break;
-            }
-            case (SCENE_LOSE):
-            {
-
-                break;
-            }
-            case (SCENE_WIN):
-            {
-
-                break;
-            }
         }
 
         // Представляем рендер после обработки всех сцен.

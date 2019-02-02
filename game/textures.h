@@ -21,4 +21,6 @@ extern SDL_Texture *texture_player,
                    *texture_silver_coin,
                    *texture_gold_coin;
 
+extern void textures_load(void);
+
 #endif

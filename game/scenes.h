@@ -1,16 +1,24 @@
 /*
  * Модуль сцен.
- * Предоставляет информацию об используемых сценах.
+ * Предоставляет ресурсы-сцены игры.
  *
  */
 
 #ifndef SCENES_H
 #define SCENES_H
 
-#define SCENE_MENU 0
-#define SCENE_LEVEL 1
-#define SCENE_LOSE 2
-#define SCENE_WIN  3
+#include <stdlib.h>
 
+#define SCENE_MENU  0
+#define SCENE_LEVEL 1
+
+typedef struct s_scene_return_value
+{
+    size_t scene,
+           param;
+} scene_return_value;
+
+extern scene_return_value scene_menu(const size_t _param);
+extern scene_return_value scene_game(const size_t _param);
 
 #endif
