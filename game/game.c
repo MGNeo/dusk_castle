@@ -26,7 +26,7 @@ void game(void)
         srv = scenes[srv.scene](srv.param);
     }
 
-    size_t scene = SCENE_MENU;
+    /*size_t scene = SCENE_MENU;
     while (1)
     {
         // Определяем время кадра.
@@ -60,7 +60,7 @@ void game(void)
 
         // Представляем рендер после обработки всех сцен.
         SDL_RenderPresent(render);
-    }
+    }*/
 }
 
 // Вычисляет dt итерации игрового цикла.
