@@ -28,4 +28,5 @@ void render_create(void)
         crash("render_create(), не удалось задать рендеру режим смешивания.\nSDL_GetError() : %s",
               SDL_GetError());
     }
+
 }
