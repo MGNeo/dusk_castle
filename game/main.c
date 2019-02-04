@@ -13,4 +13,3 @@ int main(int argc, char **argv)
     return 0;
 }
 
-// Явно указать у всех определений функций extern или static.

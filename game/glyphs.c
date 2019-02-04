@@ -34,7 +34,7 @@ void glyphs_load(void)
         }
 
         // Заполним глифы.
-        for (size_t g = 0; g < 255; ++g)
+        for (size_t g = 0; g < 256; ++g)
         {
             const char ansi_char = (char)g;
             // Защита от переполнения, если символ представлен суррогатной парой.

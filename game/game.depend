@@ -8,13 +8,13 @@
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\crash.h
 
-1549258736 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
+1549272791 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
 	"game.h"
 	"scene_menu.h"
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1549261208 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1549270639 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
 	"boot.h"
 
@@ -429,10 +429,10 @@
 	"window.h"
 	"crash.h"
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
+1549279220 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
 	"SDL.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
+1549272962 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
 	"glyphs.h"
 	"crash.h"
 	"render.h"
@@ -451,7 +451,7 @@
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
 	"SDL.h"
 
-1548828330 c:\users\nb529\desktop\dusk_castle_master\game\units.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\units.h
 	<limits.h>
 
 1548833074 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
@@ -888,14 +888,14 @@
 	<windows.h>
 	<SDL_ttf.h>
 
-1549253982 source:c:\users\nb529\desktop\dusk_castle_master\game\text.c
+1549278182 source:c:\users\nb529\desktop\dusk_castle_master\game\text.c
 	"text.h"
 	"render.h"
 	"glyphs.h"
 	"crash.h"
 	<string.h>
 
-1549262381 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
+1549283504 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
 	"scene_menu.h"
 	"SDL.h"
 	"window.h"
@@ -1844,21 +1844,48 @@
 	<crtdefs.h>
 	<stdio.h>
 
-1549258935 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
+1549282749 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
 	"scene_menu.h"
+	"units.h"
+	<SDL.h>
 
-1549262629 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
+1549272995 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
 	"scene_game.h"
 
 1549262532 c:\users\nb529\desktop\dusk_castle_master\game\scene_game.h
 	"scene_return_value.h"
 
-1549262942 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
+1549283504 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
 	"scene_authors.h"
+	"scene_menu.h"
+	"dt.h"
+	"text.h"
+	"window.h"
+	"render.h"
+	"crash.h"
+	<SDL.h>
+	<math.h>
+	<time.h>
 
 1549262808 c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.h
 	"scene_return_value.h"
 
 1549260195 c:\users\nb529\desktop\dusk_castle_master\game\scene_help.h
 	"scene_return_value.h"
+
+1468489802 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\time.h
+	<crtdefs.h>
+	<_timeval.h>
+	<sys/timeb.h>
+	<pthread_time.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sys\timeb.h
+	<crtdefs.h>
+	<sec_api/sys/timeb_s.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\sys\timeb_s.h
+	<sys/timeb.h>
+
+1468489825 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pthread_time.h
+	<sys/timeb.h>
 

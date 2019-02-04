@@ -5,5 +5,6 @@
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 extern scene_return_value scene_game(const size_t _param)
 {
-
+    scene_return_value srv = {0, 0};
+    return srv;
 }

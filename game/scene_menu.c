@@ -27,12 +27,12 @@ typedef enum e_elements
 // Выделенный элемент меню.
 static elements selected = 0;
 
-// Управление менюшкой.
-static size_t menu_control(const SDL_Event *const _event);
+// Контроль.
+static size_t control(void);
 // Формирование команды перехода к следующей сцене.
-static scene_return_value menu_activate(void);
-// Рисование меню.
-static void menu_draw(void);
+static scene_return_value next_scene(void);
+// Отрисовка.
+static void draw(void);
 
 // Сцена-меню.
 // Игнорирует значение _param.
@@ -48,28 +48,20 @@ extern scene_return_value scene_menu(const size_t _param)
     {
         // Если объявления функции не было, то стиралась первая буква первого пункта...
         // Проявление UB.
-         dt_calculate();
+        dt_calculate();
 
-        SDL_Event event;
-        while (SDL_PollEvent(&event) != 0)
+        // Контроль.
+        const size_t a = control();
+        // Переход к другой сцене.
+        if (a != 0)
         {
-            if (event.type == SDL_QUIT)
-            {
-                exit(0);
-            }
-            // Обрабатываем управление менюшкой.
-            const size_t a = menu_control(&event);
-            // Если пункт меню был активирован, переходим к следующей сцене.
-            if (a != 0)
-            {
-                return menu_activate();
-            }
+            return next_scene();
         }
 
         // Задаем рендеру цвет рисования.
         if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
         {
-            crash("scene_menu(), не удалось задать рендеру цвет очистки.\nSDL_GetError() : %s",
+            crash("scene_menu(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
                   SDL_GetError());
         }
 
@@ -81,7 +73,7 @@ extern scene_return_value scene_menu(const size_t _param)
         }
 
         // Рисуем меню.
-        menu_draw();
+        draw();
 
         // Представляем рендер.
         SDL_RenderPresent(render);
@@ -91,36 +83,40 @@ extern scene_return_value scene_menu(const size_t _param)
 // Управление меню.
 // При активации элемента меню возвращает 1, иначе 0.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-size_t menu_control(const SDL_Event *const _event)
+size_t control(void)
 {
-    if (_event == NULL)
+    SDL_Event event;
+    while (SDL_PollEvent(&event) != 0)
     {
-        crash("menu_control(), _event == NULL");
-    }
+        if (event.type == SDL_QUIT)
+        {
+            exit(0);
+        }
 
-    if (_event->type == SDL_KEYDOWN)
-    {
-        // Листаем вверх.
-        if ( (_event->key.keysym.sym == SDLK_w) ||
-             (_event->key.keysym.sym == SDLK_UP) )
+        if (event.type == SDL_KEYDOWN)
         {
-            --selected;
-            selected %= COUNT;
-            return 0;
-        }
-        // Листаем вниз.
-        if ( (_event->key.keysym.sym == SDLK_s) ||
-             (_event->key.keysym.sym == SDLK_DOWN) )
-        {
-            ++selected;
-            selected %= COUNT;
-            return 0;
-        }
-        // Активировали пункт меню.
-        if ( (_event->key.keysym.sym == SDLK_SPACE) ||
-             (_event->key.keysym.sym == SDLK_RETURN) )
-        {
-            return 1;
+            // Листаем вверх.
+            if ( (event.key.keysym.sym == SDLK_w) ||
+                 (event.key.keysym.sym == SDLK_UP) )
+            {
+                --selected;
+                selected %= COUNT;
+                return 0;
+            }
+            // Листаем вниз.
+            if ( (event.key.keysym.sym == SDLK_s) ||
+                 (event.key.keysym.sym == SDLK_DOWN) )
+            {
+                ++selected;
+                selected %= COUNT;
+                return 0;
+            }
+            // Активировали пункт меню.
+            if ( (event.key.keysym.sym == SDLK_SPACE) ||
+                 (event.key.keysym.sym == SDLK_RETURN) )
+            {
+                return 1;
+            }
         }
     }
     return 0;
@@ -128,7 +124,7 @@ size_t menu_control(const SDL_Event *const _event)
 
 // Формирование команды перехода к следующей сцене.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static scene_return_value menu_activate(void)
+static scene_return_value next_scene(void)
 {
     scene_return_value srv = {NULL, 0};
     switch (selected)
@@ -143,11 +139,13 @@ static scene_return_value menu_activate(void)
         {
             srv.scene = scene_help;
             srv.param = 0;
+            break;
         }
         case (AUTHORS):
         {
             srv.scene = scene_authors;
             srv.param = 0;
+            break;
         }
         case (EXIT):
         {
@@ -165,7 +163,7 @@ static scene_return_value menu_activate(void)
 
 // Рисование меню.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void menu_draw(void)
+static void draw(void)
 {
     // Получаем размеры окна клиентской области.
     int w, h;
