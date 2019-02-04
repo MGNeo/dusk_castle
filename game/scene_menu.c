@@ -6,30 +6,43 @@
 #include "render.h"
 #include "crash.h"
 #include "dt.h"
+#include "scene_game.h"
+#include "scene_help.h"
+#include "scene_authors.h"
+
 #include <stdio.h>
+#include <string.h>
+
+// Элементы меню.
+typedef enum e_elements
+{
+    GAME,
+    HELP,
+    AUTHORS,
+    EXIT
+} elements;
+
+// Количество элементов меню.
+#define COUNT (EXIT + 1)
+// Выделенный элемент меню.
+static elements selected = 0;
 
 // Управление менюшкой.
-static void menu_control(const SDL_Event *const _event,
-                         size_t *const _selected_item,
-                         const size_t _items_count);
-
+static size_t menu_control(const SDL_Event *const _event);
+// Формирование команды перехода к следующей сцене.
+static scene_return_value menu_activate(void);
 // Рисование меню.
-static void menu_draw(const size_t _selected_item,
-                      const size_t _items_count,
-                      const char *const _items[]);
+static void menu_draw(void);
 
 // Сцена-меню.
 // Игнорирует значение _param.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-scene_return_value scene_menu(const size_t _param)
+extern scene_return_value scene_menu(const size_t _param)
 {
     (void)_param;
-    size_t selected_item = 0;
-    const char *const items[] = {"Играть",
-                                 "Помощь",
-                                 "Авторы",
-                                 "Выход"};
-    const size_t items_count = sizeof(items) / sizeof(char*);
+
+    // Выделяем первый элемент меню.
+    selected = GAME;
 
     while (1)
     {
@@ -45,7 +58,12 @@ scene_return_value scene_menu(const size_t _param)
                 exit(0);
             }
             // Обрабатываем управление менюшкой.
-            menu_control(&event, &selected_item, items_count);
+            const size_t a = menu_control(&event);
+            // Если пункт меню был активирован, переходим к следующей сцене.
+            if (a != 0)
+            {
+                return menu_activate();
+            }
         }
 
         // Задаем рендеру цвет рисования.
@@ -63,30 +81,21 @@ scene_return_value scene_menu(const size_t _param)
         }
 
         // Рисуем меню.
-        menu_draw(selected_item, items_count, items);
+        menu_draw();
 
         // Представляем рендер.
         SDL_RenderPresent(render);
     }
-
-    scene_return_value srv = {0, 0};
-    return srv;
 }
 
 // Управление меню.
+// При активации элемента меню возвращает 1, иначе 0.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-void menu_control(const SDL_Event *const _event,
-                  size_t *const _selected_item,
-                  const size_t _items_count)
+size_t menu_control(const SDL_Event *const _event)
 {
     if (_event == NULL)
     {
         crash("menu_control(), _event == NULL");
-    }
-
-    if (_selected_item == NULL)
-    {
-        crash("menu_control(), _selected_item == NULL");
     }
 
     if (_event->type == SDL_KEYDOWN)
@@ -95,37 +104,69 @@ void menu_control(const SDL_Event *const _event,
         if ( (_event->key.keysym.sym == SDLK_w) ||
              (_event->key.keysym.sym == SDLK_UP) )
         {
-            _selected_item[0] -= 1;
+            --selected;
+            selected %= COUNT;
+            return 0;
         }
         // Листаем вниз.
         if ( (_event->key.keysym.sym == SDLK_s) ||
              (_event->key.keysym.sym == SDLK_DOWN) )
         {
-            _selected_item[0] += 1;
+            ++selected;
+            selected %= COUNT;
+            return 0;
         }
-        _selected_item[0] %= _items_count;
+        // Активировали пункт меню.
+        if ( (_event->key.keysym.sym == SDLK_SPACE) ||
+             (_event->key.keysym.sym == SDLK_RETURN) )
+        {
+            return 1;
+        }
     }
+    return 0;
+}
+
+// Формирование команды перехода к следующей сцене.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static scene_return_value menu_activate(void)
+{
+    scene_return_value srv = {NULL, 0};
+    switch (selected)
+    {
+        case (GAME):
+        {
+            srv.scene = scene_game;
+            srv.param = 0;
+            break;
+        }
+        case (HELP):
+        {
+            srv.scene = scene_help;
+            srv.param = 0;
+        }
+        case (AUTHORS):
+        {
+            srv.scene = scene_authors;
+            srv.param = 0;
+        }
+        case (EXIT):
+        {
+            exit(0);
+        }
+        default:
+        {
+            crash("menu_activate(), активирован неизвестный пункт меню.\nselected: %i",
+                  selected);
+        }
+    }
+
+    return srv;
 }
 
 // Рисование меню.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void menu_draw(const size_t _selected_item,
-                      const size_t _items_count,
-                      const char *const _items[])
+static void menu_draw(void)
 {
-    if (_items == NULL)
-    {
-        crash("menu_draw(), _items == NULL");
-    }
-
-    for (size_t i = 0; i < _items_count; ++i)
-    {
-        if (_items[i] == NULL)
-        {
-            crash("menu_draw(), _items[%Iu] == NULL", i);
-        }
-    }
-
     // Получаем размеры окна клиентской области.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
@@ -135,19 +176,57 @@ static void menu_draw(const size_t _selected_item,
     // Положение текста по x.
     const int x = w / 2;
     // Положение текста по y.
-    const int y = h / 2 - (_items_count / 2) * size;
-    for (size_t i = 0; i < _items_count; ++i)
+    const int y = h / 2 - (COUNT / 2) * size;
+    for (elements i = 0; i < COUNT; ++i)
     {
-        char text[100];
-        int s_bias = 0;
-        // Добавляем выделенному пункту меню скобочки и увеличение.
-        if (_selected_item == i)
+        // Формируем текстовое представление элемента меню.
+        char text_a[100] = {0};
+        switch (i)
         {
-            sprintf(text, "[%s]", _items[i]);
+            case (GAME):
+            {
+                sprintf(text_a, "Играть");
+                break;
+            }
+            case (HELP):
+            {
+                sprintf(text_a, "Помощь");
+                break;
+            }
+            case (AUTHORS):
+            {
+                sprintf(text_a, "Авторы");
+                break;
+            }
+            case (EXIT):
+            {
+                sprintf(text_a, "Выход");
+                break;
+            }
+            default:
+            {
+                crash("menu_draw(), попытка отрисовать неизвестный элемент меню.\ni: %i", i);
+            }
+        }
+
+        // Если отрисовываемый элемент - это выделенный элемент меню,
+        // добавляем ему скобочки и придаем ему увеличение.
+        char text_b[100];
+        int s_bias = 0;
+
+        if (selected == i)
+        {
+            sprintf(text_b, "[%s]", text_a);
             s_bias = 2;
         } else {
-            sprintf(text, "%s", _items[i]);
+            sprintf(text_b, "%s", text_a);
         }
-        text_draw(text, size + s_bias, x, y + i * size, TEXT_ALIGN_CENTER);
+
+        // Рисуем текст.
+        text_draw(text_b,
+                  size + s_bias,
+                  x,
+                  y + i * size,
+                  TEXT_ALIGN_CENTER);
     }
 }

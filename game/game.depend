@@ -1,49 +1,37 @@
 # depslib dependency file v1.0
-1548765472 source:c:\users\nb529\desktop\dusk_castle_master\game\crash.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 	"crash.h"
 	"hwnd.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\game\crash.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\crash.h
 
-1548917318 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
+1549258736 source:c:\users\nb529\desktop\dusk_castle_master\game\game.c
 	"game.h"
-	"crash.h"
-	"render.h"
-	"scenes.h"
-	"processing.h"
-	<SDL.h>
-	<stdlib.h>
-	<stdio.h>
-	<time.h>
+	"scene_menu.h"
 
-1548761997 c:\users\nb529\desktop\dusk_castle_master\game\game.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1548915915 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1549261208 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"game.h"
 	"boot.h"
 
-1548916209 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
+	"hwnd.h"
 	"glyphs.h"
 	"textures.h"
 	"crash.h"
-	"sprite.h"
-	"frames.h"
-	<SDL.h>
-	<SDL_ttf.h>
-	<SDL_mixer.h>
-	<locale.h>
-	<windows.h>
-	<SDL_syswm.h>
+	"systems.h"
+	<stdlib.h>
 
-1548763304 c:\users\nb529\desktop\dusk_castle_master\game\boot.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\boot.h
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -75,12 +63,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -109,34 +97,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -146,24 +134,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -174,18 +162,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -199,7 +187,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -213,7 +201,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -221,13 +209,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -235,7 +223,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -244,11 +232,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -256,27 +244,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -284,11 +272,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -296,60 +284,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -358,7 +346,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -366,18 +354,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1454362934 c:\sdl\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+1454362933 c:\sdl\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -391,13 +379,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1548764602 c:\users\nb529\desktop\dusk_castle_master\game\window.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\window.h
 	<SDL.h>
 
-1548765986 c:\users\nb529\desktop\dusk_castle_master\game\render.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\render.h
 	<SDL.h>
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_syswm.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_syswm.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -412,7 +400,7 @@
 	"SDL_egl.h"
 	"close_code.h"
 
-1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_egl.h
+1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_egl.h
 	<EGL/egl.h>
 	<EGL/eglext.h>
 	<stdint.h>
@@ -424,28 +412,43 @@
 	<X11/Xlib.h>
 	<X11/Xutil.h>
 
-1548765403 c:\users\nb529\desktop\dusk_castle_master\game\hwnd.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\hwnd.h
 	<windows.h>
 
-1548766056 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
-	"hwnd.h"
-
-1548766017 source:c:\users\nb529\desktop\dusk_castle_master\game\render.c
-	"render.h"
-
-1548764611 source:c:\users\nb529\desktop\dusk_castle_master\game\window.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
+	"SDL_syswm.h"
 	"window.h"
+	"crash.h"
 
-1548824738 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\render.c
+	"render.h"
+	"window.h"
+	"crash.h"
+
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\window.c
+	"window.h"
+	"crash.h"
+
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
 	"SDL.h"
 
-1548824787 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
 	"glyphs.h"
+	"crash.h"
+	"render.h"
+	<SDL_ttf.h>
+	<stdlib.h>
+	<windows.h>
 
-1548835026 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
 	"textures.h"
+	"frames.h"
+	"sprite.h"
+	"render.h"
+	"crash.h"
+	<string.h>
 
-1548834650 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\textures.h
 	"SDL.h"
 
 1548828330 c:\users\nb529\desktop\dusk_castle_master\game\units.h
@@ -453,7 +456,7 @@
 
 1548833074 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
 
-1548834821 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
 
 1548917099 source:c:\users\nb529\desktop\dusk_castle_master\game\draw.c
 	"draw.h"
@@ -496,14 +499,16 @@
 	"frames.h"
 	<math.h>
 
-1548845456 c:\users\nb529\desktop\dusk_castle_master\game\scenes.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\scenes.h
+	"scene_return_value.h"
 
-1548844184 c:\users\nb529\desktop\dusk_castle_master\game\text.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\text.h
+	<stdlib.h>
 
-1548848273 source:c:\users\nb529\desktop\dusk_castle_master\game\map.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\map.c
 	"map.h"
 
-1548848149 c:\users\nb529\desktop\dusk_castle_master\game\map.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\map.h
 	<stdint.h>
 
 1548916815 source:c:\users\nb529\desktop\dusk_castle_master\game\player.c
@@ -513,10 +518,10 @@
 	<stdlib.h>
 	"animation.h"
 
-1548926018 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
 	<stdlib.h>
 
-1548850204 c:\users\nb529\desktop\dusk_castle_master\game\sprite.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\sprite.h
 
 1548850204 D
 
@@ -686,10 +691,10 @@
 
 1549128445 h"
 
-1548926330 source:c:\users\nb529\desktop\dusk_castle_master\game\level.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\level.c
 	"level.h"
 
-1548927218 c:\users\nb529\desktop\dusk_castle_master\game\level.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\level.h
 	<stdlib.h>
 
 1548927218 60c69fe74b8746afa6cb674ef69b85eae1608
@@ -849,4 +854,1011 @@
 	"crash.h"
 	"dt.h"
 	<stdio.h>
+
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\animation.c
+	"animation.h"
+	"crash.h"
+
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\systems.h
+
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\dt.c
+	"dt.h"
+	<SDL.h>
+	<stdlib.h>
+
+1549253262 c:\users\nb529\desktop\dusk_castle_master\game\dt.h
+
+1549257195 c:\users\nb529\desktop\dusk_castle_master\game\scene_return_value.h
+	<stdlib.h>
+
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\scenes.c
+	"scenes.h"
+	"scene_menu.h"
+
+1549258737 c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.h
+	"scene_return_value.h"
+
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\systems.c
+	"systems.h"
+	"crash.h"
+	<stdlib.h>
+	<locale.h>
+	<SDL.h>
+	<SDL_mixer.h>
+	<windows.h>
+	<SDL_ttf.h>
+
+1549253982 source:c:\users\nb529\desktop\dusk_castle_master\game\text.c
+	"text.h"
+	"render.h"
+	"glyphs.h"
+	"crash.h"
+	<string.h>
+
+1549262381 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
+	"scene_menu.h"
+	"SDL.h"
+	"window.h"
+	"text.h"
+	"render.h"
+	"crash.h"
+	"dt.h"
+	"scene_game.h"
+	"scene_help.h"
+	"scene_authors.h"
+	<stdio.h>
+	<string.h>
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stdlib.h
+	<crtdefs.h>
+	<limits.h>
+	<sec_api/stdlib_s.h>
+	<malloc.h>
+
+1468489810 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\crtdefs.h
+	<_mingw.h>
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw.h
+	"_mingw_mac.h"
+	"_mingw_secapi.h"
+	"_cygwin.h"
+	<vadefs.h>
+	"sdks/_mingw_directx.h"
+	"sdks/_mingw_ddk.h"
+
+1468489803 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_mac.h
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_secapi.h
+
+1468489804 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_cygwin.h
+	<stddef.h>
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stddef.h
+	<crtdefs.h>
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\vadefs.h
+	<_mingw.h>
+
+1468489803 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sdks\_mingw_directx.h
+
+1468489803 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sdks\_mingw_ddk.h
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\limits.h
+	<crtdefs.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\stdlib_s.h
+	<stdlib.h>
+
+1468489788 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\malloc.h
+	<crtdefs.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winapifamily.h
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sys\types.h
+	<crtdefs.h>
+	<_mingw_off_t.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_off_t.h
+
+1468489800 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stdio.h
+	<crtdefs.h>
+	<_mingw_print_push.h>
+	<_mingw_off_t.h>
+	<swprintf.inl>
+	<sec_api/stdio_s.h>
+	<_mingw_print_pop.h>
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_print_push.h
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\swprintf.inl
+	<vadefs.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\stdio_s.h
+	<stdio.h>
+
+1468489803 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_print_pop.h
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stdarg.h
+	<_mingw_stdarg.h>
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_stdarg.h
+	<vadefs.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\memory.h
+	<crtdefs.h>
+
+1468489800 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\string.h
+	<crtdefs.h>
+	<sec_api/string_s.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\string_s.h
+	<string.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\strings.h
+	<string.h>
+
+1468489800 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wchar.h
+	<crtdefs.h>
+	<_mingw_print_push.h>
+	<_mingw_off_t.h>
+	<_mingw_stat64.h>
+	<swprintf.inl>
+	<sec_api/wchar_s.h>
+	<_mingw_print_pop.h>
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_stat64.h
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\wchar_s.h
+	<wchar.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\inttypes.h
+	<crtdefs.h>
+	<stdint.h>
+	<stddef.h>
+	<_mingw_print_push.h>
+	<_mingw_print_pop.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stdint.h
+	<crtdefs.h>
+	<stddef.h>
+
+1468489797 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ctype.h
+	<crtdefs.h>
+
+1468489788 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\math.h
+	<crtdefs.h>
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\float.h
+	<crtdefs.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sal.h
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\signal.h
+	<crtdefs.h>
+	<pthread_signal.h>
+
+1468489825 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pthread_signal.h
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\process.h
+	<crtdefs.h>
+	<sys/types.h>
+
+1468489809 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\intrin.h
+	<crtdefs.h>
+	<setjmp.h>
+	<stddef.h>
+	<psdk_inc/intrin-impl.h>
+	<stdlib.h>
+	<errno.h>
+	<malloc.h>
+	<x86intrin.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	<mm3dnow.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\setjmp.h
+	<crtdefs.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\intrin-impl.h
+	<intrin.h>
+	<psdk_inc/intrin-impl.h>
+
+1468489797 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\errno.h
+	<crtdefs.h>
+
+1468489787 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\windows.h
+	<_mingw.h>
+	<sdkddkver.h>
+	<winresrc.h>
+	<excpt.h>
+	<stdarg.h>
+	<windef.h>
+	<winbase.h>
+	<wingdi.h>
+	<winuser.h>
+	<winnls.h>
+	<wincon.h>
+	<winver.h>
+	<winreg.h>
+	<winnetwk.h>
+	<virtdisk.h>
+	<cderr.h>
+	<dde.h>
+	<ddeml.h>
+	<dlgs.h>
+	<lzexpand.h>
+	<mmsystem.h>
+	<nb30.h>
+	<rpc.h>
+	<shellapi.h>
+	<winperf.h>
+	<winsock.h>
+	<wincrypt.h>
+	<winefs.h>
+	<winscard.h>
+	<winspool.h>
+	<ole.h>
+	<ole2.h>
+	<commdlg.h>
+	<stralign.h>
+	<ole2.h>
+	<winsvc.h>
+	<mcx.h>
+	<imm.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sdkddkver.h
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winresrc.h
+	<winuser.rh>
+	<commctrl.rh>
+	<dde.rh>
+	<winnt.rh>
+	<dlgs.h>
+	<winver.h>
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winuser.rh
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\commctrl.rh
+
+1468489790 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\dde.rh
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winnt.rh
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\dlgs.h
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winver.h
+	<_mingw.h>
+	<_mingw_unicode.h>
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_mingw_unicode.h
+
+1468489810 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\excpt.h
+	<crtdefs.h>
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\windef.h
+	<minwindef.h>
+	<winnt.h>
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\minwindef.h
+	<_mingw.h>
+	<winapifamily.h>
+	<specstrings.h>
+	<winnt.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\specstrings.h
+	<sal.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winnt.h
+	<_mingw_unicode.h>
+	<_mingw.h>
+	<ctype.h>
+	<excpt.h>
+	<winapifamily.h>
+	<apiset.h>
+	<specstrings.h>
+	<psdk_inc/intrin-impl.h>
+	<sdkddkver.h>
+	<basetsd.h>
+	<guiddef.h>
+	<x86intrin.h>
+	<pshpack4.h>
+	<poppack.h>
+	"pshpack4.h"
+	"pshpack2.h"
+	"poppack.h"
+	"pshpack2.h"
+	<pshpack2.h>
+	<poppack.h>
+	"poppack.h"
+	"pshpack8.h"
+	"poppack.h"
+	"poppack.h"
+	<string.h>
+	<pshpack8.h>
+	<poppack.h>
+	<ktmtypes.h>
+	"pshpack4.h"
+	"poppack.h"
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\apiset.h
+	<_mingw.h>
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\basetsd.h
+	<_mingw.h>
+
+1468489809 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\guiddef.h
+	<_mingw.h>
+	<string.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pshpack4.h
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\poppack.h
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pshpack2.h
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pshpack8.h
+
+1468489800 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ktmtypes.h
+
+1468489787 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winbase.h
+	<_mingw_unicode.h>
+	<apisetcconv.h>
+	<winapifamily.h>
+	<minwinbase.h>
+	<bemapiset.h>
+	<debugapi.h>
+	<errhandlingapi.h>
+	<fibersapi.h>
+	<fileapi.h>
+	<handleapi.h>
+	<heapapi.h>
+	<ioapiset.h>
+	<interlockedapi.h>
+	<jobapi.h>
+	<libloaderapi.h>
+	<memoryapi.h>
+	<namedpipeapi.h>
+	<namespaceapi.h>
+	<processenv.h>
+	<processthreadsapi.h>
+	<processtopologyapi.h>
+	<profileapi.h>
+	<realtimeapiset.h>
+	<securityappcontainer.h>
+	<securitybaseapi.h>
+	<synchapi.h>
+	<sysinfoapi.h>
+	<systemtopologyapi.h>
+	<threadpoolapiset.h>
+	<threadpoollegacyapiset.h>
+	<utilapiset.h>
+	<wow64apiset.h>
+	<psdk_inc/intrin-impl.h>
+	<winerror.h>
+	<timezoneapi.h>
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\apisetcconv.h
+
+1468489808 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\minwinbase.h
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\bemapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\debugapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\errhandlingapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\fibersapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489809 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\fileapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489809 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\handleapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\heapapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ioapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\interlockedapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\jobapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489810 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\libloaderapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\memoryapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\namedpipeapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\namespaceapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\processenv.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\processthreadsapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\processtopologyapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\profileapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\realtimeapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\securityappcontainer.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\securitybaseapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\synchapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sysinfoapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489810 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\systemtopologyapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\threadpoolapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\threadpoollegacyapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\utilapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wow64apiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winerror.h
+	<fltwinerror.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\fltwinerror.h
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\timezoneapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wingdi.h
+	<winapifamily.h>
+	<_mingw_unicode.h>
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack2.h>
+	<poppack.h>
+	<pshpack2.h>
+	<poppack.h>
+	<pshpack4.h>
+	<poppack.h>
+	<pshpack4.h>
+	<poppack.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pshpack1.h
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winuser.h
+	<winapifamily.h>
+	<_mingw_unicode.h>
+	<apisetcconv.h>
+	<_mingw.h>
+	<stdarg.h>
+	<guiddef.h>
+	<libloaderapi.h>
+	<pshpack2.h>
+	<poppack.h>
+	<tvout.h>
+
+1468489788 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\tvout.h
+	<guiddef.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winnls.h
+	<winapifamily.h>
+	<datetimeapi.h>
+	<libloaderapi.h>
+	<stringapiset.h>
+
+1468489808 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\datetimeapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<minwinbase.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stringapiset.h
+	<apiset.h>
+	<apisetcconv.h>
+	<minwindef.h>
+	<winnls.h>
+
+1468489787 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wincon.h
+	<_mingw_unicode.h>
+	<winapifamily.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winreg.h
+	<_mingw_unicode.h>
+	<reason.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\reason.h
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winnetwk.h
+	<winapifamily.h>
+	<_mingw_unicode.h>
+	<wnnc.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wnnc.h
+	<winapifamily.h>
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\virtdisk.h
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\cderr.h
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\dde.h
+	<windef.h>
+
+1468489804 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ddeml.h
+	<_mingw_unicode.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\lzexpand.h
+	<_mingw_unicode.h>
+
+1468489803 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\mmsystem.h
+	<_mingw_unicode.h>
+	<pshpack1.h>
+	<poppack.h>
+
+1468489802 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\nb30.h
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpc.h
+	<_mingw.h>
+	<windows.h>
+	<basetsd.h>
+	<pshpack8.h>
+	<rpcdce.h>
+	<rpcnsi.h>
+	<rpcnterr.h>
+	<excpt.h>
+	<winerror.h>
+	<rpcasync.h>
+	<poppack.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcdce.h
+	<_mingw_unicode.h>
+	<specstrings.h>
+	<guiddef.h>
+	<rpcdcep.h>
+
+1468489790 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcdcep.h
+	<_mingw_unicode.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcnsi.h
+	<_mingw_unicode.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcnterr.h
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcasync.h
+	<_mingw_unicode.h>
+	<pshpack8.h>
+	<poppack.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\shellapi.h
+	<winapifamily.h>
+	<_mingw_unicode.h>
+	<specstrings.h>
+	<pshpack1.h>
+	<poppack.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winperf.h
+	<pshpack8.h>
+	<poppack.h>
+
+1468489787 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winsock.h
+	<windows.h>
+	<_timeval.h>
+	<_bsd_types.h>
+	<inaddr.h>
+	<psdk_inc/_socket_types.h>
+	<psdk_inc/_fd_types.h>
+	<psdk_inc/_ip_types.h>
+	<psdk_inc/_ip_mreq1.h>
+	<psdk_inc/_wsadata.h>
+	<psdk_inc/_xmitfile.h>
+	<psdk_inc/_wsa_errnos.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_timeval.h
+
+1468489802 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\_bsd_types.h
+	<_mingw.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\inaddr.h
+	<_bsd_types.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_socket_types.h
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_fd_types.h
+	<psdk_inc/_socket_types.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_ip_types.h
+	<_bsd_types.h>
+	<inaddr.h>
+	<_timeval.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_ip_mreq1.h
+	<inaddr.h>
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_wsadata.h
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_xmitfile.h
+
+1468489811 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\psdk_inc\_wsa_errnos.h
+
+1468489789 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wincrypt.h
+	<_mingw.h>
+	<_mingw_unicode.h>
+	<guiddef.h>
+	<winapifamily.h>
+	<apisetcconv.h>
+	<bcrypt.h>
+	<ncrypt.h>
+	<dpapi.h>
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\bcrypt.h
+	<winapifamily.h>
+
+1468489802 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ncrypt.h
+	<winapifamily.h>
+	<bcrypt.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\dpapi.h
+
+1468489788 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winefs.h
+
+1468489787 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winscard.h
+	<_mingw_unicode.h>
+	<wtypes.h>
+	<winioctl.h>
+	"winsmcrd.h"
+	"SCardErr.h"
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wtypes.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypesbase.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcndr.h
+	<pshpack8.h>
+	<basetsd.h>
+	<rpcnsip.h>
+	<rpcsal.h>
+	<poppack.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcnsip.h
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\rpcsal.h
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ole2.h
+	<winapifamily.h>
+	<pshpack8.h>
+	<winerror.h>
+	<objbase.h>
+	<oleauto.h>
+	<oleidl.h>
+	<poppack.h>
+
+1468489802 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\objbase.h
+	<winapifamily.h>
+	<rpc.h>
+	<rpcndr.h>
+	<pshpack8.h>
+	<combaseapi.h>
+	<objidl.h>
+	<urlmon.h>
+	<propidl.h>
+	<poppack.h>
+
+1468489795 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\combaseapi.h
+	<apiset.h>
+	<apisetcconv.h>
+	<rpc.h>
+	<rpcndr.h>
+	<pshpack8.h>
+	<stdlib.h>
+	<wtypesbase.h>
+	<unknwnbase.h>
+	<objidlbase.h>
+	<guiddef.h>
+	<cguid.h>
+	<poppack.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\wtypesbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<basetsd.h>
+	<guiddef.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\unknwnbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypesbase.h>
+	<winapifamily.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\objidlbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<unknwnbase.h>
+	<wtypesbase.h>
+	<winapifamily.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\cguid.h
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\objidl.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<unknwn.h>
+	<wtypes.h>
+	<winapifamily.h>
+	<winapifamily.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\unknwn.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypes.h>
+	<winapifamily.h>
+
+1468489786 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\urlmon.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<objidl.h>
+	<oleidl.h>
+	<servprov.h>
+	<msxml.h>
+	<winapifamily.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\oleidl.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<objidl.h>
+	<winapifamily.h>
+
+1468489792 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\servprov.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<objidl.h>
+	<winapifamily.h>
+
+1468489807 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\msxml.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<unknwn.h>
+	<objidl.h>
+	<oaidl.h>
+
+1468489805 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\oaidl.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<objidl.h>
+	<winapifamily.h>
+
+1468489794 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\propidl.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypes.h>
+	<objidl.h>
+	<oaidl.h>
+	<winapifamily.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\oleauto.h
+	<pshpack8.h>
+	<oaidl.h>
+	<poppack.h>
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winioctl.h
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack1.h>
+	<poppack.h>
+	<pshpack1.h>
+	<poppack.h>
+
+1468489788 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winsmcrd.h
+	<_mingw_unicode.h>
+
+1468489791 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\scarderr.h
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winspool.h
+	<_mingw_unicode.h>
+	<prsht.h>
+
+1468489793 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\prsht.h
+	<_mingw_unicode.h>
+	<pshpack8.h>
+	<pshpack4.h>
+	<poppack.h>
+
+1468489798 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\ole.h
+	<winapifamily.h>
+
+1468489806 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\commdlg.h
+	<winapifamily.h>
+	<_mingw_unicode.h>
+	<prsht.h>
+	<pshpack1.h>
+	<poppack.h>
+
+1468489801 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\stralign.h
+	<sec_api/stralign_s.h>
+
+1468489808 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\sec_api\stralign_s.h
+	<stralign.h>
+
+1468489785 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\winsvc.h
+	<_mingw.h>
+	<_mingw_unicode.h>
+	<apisetcconv.h>
+
+1468489808 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\mcx.h
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\imm.h
+	<_mingw_unicode.h>
+
+1468489784 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\inspectable.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypes.h>
+	<hstring.h>
+	<unknwn.h>
+
+1468489810 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\hstring.h
+	<rpc.h>
+	<rpcndr.h>
+	<windows.h>
+	<ole2.h>
+	<wtypes.h>
+
+1468489796 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\locale.h
+	<crtdefs.h>
+	<stdio.h>
+
+1549258935 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
+	"scene_menu.h"
+
+1549262629 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
+	"scene_game.h"
+
+1549262532 c:\users\nb529\desktop\dusk_castle_master\game\scene_game.h
+	"scene_return_value.h"
+
+1549262942 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
+	"scene_authors.h"
+
+1549262808 c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.h
+	"scene_return_value.h"
+
+1549260195 c:\users\nb529\desktop\dusk_castle_master\game\scene_help.h
+	"scene_return_value.h"
 

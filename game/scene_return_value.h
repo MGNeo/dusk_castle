@@ -8,10 +8,12 @@
 
 #include <stdlib.h>
 
-typedef struct s_scene_return_value
+typedef struct s_scene_return_value scene_return_value;
+
+struct s_scene_return_value
 {
-    size_t scene;
+    scene_return_value (*scene)(const size_t _param);
     size_t param;
-} scene_return_value;
+};
 
 #endif

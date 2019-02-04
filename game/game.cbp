@@ -38,6 +38,7 @@
 			<Add directory="C:/SDL/SDL2-2.0.8/i686-w64-mingw32/include/SDL2" />
 			<Add directory="C:/SDL/SDL2_ttf-2.0.14/i686-w64-mingw32/include/SDL2" />
 			<Add directory="C:/SDL/SDL2_mixer-2.0.2/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/Program Files (x86)/mingw-w64/i686-5.4.0-win32-dwarf-rt_v5-rev0/mingw32/i686-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32" />
@@ -96,15 +97,23 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="render.h" />
+		<Unit filename="scene_authors.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="scene_authors.h" />
+		<Unit filename="scene_game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="scene_game.h" />
+		<Unit filename="scene_help.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="scene_help.h" />
 		<Unit filename="scene_menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="scene_menu.h" />
 		<Unit filename="scene_return_value.h" />
-		<Unit filename="scenes.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="scenes.h" />
 		<Unit filename="sprite.h" />
 		<Unit filename="systems.c">
 			<Option compilerVar="CC" />
