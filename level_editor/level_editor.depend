@@ -618,7 +618,7 @@
 	<stdlib.h>
 	"units.h"
 
-1549357817 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
+1549365123 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
 	"crash.h"
 	"render.h"
 	"windows.h"
@@ -637,7 +637,7 @@
 1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.c
 	"glyphs.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
+1549363177 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
 	"boot.h"
 	"editor.h"
 
@@ -1157,4 +1157,10 @@
 1341006776 c:\program files (x86)\codeblocks\mingw\include\time.h
 	<_mingw.h>
 	<stddef.h>
+
+1549367393 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\dt.c
+	"dt.h"
+	<SDL.h>
+
+1549367393 c:\users\nb529\desktop\dusk_castle_master\level_editor\dt.h
 

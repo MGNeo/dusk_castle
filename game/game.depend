@@ -14,8 +14,7 @@
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1549270639 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
-	"game.h"
+1549368767 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
 	"boot.h"
 
 1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
@@ -861,12 +860,12 @@
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\systems.h
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\dt.c
+1549369391 source:c:\users\nb529\desktop\dusk_castle_master\game\dt.c
 	"dt.h"
 	<SDL.h>
 	<stdlib.h>
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\dt.h
+1549368062 c:\users\nb529\desktop\dusk_castle_master\game\dt.h
 
 1549257195 c:\users\nb529\desktop\dusk_castle_master\game\scene_return_value.h
 	<stdlib.h>
@@ -895,7 +894,7 @@
 	"crash.h"
 	<string.h>
 
-1549283504 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
+1549368712 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
 	"scene_menu.h"
 	"SDL.h"
 	"window.h"
@@ -906,6 +905,7 @@
 	"scene_game.h"
 	"scene_help.h"
 	"scene_authors.h"
+	"fps.h"
 	<stdio.h>
 	<string.h>
 
@@ -1844,18 +1844,25 @@
 	<crtdefs.h>
 	<stdio.h>
 
-1549282749 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
+1549368823 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
 	"scene_menu.h"
 	"units.h"
+	"scene_menu.h"
+	"dt.h"
+	"window.h"
+	"text.h"
+	"render.h"
+	"crash.h"
+	"fps.h"
 	<SDL.h>
 
-1549272995 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
+1549369248 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
 	"scene_game.h"
 
 1549262532 c:\users\nb529\desktop\dusk_castle_master\game\scene_game.h
 	"scene_return_value.h"
 
-1549283504 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
+1549369114 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
 	"scene_authors.h"
 	"scene_menu.h"
 	"dt.h"
@@ -1863,6 +1870,7 @@
 	"window.h"
 	"render.h"
 	"crash.h"
+	"fps.h"
 	<SDL.h>
 	<math.h>
 	<time.h>
@@ -1888,4 +1896,6 @@
 
 1468489825 c:\program files (x86)\mingw-w64\i686-5.4.0-win32-dwarf-rt_v5-rev0\mingw32\i686-w64-mingw32\include\pthread_time.h
 	<sys/timeb.h>
+
+1549368784 c:\users\nb529\desktop\dusk_castle_master\game\fps.h
 

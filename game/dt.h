@@ -1,11 +1,13 @@
 /*
  * Модуль dt.
- * Предоставляет цвенам функцию вычисления dt игрового цикла.
+ * Предоставляет функции для осуществления замера времени, прошедшего с момента последних
+ * просчетов и отрисовок главного цикла.
  *
  */
 #ifndef DT_H
 #define DT_H
 
-extern float dt_calculate(void);
+extern void dt_reset(void);
+extern float dt_get(void);
 
 #endif

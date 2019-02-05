@@ -9,6 +9,7 @@
 #include "scene_game.h"
 #include "scene_help.h"
 #include "scene_authors.h"
+#include "fps.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -44,12 +45,10 @@ extern scene_return_value scene_menu(const size_t _param)
     // Выделяем первый элемент меню.
     selected = GAME;
 
+    dt_reset();
+
     while (1)
     {
-        // Если объявления функции не было, то стиралась первая буква первого пункта...
-        // Проявление UB.
-        dt_calculate();
-
         // Контроль.
         const size_t a = control();
         // Переход к другой сцене.
@@ -58,25 +57,12 @@ extern scene_return_value scene_menu(const size_t _param)
             return next_scene();
         }
 
-        // Задаем рендеру цвет рисования.
-        if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
-        {
-            crash("scene_menu(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
-        // Очищаем рендер.
-        if (SDL_RenderClear(render) != 0)
-        {
-            crash("scene_menu(), не удалось очистить рендер.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
         // Рисуем меню.
-        draw();
-
-        // Представляем рендер.
-        SDL_RenderPresent(render);
+        if (dt_get() > SPF)
+        {
+            draw();
+            dt_reset();
+        }
     }
 }
 
@@ -169,6 +155,20 @@ static void draw(void)
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
 
+    // Задаем рендеру цвет рисования.
+    if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
+    {
+        crash("scene_menu(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Очищаем рендер.
+    if (SDL_RenderClear(render) != 0)
+    {
+        crash("scene_menu(), не удалось очистить рендер.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
     // Размер шрифта.
     const size_t size = 20;
     // Положение текста по x.
@@ -227,4 +227,7 @@ static void draw(void)
                   y + i * size,
                   TEXT_ALIGN_CENTER);
     }
+
+    // Представляем рендер.
+    SDL_RenderPresent(render);
 }

@@ -6,6 +6,7 @@
 #include "text.h"
 #include "render.h"
 #include "crash.h"
+#include "fps.h"
 
 #include <SDL.h>
 
@@ -26,36 +27,27 @@ static void draw(void);
 extern scene_return_value scene_help(const size_t _param)
 {
     (void)_param;
+
+    dt_reset();
+
     while (1)
     {
-        dt_calculate();
         // Контроль.
         const size_t a = control();
         // Переход к другой сцене.
-        if ( a != 0)
+        if (a != 0)
         {
             return next_scene();
         }
 
-        // Задаем рендеру цвет очистки.
-        if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
-        {
-            crash("scene_help(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
-        // Очищаем рендер.
-        if (SDL_RenderClear(render) != 0)
-        {
-            crash("scene_help(), не удалось очистить рендер.\n");
-        }
-
         // Рисуем.
-        draw();
-
-        // Представляем рендер.
-        SDL_RenderPresent(render);
+        if (dt_get() > SPF)
+        {
+            draw();
+            dt_reset();
+        }
     }
+
     scene_return_value srv = {0, 0};
     return srv;
 }
@@ -113,6 +105,19 @@ static void draw(void)
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
 
+    // Задаем рендеру цвет очистки.
+    if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
+    {
+        crash("scene_help(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+    // Очищаем рендер.
+    if (SDL_RenderClear(render) != 0)
+    {
+        crash("scene_help(), не удалось очистить рендер.\n");
+    }
+
     // Рисуем подсказку.
     text_draw("[Escape] - возврат в меню",
               20,
@@ -122,4 +127,7 @@ static void draw(void)
 
     // Пока так.
     text_draw("Здесь будет помощь по игре...", 20, w / 2, h / 2, TEXT_ALIGN_CENTER);
+
+    // Представляем рендер.
+    SDL_RenderPresent(render);
 }

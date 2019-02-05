@@ -5,6 +5,7 @@
 #include "window.h"
 #include "render.h"
 #include "crash.h"
+#include "fps.h"
 
 #include <SDL.h>
 #include <math.h>
@@ -23,10 +24,11 @@ static void draw(void);
 extern scene_return_value scene_authors(const size_t _param)
 {
     (void)_param;
+
+    dt_reset();
+
     while (1)
     {
-        dt_calculate();
-
         // Контроль.
         const size_t a = control();
 
@@ -36,25 +38,12 @@ extern scene_return_value scene_authors(const size_t _param)
             return next_scene();
         }
 
-        // Задаем рендеру цвет рисования.
-        if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
-        {
-            crash("scene_authors(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
-        // Очищаем рендер.
-        if (SDL_RenderClear(render) != 0)
-        {
-            crash("scene_authors(), не удалось очистить рендер.\nSDL_GetError() : %s",
-                  SDL_GetError());
-        }
-
         // Обработка отрисовки.
-        draw();
-
-        // Представляем рендер.
-        SDL_RenderPresent(render);
+        if (dt_get() > SPF)
+        {
+            draw();
+            dt_reset();
+        }
     }
 }
 
@@ -66,6 +55,10 @@ static size_t control(void)
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0)
     {
+        if (event.type == SDL_QUIT)
+        {
+            exit(0);
+        }
         if (event.type == SDL_KEYDOWN)
         {
             if (event.key.keysym.sym == SDLK_ESCAPE)
@@ -92,6 +85,20 @@ static void draw(void)
     // Получаем размеры клиентской области окна.
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
+
+    // Задаем рендеру цвет рисования.
+    if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
+    {
+        crash("scene_authors::draw(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
+                SDL_GetError());
+    }
+
+    // Очищаем рендер.
+    if (SDL_RenderClear(render) != 0)
+    {
+        crash("scene_authors::draw(), не удалось очистить рендер.\nSDL_GetError() : %s",
+              SDL_GetError());
+    }
 
     // Текст должен бежать вверх, как в звездных войнах.
     // ...
@@ -145,4 +152,7 @@ static void draw(void)
                    y,
                    TEXT_ALIGN_CENTER);
      }
+
+     // Представляем рендер.
+    SDL_RenderPresent(render);
 }

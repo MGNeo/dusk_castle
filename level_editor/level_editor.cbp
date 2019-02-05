@@ -66,6 +66,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="draw.h" />
+		<Unit filename="dt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="dt.h" />
 		<Unit filename="editor.c">
 			<Option compilerVar="CC" />
 		</Unit>

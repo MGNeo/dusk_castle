@@ -3,27 +3,23 @@
 #include <SDL.h>
 #include <stdlib.h>
 
-// Вычисляет dt итерации игрового цикла.
-// За одну итерацию игрового цикла функция должна вызываться один раз.
-// Функция должна вызываться первой в в цикле любой сцены.
-float dt_calculate(void)
-{
-    static Uint64 t1, t2;
-    t2 = t1;
-    t1 = SDL_GetPerformanceCounter();
-    // dt первого кадра определить невозможно.
-    static size_t first;
-    if (first == 0)
-    {
-        ++first;
-        return 0.f;
-    }
+static Uint64 begin;
 
-    // Контроль теоретически возможного переполнения Uint64.
-    if (t2 > t1)
+// Установка новой точки отсчета времени.
+extern void dt_reset(void)
+{
+    begin = SDL_GetPerformanceCounter();
+}
+
+// Подсчет количества секунд, которое прошло от точки отсчета до текущего момента.
+extern float dt_get(void)
+{
+    const Uint64 end = SDL_GetPerformanceCounter();
+    // Учитываем теоретическую возможность переполнения Uint64 (но только однократного переполнения).
+    if (end >= begin)
     {
-        return (t1 + (SDL_MAX_UINT64 - t2)) / (float) SDL_GetPerformanceFrequency();
+        return (end - begin) / ((float)SDL_GetPerformanceFrequency());
     } else {
-        return (t1 - t2) / (float) SDL_GetPerformanceFrequency();
+        return (begin + (UINT64_MAX - end)) / ((float)SDL_GetPerformanceFrequency());
     }
 }

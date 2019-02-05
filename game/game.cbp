@@ -41,6 +41,7 @@
 			<Add directory="C:/Program Files (x86)/mingw-w64/i686-5.4.0-win32-dwarf-rt_v5-rev0/mingw32/i686-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
+			<Add option="-static-libgcc" />
 			<Add option="-lmingw32" />
 			<Add option="-lSDL2main" />
 			<Add option="-lSDL2" />
@@ -67,6 +68,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="dt.h" />
+		<Unit filename="fps.h" />
 		<Unit filename="frames.h" />
 		<Unit filename="game.c">
 			<Option compilerVar="CC" />
