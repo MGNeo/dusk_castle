@@ -20,6 +20,7 @@ void editor(void)
     srand(time(NULL));
 
     size_t scene = 0;
+    float t = 0.f;
     while (1)
     {
         // Определяем время кадра.

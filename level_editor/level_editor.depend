@@ -522,7 +522,7 @@
 1548326636 source:c:\users\nb529\desktop\dusk_castle\level_editor\statistics.c
 	"statistics.h"
 
-1548831131 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -538,44 +538,44 @@
 	<stdlib.h>
 	<stdio.h>
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\boot.h
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\window.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\window.h
 	"SDL.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\render.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\render.h
 	"SDL.h"
 
-1548824678 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.h
 	"SDL.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.h
 	"SDL.h"
 	"units.h"
 
-1548834525 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\units.h
 	<limits.h>
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.h
 
-1548765153 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 	"crash.h"
 	"hwnd.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.c
 	"cursor.h"
 	"map.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\cursor.h
 	<stdlib.h>
 
-1548740997 c:\users\nb529\desktop\dusk_castle_master\level_editor\map.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\map.h
 	<stdint.h>
 
-1548746224 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.c
 	"draw.h"
 	"glyphs.h"
 	"render.h"
@@ -597,28 +597,28 @@
 	<stdio.h>
 	<time.h>
 
-1548846333 c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\draw.h
 	"text.h"
 	<stdlib.h>
 
-1548844184 c:\users\nb529\desktop\dusk_castle_master\level_editor\text.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\text.h
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.h
 	<stdlib.h>
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.h
 	<stdint.h>
 	"sprite.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\sprite.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\sprite.h
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.h
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.h
 	<stdlib.h>
 	"units.h"
 
-1548847314 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
+1549357817 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.c
 	"crash.h"
 	"render.h"
 	"windows.h"
@@ -629,28 +629,28 @@
 	<stdio.h>
 	<time.h>
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\editor.h
 
-1548847314 c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.h
 	"SDL.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\glyphs.c
 	"glyphs.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\main.c
 	"boot.h"
 	"editor.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\map.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\map.c
 	"map.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_1.c
 	"menu_1.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\menu_2.c
 	"menu_2.h"
 
-1548847314 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\processing.c
 	"processing.h"
 	"menu_1.h"
 	"cursor.h"
@@ -668,20 +668,20 @@
 	<stdio.h>
 	<stdint.h>
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render.c
 	"render.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\render_point.c
 	"render_point.h"
 	"map.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\statistics.c
 	"statistics.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\textures.c
 	"textures.h"
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\window.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\window.c
 	"window.h"
 
 1548370582 source:c:\users\nb529\desktop\dusk_castle-master\level_editor\crash.c
@@ -876,10 +876,10 @@
 1548414776 source:c:\users\nb529\desktop\dusk_castle-master\level_editor\hwnd.c
 	"hwnd.h"
 
-1548734984 c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.h
+1549253262 c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.h
 	<windows.h>
 
-1548734984 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.c
+1549253262 source:c:\users\nb529\desktop\dusk_castle_master\level_editor\hwnd.c
 	"hwnd.h"
 
 1341006780 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
