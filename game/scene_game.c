@@ -6,22 +6,34 @@
 #include "frames.h"
 #include "textures.h"
 #include "player.h"
+#include "animation.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
 #define MAX_LEVEL 99
 
+// Номер уровня.
 static uint8_t level;
-
+// Карта уровня.
 static uint8_t map[MAP_WIDTH][MAP_HEIGHT];
-
-static size_t gold_coins;
-static size_t silver_coins;
-
+// Количество серебра на счету игрока.
+static size_t silver_score;
+// Количество золота на счету игрока.
+static size_t gold_score;
+// Количество врагов.
 static size_t enemies_count;
+// Враги.
 static enemy_unit enemies[MAX_ENEMIES];
+// Игрок.
 static player_unit player;
+
+// Анимация серебрянной монетки.
+static animation silver_animation;
+// Анимация золотой монетки.
+static animation gold_animation;
+// Анимация токсичной жижи.
+static animation toxic_animation;
 
 // Загружает карту из файла.
 static void map_load_from_file(void);
@@ -29,6 +41,7 @@ static void map_load_from_file(void);
 static void map_check_correctness(void);
 // Строит уровень.
 static void level_build(void);
+
 // Добавляет призрака.
 static void ghost_add(const float _x, const float _y);
 // Добавляет мышь.
@@ -36,6 +49,9 @@ static void bat_add(const float _x, const float _y);
 // Добавляет игрока.
 static void player_add(const float _x,
                        const float _y);
+// Сбрасывает анимацию серебряных монеток.
+static void silver_animation_reset(void);
+// Сбрасывает анимацию
 
 // Сцена-игра.
 // Обрабатывает _param.
@@ -294,4 +310,14 @@ static void player_add(const float _x,
 
     // Инициализируем анимацию.
     animation_player_walk(&player.a);
+}
+
+// Сбрасывает анимацию серебрянных монеток.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void silver_animation_reset(void)
+{
+    silver_animation.t = 0.f;
+    silver_animation.first_frame = 0;
+    silver_animation.current_frame = 0;
+    silver_animation.last_frame = SILVER_COIN_FRAMES_COUNT - 1;
 }

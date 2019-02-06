@@ -35,7 +35,7 @@
 // Летучая мышь.
 #define BAT_FRAMES_COUNT 5
 
-// Серебрянная монетка.
+// Серебряная монетка.
 #define SILVER_COIN_FRAMES_COUNT 10
 
 // Золотая монетка.

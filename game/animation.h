@@ -24,13 +24,17 @@ typedef struct s_animation
 extern void animation_processing(animation *const _animation,
                                  const float _dt);
 
-extern void animation_player_walk(animation *const _animation);
-extern void animation_player_climb(animation *const _animation);
-extern void animation_player_fall(animation *const _animation);
-extern void animation_player_die(animation *const _animation);
+extern void animation_player_walk_init(animation *const _animation);
+extern void animation_player_climb_init(animation *const _animation);
+extern void animation_player_fall_init(animation *const _animation);
+extern void animation_player_die_init(animation *const _animation);
 
-extern void animation_ghost(animation *const _animation);
-extern void animation_bat(animation *const _animation);
-extern void animation_toxic(animation *const _animation);
+extern void animation_ghost_init(animation *const _animation);
+extern void animation_bat_init(animation *const _animation);
+extern void animation_toxic_init(animation *const _animation);
+
+extern void animation_silver_coin_init(animation *const _animation);
+extern void animation_gold_coin_init(animation *const _animation);
+extern void animation_toxic_init(animation *const _animation);
 
 #endif
