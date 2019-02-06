@@ -21,30 +21,15 @@
 #define PLAYER_FALL_FIRST 8
 #define PLAYER_FALL_LAST 11
 // Смерть.
-#define PLAYER_DEAD_FIRST 12
-#define PLAYER_DEAD_LAST  15
+#define PLAYER_DIE_FIRST 12
+#define PLAYER_DIE_LAST  15
 // Всего кадров.
-#define PLAYER_FRAMES_COUNT (PLAYER_DEAD_LAST + 1)
-
-// Старт.
-#define START_FRAMES_COUNT 1
-
-// Финиш.
-#define FINISH_FRAMES_COUNT 1
-
-// Стена.
-#define WALL_FRAMES_COUNT 1
-
-// Лестница.
-#define LADDER_FRAMES_COUNT 1
-
-// Шипы.
-#define STAKES_FRAMES_COUNT 1
+#define PLAYER_FRAMES_COUNT (PLAYER_DIE_LAST + 1)
 
 // Токсичная слизь.
 #define TOXIC_FRAMES_COUNT 10
 
-//Призрак.
+// Призрак.
 #define GHOST_FRAMES_COUNT 5
 
 // Летучая мышь.

@@ -16,7 +16,7 @@ void glyphs_load(void)
     static size_t again;
     if (again++ != 0)
     {
-        crash("glyphs_load(), попытка повторной загрузки глифов.");
+        crash("glyphs.c, glyphs_load(), произошла попытка повторной загрузки глифов.");
     }
 
     // Цвет шрифта.
@@ -28,7 +28,7 @@ void glyphs_load(void)
         TTF_Font *h_font = TTF_OpenFont("font/font.ttf", MIN_FONT_SIZE + s);
         if (h_font == NULL)
         {
-            crash("glyphs_load(), не удалось загрузить шрифт размера: %Iu\nTTF_GetError() : %s",
+            crash("glyphs.c, glyphs_load(), не удалось загрузить шрифт размера: %Iu",
                   MIN_FONT_SIZE + s,
                   TTF_GetError());
         }
@@ -49,13 +49,13 @@ void glyphs_load(void)
 
             if (r_code != 1)
             {
-                crash("glyphs_load(), не удалось конвертировать символ из cp1251 в unicode.\nGetLastError() : %lu",
+                crash("glyphs.c, glyphs_load(), не удалось конвертировать символ из cp1251 в unicode, GetLastError() : %lu",
                       GetLastError());
             }
 
             if (unicode_char[1] != 0)
             {
-                crash("glyphs_load(), при конвертации ANSI символа [%c] получилась суррогатная пара UTF16-LE, а не единственный 16-ти битный символ.",
+                crash("glyphs.c, glyphs_load(), при конвертации ANSI символа [%c] получилась суррогатная пара UTF16-LE, а не единственный 16-ти битный символ.",
                       ansi_char);
             }
 
@@ -70,7 +70,7 @@ void glyphs_load(void)
                 SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
                 if (h_texture == NULL)
                 {
-                    crash("glyphs_load(), не удалось создать текстуру на основе поверхности с символом.\nSDL_GetError() : %s",
+                    crash("glyphs.c, glyphs_load(), не удалось создать текстуру на основе поверхности с символом.\nSDL_GetError() : %s\n%s\n%d",
                           SDL_GetError());
                 }
 

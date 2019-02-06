@@ -108,14 +108,14 @@ static void draw(void)
     // Задаем рендеру цвет очистки.
     if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
     {
-        crash("scene_help(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
+        crash("scene_help, draw(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // Очищаем рендер.
     if (SDL_RenderClear(render) != 0)
     {
-        crash("scene_help(), не удалось очистить рендер.\n");
+        crash("scene_help, draw(), не удалось очистить рендер.\n");
     }
 
     // Рисуем подсказку.

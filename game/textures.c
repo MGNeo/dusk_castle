@@ -31,26 +31,26 @@ void textures_load(void)
     static size_t again;
     if (again++ != 0)
     {
-        crash("textures_load(), попытка повторной загрузки текстур.\n");
+        crash("textures, textures_load(), попытка повторной загрузки текстур.\n");
     }
 
     // Игрок.
     texture_load("textures/player.bmp", &texture_player, PLAYER_FRAMES_COUNT);
 
     // Старт.
-    texture_load("textures/start.bmp", &texture_start, START_FRAMES_COUNT);
+    texture_load("textures/start.bmp", &texture_start, 1);
 
     // Финиш.
-    texture_load("textures/finish.bmp", &texture_finish, FINISH_FRAMES_COUNT);
+    texture_load("textures/finish.bmp", &texture_finish, 1);
 
     // Стена.
-    texture_load("textures/wall.bmp", &texture_wall, WALL_FRAMES_COUNT);
+    texture_load("textures/wall.bmp", &texture_wall, 1);
 
     // Лестница.
-    texture_load("textures/ladder.bmp", &texture_ladder, LADDER_FRAMES_COUNT);
+    texture_load("textures/ladder.bmp", &texture_ladder, 1);
 
     // Шипы.
-    texture_load("textures/stakes.bmp", &texture_stakes, STAKES_FRAMES_COUNT);
+    texture_load("textures/stakes.bmp", &texture_stakes, 1);
 
     // Токсичная слизь.
     texture_load("textures/toxic.bmp", &texture_toxic, TOXIC_FRAMES_COUNT);
@@ -77,34 +77,34 @@ static void texture_load(const char *const _file_name,
 {
     if (_file_name == NULL)
     {
-        crash("texture_load(), _file_name == NULL");
+        crash("textures, texture_load(), _file_name == NULL");
     }
 
     if (strlen(_file_name) == 0)
     {
-        crash("texture_load(), strlen(_file_name) == 0");
+        crash("textures, texture_load(), strlen(_file_name) == 0");
     }
 
     if (_texture == NULL)
     {
-        crash("texture_load(), _texture == NULL");
+        crash("textures, texture_load(), _texture == NULL");
     }
 
     if (_frames_count == 0)
     {
-        crash("texture_load(), _frames_count == 0");
+        crash("textures, texture_load(), _frames_count == 0");
     }
 
     if (_frames_count > MAX_FRAMES_COUNT)
     {
-        crash("texture_load(), _frames_count > MAX_FRAMES_COUNT");
+        crash("textures, texture_load(), _frames_count > MAX_FRAMES_COUNT");
     }
 
     // Пытаемся создать поверхность, загрузив данные из файла.
     SDL_Surface *h_surface = SDL_LoadBMP(_file_name);
     if (h_surface == NULL)
     {
-        crash("texture_load(), не удалось создать поверхность на оснвое файла: %s\nSDL_GetError() : %s",
+        crash("textures, texture_load(), не удалось создать поверхность на оснвое файла: %s\nSDL_GetError() : %s",
               _file_name,
               SDL_GetError());
     }
@@ -112,7 +112,7 @@ static void texture_load(const char *const _file_name,
     // Проверяем высоту текстуры на соответствие требованиям.
     if (h_surface->h != SPRITE_SIZE)
     {
-        crash("texture_load(), неверная высота текстуры.\nТекущая: %i\nТребуемая: %i",
+        crash("textures, texture_load(), неверная высота текстуры.\nТекущая: %i\nТребуемая: %i",
               h_surface->h,
               SPRITE_SIZE);
     }
@@ -122,7 +122,7 @@ static void texture_load(const char *const _file_name,
     // Проверяем ширину текстуры на соответствие требованиям.
     if (h_surface->w != required_w)
     {
-        crash("texture_load(), неверная ширина текстуры.\nТекущая: %i\nТребуемая: %i",
+        crash("textures, texture_load(), неверная ширина текстуры.\nТекущая: %i\nТребуемая: %i",
               h_surface->w,
               required_w);
     }
@@ -131,7 +131,7 @@ static void texture_load(const char *const _file_name,
     SDL_Texture *h_texture = SDL_CreateTextureFromSurface(render, h_surface);
     if (h_surface == NULL)
     {
-        crash("texture_load(), не удалось создать текстуру на основе поверхности.\nSDL_GetError() : %s",
+        crash("textures, texture_load(), не удалось создать текстуру на основе поверхности.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 

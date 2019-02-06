@@ -1,6 +1,6 @@
 /*
  * Модуль карты.
- * Предоставляет ресурс-карту.
+ * Предоставляет информацию о карте (размере).
  *
  */
 
@@ -11,7 +11,5 @@
 
 #define MAP_WIDTH  100
 #define MAP_HEIGHT 100
-
-extern uint8_t map[MAP_WIDTH][MAP_HEIGHT];
 
 #endif

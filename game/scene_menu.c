@@ -139,7 +139,7 @@ static scene_return_value next_scene(void)
         }
         default:
         {
-            crash("menu_activate(), активирован неизвестный пункт меню.\nselected: %i",
+            crash("scene_menu, next_scene(), активирован неизвестный пункт меню.\nselected: %i",
                   selected);
         }
     }
@@ -158,14 +158,14 @@ static void draw(void)
     // Задаем рендеру цвет рисования.
     if (SDL_SetRenderDrawColor(render, 0, 0, 0, 255) != 0)
     {
-        crash("scene_menu(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
+        crash("scene_menu, draw(), не удалось задать рендеру цвет рисования.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
     // Очищаем рендер.
     if (SDL_RenderClear(render) != 0)
     {
-        crash("scene_menu(), не удалось очистить рендер.\nSDL_GetError() : %s",
+        crash("scene_menu, draw(), не удалось очистить рендер.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 
@@ -203,7 +203,7 @@ static void draw(void)
             }
             default:
             {
-                crash("menu_draw(), попытка отрисовать неизвестный элемент меню.\ni: %i", i);
+                crash("scene_menu, draw(), попытка отрисовать неизвестный элемент меню.\ni: %i", i);
             }
         }
 

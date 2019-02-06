@@ -17,20 +17,20 @@ void text_draw(const char *const _text,
     // Текст не задан.
     if (_text == NULL)
     {
-        crash("text_draw(), _text == NULL");
+        crash("text, text_draw(), _text == NULL");
     }
 
     // Задан слишком маленький размер текста.
     if (_size < MIN_FONT_SIZE)
     {
-        crash("text_draw(), попытка отрисовать слишком мелкий текст.\n_size: %Iu",
+        crash("text, text_draw(), попытка отрисовать слишком мелкий текст.\n_size: %Iu",
               _size);
     }
 
     // Задан слишком большой размер текста.
     if (_size > MAX_FONT_SIZE)
     {
-        crash("text_draw(), попытка отрисовать слишком крупный текст.\n_size: %Iu",
+        crash("text, text_draw(), попытка отрисовать слишком крупный текст.\n_size: %Iu",
               _size);
     }
 
@@ -38,7 +38,7 @@ void text_draw(const char *const _text,
 
     if (text_length > MAX_TEXT_LENGTH)
     {
-        crash("text_draw(), длина текста превышает максимальную.\ntext_length: %Iu",
+        crash("text, text_draw(), длина текста превышает максимальную.\ntext_length: %Iu",
               text_length);
     }
 
@@ -66,7 +66,7 @@ void text_draw(const char *const _text,
 
                     if (SDL_RenderCopy(render, glyphs[s][g].texture, NULL, &rect) != 0)
                     {
-                        crash("text_draw(), не удалось отрисовать глиф при выводе текста с левым выравниванием\nSDL_GetError() : %s",
+                        crash("text, text_draw(), не удалось отрисовать глиф при выводе текста с левым выравниванием\nSDL_GetError() : %s",
                               SDL_GetError());
                     }
 
@@ -97,7 +97,7 @@ void text_draw(const char *const _text,
 
                     if (SDL_RenderCopy(render, glyphs[s][g].texture, NULL, &rect) != 0)
                     {
-                        crash("text_draw(), не удалось отрисовать глиф при выводе текста с правым выравниванием\nSDL_GetError() : %s",
+                        crash("text, text_draw(), не удалось отрисовать глиф при выводе текста с правым выравниванием\nSDL_GetError() : %s",
                               SDL_GetError());
                     }
                 }
@@ -137,7 +137,7 @@ void text_draw(const char *const _text,
                     rect.w = glyphs[s][g].w;
                     if (SDL_RenderCopy(render, glyphs[s][g].texture, NULL, &rect) != 0)
                     {
-                        crash("text_draw(), не удалось отрисовать глиф при выводе текста с центральным выравниванием\nSDL_GetError() : %s",
+                        crash("text, text_draw(), не удалось отрисовать глиф при выводе текста с центральным выравниванием\nSDL_GetError() : %s",
                               SDL_GetError());
                     }
 
@@ -149,7 +149,7 @@ void text_draw(const char *const _text,
         }
         default:
         {
-            crash("text_draw(), для отрисовки текста задано неизвестное выравнивание");
+            crash("text::text_draw(), для отрисовки текста задано неизвестное выравнивание");
             break;
         }
     }

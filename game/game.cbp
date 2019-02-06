@@ -68,6 +68,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="dt.h" />
+		<Unit filename="enemy.h" />
 		<Unit filename="fps.h" />
 		<Unit filename="frames.h" />
 		<Unit filename="game.c">
@@ -82,18 +83,11 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="hwnd.h" />
-		<Unit filename="level.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="level.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="map.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="map.h" />
-		<Unit filename="menu.h" />
 		<Unit filename="player.h" />
 		<Unit filename="render.c">
 			<Option compilerVar="CC" />

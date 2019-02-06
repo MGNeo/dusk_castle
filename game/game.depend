@@ -12,12 +12,13 @@
 	"game.h"
 	"scene_menu.h"
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\game.h
+1549427640 c:\users\nb529\desktop\dusk_castle_master\game\game.h
 
-1549368767 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+1549439339 source:c:\users\nb529\desktop\dusk_castle_master\game\main.c
+	"game.h"
 	"boot.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
+1549430982 source:c:\users\nb529\desktop\dusk_castle_master\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -414,24 +415,24 @@
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\hwnd.h
 	<windows.h>
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
+1549431003 source:c:\users\nb529\desktop\dusk_castle_master\game\hwnd.c
 	"SDL_syswm.h"
 	"window.h"
 	"crash.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\render.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\render.c
 	"render.h"
 	"window.h"
 	"crash.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\window.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\window.c
 	"window.h"
 	"crash.h"
 
 1549279220 c:\users\nb529\desktop\dusk_castle_master\game\glyphs.h
 	"SDL.h"
 
-1549272962 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
+1549432095 source:c:\users\nb529\desktop\dusk_castle_master\game\glyphs.c
 	"glyphs.h"
 	"crash.h"
 	"render.h"
@@ -439,7 +440,7 @@
 	<stdlib.h>
 	<windows.h>
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
+1549436590 source:c:\users\nb529\desktop\dusk_castle_master\game\textures.c
 	"textures.h"
 	"frames.h"
 	"sprite.h"
@@ -455,7 +456,7 @@
 
 1548833074 c:\users\nb529\desktop\dusk_castle_master\game\sprites.h
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
+1549437499 c:\users\nb529\desktop\dusk_castle_master\game\frames.h
 
 1548917099 source:c:\users\nb529\desktop\dusk_castle_master\game\draw.c
 	"draw.h"
@@ -507,17 +508,17 @@
 1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\map.c
 	"map.h"
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\map.h
+1549426040 c:\users\nb529\desktop\dusk_castle_master\game\map.h
 	<stdint.h>
 
 1548916815 source:c:\users\nb529\desktop\dusk_castle_master\game\player.c
 	"player.h"
 
-1548926271 c:\users\nb529\desktop\dusk_castle_master\game\player.h
+1549439330 c:\users\nb529\desktop\dusk_castle_master\game\player.h
 	<stdlib.h>
 	"animation.h"
 
-1549253262 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
+1549437494 c:\users\nb529\desktop\dusk_castle_master\game\animation.h
 	<stdlib.h>
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\sprite.h
@@ -854,13 +855,14 @@
 	"dt.h"
 	<stdio.h>
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\animation.c
+1549437840 source:c:\users\nb529\desktop\dusk_castle_master\game\animation.c
 	"animation.h"
 	"crash.h"
+	"frames.h"
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\systems.h
 
-1549369391 source:c:\users\nb529\desktop\dusk_castle_master\game\dt.c
+1549369408 source:c:\users\nb529\desktop\dusk_castle_master\game\dt.c
 	"dt.h"
 	<SDL.h>
 	<stdlib.h>
@@ -877,7 +879,7 @@
 1549258737 c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.h
 	"scene_return_value.h"
 
-1549253262 source:c:\users\nb529\desktop\dusk_castle_master\game\systems.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\systems.c
 	"systems.h"
 	"crash.h"
 	<stdlib.h>
@@ -887,14 +889,14 @@
 	<windows.h>
 	<SDL_ttf.h>
 
-1549278182 source:c:\users\nb529\desktop\dusk_castle_master\game\text.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\text.c
 	"text.h"
 	"render.h"
 	"glyphs.h"
 	"crash.h"
 	<string.h>
 
-1549368712 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_menu.c
 	"scene_menu.h"
 	"SDL.h"
 	"window.h"
@@ -1844,7 +1846,7 @@
 	<crtdefs.h>
 	<stdio.h>
 
-1549368823 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
+1549431176 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_help.c
 	"scene_menu.h"
 	"units.h"
 	"scene_menu.h"
@@ -1856,13 +1858,20 @@
 	"fps.h"
 	<SDL.h>
 
-1549369248 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
+1549436550 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_game.c
 	"scene_game.h"
+	"map.h"
+	"crash.h"
+	"units.h"
+	"enemy.h"
+	"frames.h"
+	<stdlib.h>
+	<stdio.h>
 
-1549262532 c:\users\nb529\desktop\dusk_castle_master\game\scene_game.h
+1549437635 c:\users\nb529\desktop\dusk_castle_master\game\scene_game.h
 	"scene_return_value.h"
 
-1549369114 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
+1549437183 source:c:\users\nb529\desktop\dusk_castle_master\game\scene_authors.c
 	"scene_authors.h"
 	"scene_menu.h"
 	"dt.h"
@@ -1898,4 +1907,7 @@
 	<sys/timeb.h>
 
 1549368784 c:\users\nb529\desktop\dusk_castle_master\game\fps.h
+
+1549435294 c:\users\nb529\desktop\dusk_castle_master\game\enemy.h
+	"animation.h"
 

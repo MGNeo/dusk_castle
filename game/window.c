@@ -9,7 +9,7 @@ void window_create(void)
     static size_t again;
     if (again++ != 0)
     {
-        crash("window_create(), произошла попытка повторного создания окна.");
+        crash("window, window_create(), произошла попытка повторного создания окна.");
     }
 
     // Создадим окно.
@@ -22,7 +22,7 @@ void window_create(void)
 
     if (window == NULL)
     {
-        crash("window_create(), не удалось создать окно.\nSDL_GetError() : %s",
+        crash("window, window_create(), не удалось создать окно.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 }

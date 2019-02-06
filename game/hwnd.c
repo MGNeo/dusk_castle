@@ -11,7 +11,7 @@ void hwnd_create(void)
     static size_t again;
     if (again++ != 0)
     {
-        crash("hwnd_create(), произошла попытка повторного создания hwnd.");
+        crash("hwnd.c, hwnd_create(), произошла попытка повторного создания hwnd.");
     }
 
      // Для того, чтобы диалоговые окна правильно блокировали родительское окно,
@@ -21,7 +21,7 @@ void hwnd_create(void)
 
     if (SDL_GetWindowWMInfo(window, &info) != 1)
     {
-        crash("hwnd_create(), не удалось получить hwnd окна игры.\nSDL_GetError() : %s",
+        crash("hwnd, hwnd_create(), не удалось получить hwnd окна игры.\nSDL_GetError() : %s",
               SDL_GetError());
     }
 }
