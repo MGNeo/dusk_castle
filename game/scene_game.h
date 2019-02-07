@@ -9,8 +9,9 @@
 
 #include "scene_return_value.h"
 
-#define SCENE_GAME_PARAM             0
-#define SCENE_GAME_PARAM_RESET_LEVEL 1
+#define SCENE_GAME_PARAM_NEW_GAME      0
+#define SCENE_GAME_PARAM_NEXT_LEVEL    1
+#define SCENE_GAME_PARAM_CURRENT_LEVEL 2
 
 extern scene_return_value scene_game(const size_t _param);
 

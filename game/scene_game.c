@@ -7,20 +7,26 @@
 #include "textures.h"
 #include "player.h"
 #include "animation.h"
+#include "fps.h"
+#include "dt.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
 #define MAX_LEVEL 99
+#define IMPACT_RETURN_NOTHING   0
+#define IMPACT_RETURN_FINISH    1
+#define IMPACT_RETURN_DEATH     2
 
 // Номер уровня.
 static uint8_t level;
-// Карта уровня.
-static uint8_t map[MAP_WIDTH][MAP_HEIGHT];
 // Количество серебра на счету игрока.
 static size_t silver_score;
 // Количество золота на счету игрока.
 static size_t gold_score;
+
+// Карта уровня.
+static uint8_t map[MAP_WIDTH][MAP_HEIGHT];
 // Количество врагов.
 static size_t enemies_count;
 // Враги.
@@ -29,18 +35,18 @@ static enemy_unit enemies[MAX_ENEMIES];
 static player_unit player;
 
 // Анимация серебрянной монетки.
-static animation silver_animation;
+static animation animation_silver_coin;
 // Анимация золотой монетки.
-static animation gold_animation;
+static animation animation_gold_coin;
 // Анимация токсичной жижи.
-static animation toxic_animation;
+static animation animation_toxic;
 
 // Загружает карту из файла.
 static void map_load_from_file(void);
 // Проверяет загруженную карту на корректность.
 static void map_check_correctness(void);
-// Строит уровень.
-static void level_build(void);
+// Строит мир.
+static void world_build(void);
 
 // Добавляет призрака.
 static void ghost_add(const float _x, const float _y);
@@ -49,25 +55,45 @@ static void bat_add(const float _x, const float _y);
 // Добавляет игрока.
 static void player_add(const float _x,
                        const float _y);
-// Сбрасывает анимацию серебряных монеток.
-static void silver_animation_reset(void);
-// Сбрасывает анимацию
+
+// Контроль.
+static void control(void);
+// Взаимодействие.
+static size_t impact(void);
+// Формирование команды перехода к следующей сцене.
+static scene_return_value next_scene(const size_t _impact_return);
+// Движение.
+static void move(const float _dt);
+// Отрисовка.
+static void draw(void);
 
 // Сцена-игра.
 // Обрабатывает _param.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 extern scene_return_value scene_game(const size_t _param)
 {
+    // Обрабатываем управляющую команду _param.
     switch (_param)
     {
-        case (SCENE_GAME_PARAM):
-        {
-            // nothing
-            break;
-        }
-        case (SCENE_GAME_PARAM_RESET_LEVEL):
+        // Начало новой игры.
+        case (SCENE_GAME_PARAM_NEW_GAME):
         {
             level = 0;
+            silver_score = 0;
+            gold_score = 0;
+            break;
+        }
+        // Начало следующего уровня.
+        case (SCENE_GAME_PARAM_NEXT_LEVEL):
+        {
+            ++level;
+            break;
+        }
+        // Начало того же уровня.
+        case (SCENE_GAME_PARAM_CURRENT_LEVEL):
+        {
+            // Золото уменьшается в момент смерти игрока,
+            // перед переходом к следующей сцене.
             break;
         }
         default:
@@ -76,7 +102,44 @@ extern scene_return_value scene_game(const size_t _param)
         }
     }
 
+    // Грузим карту из файла.
+    map_load_from_file();
 
+    // Проверяем корректность загруженной карты.
+    map_check_correctness();
+
+    // Строим уровень.
+    world_build();
+
+    dt_reset();
+
+    while (1)
+    {
+        // Контроль.
+        control();
+
+        // Взаимодействия, передвижения, отрисовка.
+        const float dt = dt_get();
+        if (dt > SPF)
+        {
+            // Взаимодействия.
+            const size_t i = impact();
+
+            // Взаимодействия становятся причиной перехода к следующей сцене.
+            if (i != IMPACT_RETURN_NOTHING)
+            {
+                return next_scene(i);
+            }
+
+            // Движение.
+            move(dt);
+
+            // Отрисовка.
+            draw();
+
+            dt_reset();
+        }
+    }
 
     scene_return_value srv = {0, 0};
     return srv;
@@ -195,9 +258,9 @@ static void map_check_correctness(void)
     }
 }
 
-// Строит уровень.
-// В критической случае ошибки показывает информацию о причине сбоя и крашит программу.
-static void level_build(void)
+// Строит мир.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void world_build(void)
 {
     for (size_t x = 0; x < MAP_WIDTH; ++x)
     {
@@ -236,6 +299,15 @@ static void level_build(void)
     }
 
     // Дать ли каждой монетке собственную анимацию, или все они будут крутиться синхронно?
+
+    // Инициализируем анимацию серебряных монеток.
+    animation_silver_coin_init(&animation_silver_coin);
+
+    // Инициализируем анимацию золотых монеток.
+    animation_gold_coin_init(&animation_gold_coin);
+
+    // Инициализируем анимацию токсичной жижи.
+    animation_toxic_init(&animation_toxic);
 }
 
 // Добавляет призрака.
@@ -259,7 +331,7 @@ static void ghost_add(const float _x, const float _y)
     enemies[enemies_count].vy = 0.f;
 
     // Инициализируем анимацию.
-    animation_ghost(&enemies[enemies_count].a);
+    animation_ghost_init(&enemies[enemies_count].a);
 
     // Устанавливаем врагу соответствующую текстуру.
     enemies[enemies_count].texture = texture_ghost;
@@ -287,7 +359,7 @@ static void bat_add(const float _x, const float _y)
     enemies[enemies_count].vy = BAT_SPEED;
 
     // Инициализируем анимацию.
-    animation_bat(&enemies[enemies_count].a);
+    animation_bat_init(&enemies[enemies_count].a);
 
     // Устанавливаем врагу соответствующую текстуру.
     enemies[enemies_count].texture = texture_bat;
@@ -309,15 +381,41 @@ static void player_add(const float _x,
     player.vy = 0.f;
 
     // Инициализируем анимацию.
-    animation_player_walk(&player.a);
+    animation_player_walk_init(&player.a);
 }
 
-// Сбрасывает анимацию серебрянных монеток.
+// Контроль.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void silver_animation_reset(void)
+static void control(void)
 {
-    silver_animation.t = 0.f;
-    silver_animation.first_frame = 0;
-    silver_animation.current_frame = 0;
-    silver_animation.last_frame = SILVER_COIN_FRAMES_COUNT - 1;
+    // ...
+}
+
+// Взаимодействие.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static size_t impact(void)
+{
+    // ...
+    return IMPACT_RETURN_DEATH;
+}
+
+// Формирование команды перехода к следующей сцене.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static scene_return_value next_scene(const size_t _impact_return)
+{
+    // ...
+}
+
+// Движение.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void move(const float _dt)
+{
+    // ...
+}
+
+// Отрисовка.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void draw(void)
+{
+    // ...
 }

@@ -31,7 +31,7 @@
 
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\boot.h
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -63,12 +63,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -97,34 +97,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -134,24 +134,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -162,18 +162,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -187,7 +187,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -201,7 +201,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -209,13 +209,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -223,7 +223,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -232,11 +232,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -244,27 +244,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -272,11 +272,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -284,60 +284,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -346,7 +346,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -354,18 +354,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1454362933 c:\sdl\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+1454362934 c:\sdl\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -385,7 +385,7 @@
 1549253262 c:\users\nb529\desktop\dusk_castle_master\game\render.h
 	<SDL.h>
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_syswm.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_syswm.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -400,7 +400,7 @@
 	"SDL_egl.h"
 	"close_code.h"
 
-1519922211 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_egl.h
+1519922212 c:\sdl\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_egl.h
 	<EGL/egl.h>
 	<EGL/eglext.h>
 	<stdint.h>
@@ -525,7 +525,7 @@
 
 1548850204 D
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\boot.c
+1549555998 source:c:\users\mgneo\desktop\dusk_castle\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -554,7 +554,7 @@
 
 1549134077 c:\users\mgneo\desktop\dusk_castle\game\sprite.h
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\frames.h
+1549555999 c:\users\mgneo\desktop\dusk_castle\game\frames.h
 
 1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\crash.c
 	<windows.h>
@@ -593,12 +593,12 @@
 	<stdlib.h>
 	"animation.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\animation.h
+1549559010 c:\users\mgneo\desktop\dusk_castle\game\animation.h
 	<stdlib.h>
 
-1549203216 source:c:\users\mgneo\desktop\dusk_castle\game\game.c
+1549299060 source:c:\users\mgneo\desktop\dusk_castle\game\game.c
 	"game.h"
-	"scenes.h"
+	"scene_menu.h"
 
 1549134077 c:\users\mgneo\desktop\dusk_castle\game\game.h
 
@@ -608,7 +608,7 @@
 1548947095 c:\users\mgneo\desktop\dusk_castle\game\processing.h
 	<SDL.h>
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\glyphs.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\glyphs.c
 	"glyphs.h"
 	"crash.h"
 	"render.h"
@@ -616,12 +616,12 @@
 	<stdlib.h>
 	<windows.h>
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\hwnd.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\hwnd.c
 	"SDL_syswm.h"
 	"window.h"
 	"crash.h"
 
-1549211926 source:c:\users\mgneo\desktop\dusk_castle\game\main.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\main.c
 	"game.h"
 	"boot.h"
 
@@ -646,12 +646,12 @@
 	"frames.h"
 	<math.h>
 
-1549206212 source:c:\users\mgneo\desktop\dusk_castle\game\render.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\render.c
 	"render.h"
 	"window.h"
 	"crash.h"
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\textures.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\textures.c
 	"textures.h"
 	"frames.h"
 	"sprite.h"
@@ -659,21 +659,23 @@
 	"crash.h"
 	<string.h>
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\window.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\window.c
 	"window.h"
 	"crash.h"
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\text.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\text.c
 	"text.h"
 	"render.h"
 	"glyphs.h"
 	"crash.h"
+	<string.h>
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
+1549558456 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
 	"animation.h"
 	"crash.h"
+	"frames.h"
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\systems.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\systems.c
 	"systems.h"
 	"crash.h"
 	<stdlib.h>
@@ -832,20 +834,20 @@
 1549134077 c:\users\mgneo\desktop\dusk_castle\game\level.h
 	<stdlib.h>
 
-1549201867 source:c:\users\mgneo\desktop\dusk_castle\game\dt.c
+1549555998 source:c:\users\mgneo\desktop\dusk_castle\game\dt.c
 	"dt.h"
 	<SDL.h>
 	<stdlib.h>
 
-1549201883 c:\users\mgneo\desktop\dusk_castle\game\dt.h
+1549555998 c:\users\mgneo\desktop\dusk_castle\game\dt.h
 
-1549202185 c:\users\mgneo\desktop\dusk_castle\game\scene_return_value.h
+1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_return_value.h
 	<stdlib.h>
 
-1549202413 c:\users\mgneo\desktop\dusk_castle\game\scene_menu.h
+1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_menu.h
 	"scene_return_value.h"
 
-1549211941 source:c:\users\mgneo\desktop\dusk_castle\game\scene_menu.c
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_menu.c
 	"scene_menu.h"
 	"SDL.h"
 	"window.h"
@@ -853,7 +855,12 @@
 	"render.h"
 	"crash.h"
 	"dt.h"
+	"scene_game.h"
+	"scene_help.h"
+	"scene_authors.h"
+	"fps.h"
 	<stdio.h>
+	<string.h>
 
 1549437840 source:c:\users\nb529\desktop\dusk_castle_master\game\animation.c
 	"animation.h"
@@ -1910,4 +1917,43 @@
 
 1549435294 c:\users\nb529\desktop\dusk_castle_master\game\enemy.h
 	"animation.h"
+
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_authors.c
+	"scene_authors.h"
+	"scene_menu.h"
+	"dt.h"
+	"text.h"
+	"window.h"
+	"render.h"
+	"crash.h"
+	"fps.h"
+	<SDL.h>
+	<math.h>
+	<time.h>
+
+1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_authors.h
+	"scene_return_value.h"
+
+1549555998 c:\users\mgneo\desktop\dusk_castle\game\fps.h
+
+1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_help.c
+	"scene_menu.h"
+	"units.h"
+	"scene_menu.h"
+	"dt.h"
+	"window.h"
+	"text.h"
+	"render.h"
+	"crash.h"
+	"fps.h"
+	<SDL.h>
+
+1549134077 c:\users\mgneo\desktop\dusk_castle\game\units.h
+	<limits.h>
+
+1549559837 c:\users\mgneo\desktop\dusk_castle\game\scene_game.h
+	"scene_return_value.h"
+
+1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
+	"scene_return_value.h"
 

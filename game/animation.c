@@ -155,5 +155,3 @@ extern void animation_toxic_init(animation *const _animation)
     _animation->current_frame = 0;
     _animation->last_frame = TOXIC_FRAMES_COUNT - 1;
 }
-
-// TODO +_init для имен функций инициализации анимации.
