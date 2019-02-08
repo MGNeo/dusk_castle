@@ -9,14 +9,15 @@
 #include "animation.h"
 #include "fps.h"
 #include "dt.h"
+#include "render.h"
+#include "window.h"
+#include "sprite.h"
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <SDL.h>
 
 #define MAX_LEVEL 99
-#define IMPACT_RETURN_NOTHING   0
-#define IMPACT_RETURN_FINISH    1
-#define IMPACT_RETURN_DEATH     2
 
 // Номер уровня.
 static uint8_t level;
@@ -55,17 +56,10 @@ static void bat_add(const float _x, const float _y);
 // Добавляет игрока.
 static void player_add(const float _x,
                        const float _y);
-
-// Контроль.
+// Контроль (игрока).
 static void control(void);
-// Взаимодействие.
-static size_t impact(void);
-// Формирование команды перехода к следующей сцене.
-static scene_return_value next_scene(const size_t _impact_return);
-// Движение.
-static void move(const float _dt);
-// Отрисовка.
-static void draw(void);
+// Отрисовка карты.
+static void map_draw(void);
 
 // Сцена-игра.
 // Обрабатывает _param.
@@ -111,33 +105,26 @@ extern scene_return_value scene_game(const size_t _param)
     // Строим уровень.
     world_build();
 
+    // Устанавливаем точку отсчета времени.
     dt_reset();
 
     while (1)
     {
-        // Контроль.
+        // Контроль (игрока).
         control();
 
-        // Взаимодействия, передвижения, отрисовка.
+        // Взаимодействие, передвижение, отрисовка.
         const float dt = dt_get();
         if (dt > SPF)
         {
-            // Взаимодействия.
-            const size_t i = impact();
+           // Отрисовка карты.
+           map_draw();
 
-            // Взаимодействия становятся причиной перехода к следующей сцене.
-            if (i != IMPACT_RETURN_NOTHING)
-            {
-                return next_scene(i);
-            }
+           // Устанавливаем точку отсчета времени.
+           dt_reset();
 
-            // Движение.
-            move(dt);
-
-            // Отрисовка.
-            draw();
-
-            dt_reset();
+           // DEBUG
+           SDL_RenderPresent(render);
         }
     }
 
@@ -384,38 +371,142 @@ static void player_add(const float _x,
     animation_player_walk_init(&player.a);
 }
 
-// Контроль.
+// Контроль (игрока).
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 static void control(void)
 {
-    // ...
+    SDL_Event event;
+    if (SDL_PollEvent(&event) != 0)
+    {
+        if (event.type == SDL_QUIT)
+        {
+            exit(0);
+        }
+    }
 }
 
-// Взаимодействие.
+// Отрисовка карты.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static size_t impact(void)
+static void map_draw(void)
 {
-    // ...
-    return IMPACT_RETURN_DEATH;
-}
+    // Определяем размеры клиентской области окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
 
-// Формирование команды перехода к следующей сцене.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static scene_return_value next_scene(const size_t _impact_return)
-{
-    // ...
-}
+    // Определяем, сколько клеток карты умещается по ширине и высоте клиентской области.
+    const int x_count = w / SPRITE_SIZE;
+    const int y_count = h / SPRITE_SIZE;
 
-// Движение.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void move(const float _dt)
-{
-    // ...
-}
+    // Определяем, сколько клеток умещается между игроком и краями экрана по ширине и высоте.
+    const int half_x_count = x_count / 2;
+    const int half_y_count = y_count / 2;
 
-// Отрисовка.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void draw(void)
-{
-    // ...
+    // Определяем x-индекс самой левой отрисовываемой клетки.
+    int begin_x = (player.x + 0.5f) - half_x_count;
+    if (begin_x < 0)
+    {
+        begin_x = 0;
+    }
+
+    // Определяем x-индекс самой правой отрисовываемой клетки.
+    int end_x = (player.x + 0.5f) + half_x_count;
+    if (end_x >= MAP_WIDTH)
+    {
+        end_x = MAP_WIDTH - 1;
+    }
+
+    // Определяем y-индекс самой верхней отрисовываемой клетки.
+    int begin_y = (player.y + 0.5f) - half_y_count;
+    if (begin_y < 0)
+    {
+        begin_y = 0;
+    }
+
+    // Определяем y-индекс самой нижней отрисовываемой клетки.
+    int end_y = (player.y + 0.5f) + half_y_count;
+    if (end_y >= MAP_HEIGHT)
+    {
+        end_y = MAP_HEIGHT - 1;
+    }
+
+    // Контроль переполнения знакового целого излишен.
+
+    // Отрисовываем.
+    for (int x = begin_x; x <= end_x; ++x)
+    {
+        for (int y = begin_y; y <= end_y; ++y)
+        {
+            // Текстура, которую будем отрисовывать.
+            SDL_Texture *h_texture = NULL;
+
+            // Отрисовываемая область текстуры.
+            SDL_Rect source_rect;
+            // ...
+
+            // Область вывода текстуры.
+            SDL_Rect dest_rect;
+            dest_rect.w = SPRITE_SIZE;
+            dest_rect.h = SPRITE_SIZE;
+            dest_rect.x = (x - (player.x + 0.5f)) * SPRITE_SIZE + w / 2;
+            dest_rect.y = (y - (player.y + 0.5f)) * SPRITE_SIZE + h / 2;
+
+            // Выбираем текстуру в соответствии с типом клетки.
+            switch (map[x][y])
+            {
+                case (U_START):
+                {
+                    h_texture = texture_start;
+                    break;
+                }
+                case (U_FINISH):
+                {
+                    h_texture = texture_finish;
+                    break;
+                }
+                case (U_WALL):
+                {
+                    h_texture = texture_wall;
+                    break;
+                }
+                case (U_LADDER):
+                {
+                    h_texture = texture_ladder;
+                    break;
+                }
+                case (U_STAKES):
+                {
+                    h_texture = texture_ladder;
+                    break;
+                }
+                case (U_TOXIC):
+                {
+                    h_texture = texture_toxic;
+                    break;
+                }
+                case (U_SILVER_COIN):
+                {
+                    h_texture = texture_silver_coin;
+                    break;
+                }
+                case (U_GOLD_COIN):
+                {
+                    h_texture = texture_gold_coin;
+                    break;
+                }
+            }
+
+            // Если данная клетка не имеет графического представления, переходим к следующей.
+            if (h_texture == NULL) continue;
+
+            // Учет анимации.
+
+            // Рисуем.
+            if (SDL_RenderCopy(render, h_texture, &dest_rect, &dest_rect) != 0)
+            {
+                crash("scene_game.c, map_draw(), не удалось отрисовать клетку карты.\nSDL_GetError() : %s",
+                      SDL_GetError());
+            }
+
+        }
+    }
 }

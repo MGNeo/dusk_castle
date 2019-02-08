@@ -589,7 +589,7 @@
 1548947095 c:\users\mgneo\desktop\dusk_castle\game\menu.h
 	<stdlib.h>
 
-1549122434 c:\users\mgneo\desktop\dusk_castle\game\player.h
+1549555999 c:\users\mgneo\desktop\dusk_castle\game\player.h
 	<stdlib.h>
 	"animation.h"
 
@@ -628,7 +628,7 @@
 1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\map.c
 	"map.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\map.h
+1549555999 c:\users\mgneo\desktop\dusk_castle\game\map.h
 	<stdint.h>
 
 1548947095 source:c:\users\mgneo\desktop\dusk_castle\game\menu.c
@@ -1956,4 +1956,27 @@
 
 1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
 	"scene_return_value.h"
+
+1549632241 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
+	"scene_game.h"
+	"map.h"
+	"crash.h"
+	"units.h"
+	"enemy.h"
+	"frames.h"
+	"textures.h"
+	"player.h"
+	"animation.h"
+	"fps.h"
+	"dt.h"
+	"render.h"
+	"window.h"
+	"sprite.h"
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+
+1549555998 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
+	"animation.h"
+	<SDL.h>
 
