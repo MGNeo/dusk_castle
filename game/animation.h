@@ -1,7 +1,6 @@
 ﻿/*
  * Модуль анимации.
- * Предоставляет ресурс - состояние анимации и функцию обработки анимации.
- *
+ * Предоставляет ресурс - анимацию и функции работы с анимацией.
  *
  */
 
@@ -23,7 +22,6 @@ typedef struct s_animation
 
 extern void animation_processing(animation *const _animation,
                                  const float _dt);
-
 extern void animation_player_walk_init(animation *const _animation);
 extern void animation_player_climb_init(animation *const _animation);
 extern void animation_player_fall_init(animation *const _animation);

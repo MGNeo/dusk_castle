@@ -593,7 +593,7 @@
 	<stdlib.h>
 	"animation.h"
 
-1549559010 c:\users\mgneo\desktop\dusk_castle\game\animation.h
+1549647444 c:\users\mgneo\desktop\dusk_castle\game\animation.h
 	<stdlib.h>
 
 1549299060 source:c:\users\mgneo\desktop\dusk_castle\game\game.c
@@ -670,7 +670,7 @@
 	"crash.h"
 	<string.h>
 
-1549558456 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
+1549651770 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
 	"animation.h"
 	"crash.h"
 	"frames.h"
@@ -1957,7 +1957,7 @@
 1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
 	"scene_return_value.h"
 
-1549632241 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
+1549652387 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
 	"scene_game.h"
 	"map.h"
 	"crash.h"
@@ -1976,7 +1976,7 @@
 	<stdio.h>
 	<SDL.h>
 
-1549555998 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
+1549648135 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
 	"animation.h"
 	<SDL.h>
 

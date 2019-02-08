@@ -56,10 +56,35 @@ static void bat_add(const float _x, const float _y);
 // Добавляет игрока.
 static void player_add(const float _x,
                        const float _y);
-// Контроль (игрока).
-static void control(void);
+
+// Обработка игрока (вся).
+static size_t player_processing(const float _dt);
+// Контроль игрока.
+static size_t player_control(void);
+// Анимации игрока.
+static void player_animation(const float _dt);
+// Движение игрока.
+static void player_move(const float _dt);
+// Отрисовка игрока.
+static void player_draw(void);
+
+// Обработка карты (вся).
+static void map_processing(const float _dt);
+// Анимации карты.
+static void map_animation(const float _dt);
 // Отрисовка карты.
 static void map_draw(void);
+
+// Обработка врагов (вся).
+static void enemies_processing(const float _dt);
+// Контроль врага.
+static void enemy_control(enemy_unit *const _enemy);
+// Анимация врага.
+static void enemy_animation(enemy_unit *const _enemy, const float _dt);
+// Движение врага.
+static void enemy_move(enemy_unit *const _enemy, const float _dt);
+// Отрисовка врага.
+static void enemy_draw(enemy_unit *const _enemy);
 
 // Сцена-игра.
 // Обрабатывает _param.
@@ -110,21 +135,27 @@ extern scene_return_value scene_game(const size_t _param)
 
     while (1)
     {
-        // Контроль (игрока).
-        control();
-
-        // Взаимодействие, передвижение, отрисовка.
+        // Определяем, пришло ли время обрабатывать очередной кадр.
         const float dt = dt_get();
         if (dt > SPF)
         {
-           // Отрисовка карты.
-           map_draw();
+            // DEBUG
+            SDL_RenderClear(render);
 
-           // Устанавливаем точку отсчета времени.
-           dt_reset();
+            // Обрабатываем карту.
+            map_processing(dt);
 
-           // DEBUG
-           SDL_RenderPresent(render);
+            // Обрабатываем игрока.
+            player_processing(dt);
+
+            // Обрабатываем врагов.
+            enemies_processing(dt);
+
+            // Устанавливаем точку отсчета времени.
+            dt_reset();
+
+            // DEBUG
+            SDL_RenderPresent(render);
         }
     }
 
@@ -249,6 +280,8 @@ static void map_check_correctness(void)
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 static void world_build(void)
 {
+    enemies_count = 0;
+
     for (size_t x = 0; x < MAP_WIDTH; ++x)
     {
         for (size_t y = 0; y < MAP_HEIGHT; ++y)
@@ -306,9 +339,6 @@ static void ghost_add(const float _x, const float _y)
         crash("scene_game, ghost_add(), enemies_count == MAX_ENEMIES");
     }
 
-    // Активируем врага.
-    enemies[enemies_count].active = 1;
-
     // Размещаем.
     enemies[enemies_count].x = _x;
     enemies[enemies_count].y = _y;
@@ -320,7 +350,7 @@ static void ghost_add(const float _x, const float _y)
     // Инициализируем анимацию.
     animation_ghost_init(&enemies[enemies_count].a);
 
-    // Устанавливаем врагу соответствующую текстуру.
+    // Инициализируем текстуру.
     enemies[enemies_count].texture = texture_ghost;
 
     ++enemies_count;
@@ -334,9 +364,6 @@ static void bat_add(const float _x, const float _y)
         crash("scene_game, bat_add(), enemies_count == MAX_ENEMIES");
     }
 
-    // Активируем врага.
-    enemies[enemies_count].active = 1;
-
     // Размещаем.
     enemies[enemies_count].x = _x;
     enemies[enemies_count].y = _y;
@@ -348,7 +375,7 @@ static void bat_add(const float _x, const float _y)
     // Инициализируем анимацию.
     animation_bat_init(&enemies[enemies_count].a);
 
-    // Устанавливаем врагу соответствующую текстуру.
+    // Инициализируем текстуру.
     enemies[enemies_count].texture = texture_bat;
 
     ++enemies_count;
@@ -371,18 +398,23 @@ static void player_add(const float _x,
     animation_player_walk_init(&player.a);
 }
 
-// Контроль (игрока).
+// Просчет карты.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void control(void)
+static void map_processing(const float _dt)
 {
-    SDL_Event event;
-    if (SDL_PollEvent(&event) != 0)
-    {
-        if (event.type == SDL_QUIT)
-        {
-            exit(0);
-        }
-    }
+    // Анимация карты.
+    map_animation(_dt);
+    // Отрисовка карты.
+    map_draw();
+}
+
+// Просчет анимации карты.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void map_animation(const float _dt)
+{
+    animation_processing(&animation_toxic, _dt);
+    animation_processing(&animation_silver_coin, _dt);
+    animation_processing(&animation_gold_coin, _dt);
 }
 
 // Отрисовка карты.
@@ -441,16 +473,19 @@ static void map_draw(void)
 
             // Отрисовываемая область текстуры.
             SDL_Rect source_rect;
-            // ...
+            source_rect.w = SPRITE_SIZE;
+            source_rect.h = SPRITE_SIZE;
+            source_rect.x = 0;
+            source_rect.y = 0;
 
-            // Область вывода текстуры.
-            SDL_Rect dest_rect;
-            dest_rect.w = SPRITE_SIZE;
-            dest_rect.h = SPRITE_SIZE;
-            dest_rect.x = (x - (player.x + 0.5f)) * SPRITE_SIZE + w / 2;
-            dest_rect.y = (y - (player.y + 0.5f)) * SPRITE_SIZE + h / 2;
+            // Область вывода на поверхности клиентской части окна.
+            SDL_Rect destination_rect;
+            destination_rect.w = SPRITE_SIZE;
+            destination_rect.h = SPRITE_SIZE;
+            destination_rect.x = (x - (player.x + 0.5f)) * SPRITE_SIZE + w / 2;
+            destination_rect.y = (y - (player.y + 0.5f)) * SPRITE_SIZE + h / 2;
 
-            // Выбираем текстуру в соответствии с типом клетки.
+            // Выбираем текстуру и область на ней в соответствии с типом клетки.
             switch (map[x][y])
             {
                 case (U_START):
@@ -475,22 +510,25 @@ static void map_draw(void)
                 }
                 case (U_STAKES):
                 {
-                    h_texture = texture_ladder;
+                    h_texture = texture_stakes;
                     break;
                 }
                 case (U_TOXIC):
                 {
                     h_texture = texture_toxic;
+                    source_rect.x = animation_toxic.current_frame * SPRITE_SIZE;
                     break;
                 }
                 case (U_SILVER_COIN):
                 {
                     h_texture = texture_silver_coin;
+                    source_rect.x = animation_silver_coin.current_frame * SPRITE_SIZE;
                     break;
                 }
                 case (U_GOLD_COIN):
                 {
                     h_texture = texture_gold_coin;
+                    source_rect.x = animation_gold_coin.current_frame * SPRITE_SIZE;
                     break;
                 }
             }
@@ -498,15 +536,180 @@ static void map_draw(void)
             // Если данная клетка не имеет графического представления, переходим к следующей.
             if (h_texture == NULL) continue;
 
-            // Учет анимации.
-
             // Рисуем.
-            if (SDL_RenderCopy(render, h_texture, &dest_rect, &dest_rect) != 0)
+            if (SDL_RenderCopy(render, h_texture, &source_rect, &destination_rect) != 0)
             {
                 crash("scene_game.c, map_draw(), не удалось отрисовать клетку карты.\nSDL_GetError() : %s",
                       SDL_GetError());
             }
 
         }
+    }
+}
+
+// Обработка игрока.
+static size_t player_processing(const float _dt)
+{
+    // Контроль игрока.
+    player_control();
+    // Анимация игрока.
+    player_animation(_dt);
+    // Движение игрока.
+    player_move(_dt);
+    // Отрисовка игрока.
+    player_draw();
+
+    return 0;
+}
+
+// Контроль игрока.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static size_t player_control(void)
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event) != 0)
+    {
+        if (event.type == SDL_QUIT)
+        {
+            exit(0);
+        }
+    }
+}
+
+// Просчет анимации игрока.
+// В случае критической ошибки показывает инфорамцию о причине сбоя и крашит программу.
+static void player_animation(const float _dt)
+{
+    animation_processing(&player.a, _dt);
+}
+
+// Движение игрока.
+// В случае критической ошибки показывает информацию о причине ошибки и крашит программу.
+static void player_move(const float _dt)
+{
+    // ...
+}
+
+// Отрисовка игрока.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void player_draw(void)
+{
+    // Определяем размеры клиентской области окна.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    // Определяем точку вывода.
+    const int x = w / 2 - SPRITE_SIZE / 2;
+    const int y = h / 2 - SPRITE_SIZE / 2;
+
+    // Отрисовываемая область текстуры.
+    SDL_Rect source_rect;
+    source_rect.w = SPRITE_SIZE;
+    source_rect.h = SPRITE_SIZE;
+    source_rect.x = player.a.current_frame * SPRITE_SIZE;
+    source_rect.y = 0;
+
+    // Область вывода на поверхности клиентской части окна.
+    SDL_Rect destination_rect;
+    destination_rect.w = SPRITE_SIZE;
+    destination_rect.h = SPRITE_SIZE;
+    destination_rect.x = x;
+    destination_rect.y = y;
+
+    // Отрисовываем игрока.
+    if (SDL_RenderCopy(render, texture_player, &source_rect, &destination_rect) != 0)
+    {
+        crash("scene_game.c, player_draw(), не удалось отрисовать игрока, SDL_GetError() : %s",
+              SDL_GetError());
+    }
+
+}
+
+// Обработка врагов (вся).
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void enemies_processing(const float _dt)
+{
+    for (size_t e = 0; e < enemies_count; ++e)
+    {
+        // Контролируем врага.
+        enemy_control(&enemies[e]);
+        // Анимируем врага.
+        enemy_animation(&enemies[e], _dt);
+        // Движение врага.
+        enemy_move(&enemies[e], _dt);
+        // Отрисовка врага.
+        enemy_draw(&enemies[e]);
+    }
+}
+// Контроль врага.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void enemy_control(enemy_unit *const _enemy)
+{
+    if (_enemy == NULL)
+    {
+        crash("scene_game.c, enemy_control(), _enemy == NULL");
+    }
+}
+// Анимация врага.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void enemy_animation(enemy_unit *const _enemy, const float _dt)
+{
+    if (_enemy == NULL)
+    {
+        crash("scene_game.c, enemy_animation(), _enemy == NULL");
+    }
+    animation_processing(&_enemy->a, _dt);
+}
+// Движение врага.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void enemy_move(enemy_unit *const _enemy, const float _dt)
+{
+    if (_enemy == NULL)
+    {
+        crash("scene_game.c, enemy_move(), _enemy == NULL");
+    }
+}
+// Отрисовка врага.
+// В случае критической ошибки показывает инфорацию о причине сбоя и крашит программу.
+static void enemy_draw(enemy_unit *const _enemy)
+{
+    if (_enemy == NULL)
+    {
+        crash("scene_game.c, enemy_draw()m _enemy == NULL");
+    }
+
+    // Определяем размеры клиентской области экрана.
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    // Определяем точку вывода.
+    const int x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2;
+    const int y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2;
+
+    // Рисуем только в том случае, если видно хотя бы кусочек врага.
+    // Можно проверять быстрее..............................................................
+    if ( (x < SPRITE_SIZE) || (x > w) || (y < SPRITE_SIZE) || (y > MAP_HEIGHT) )
+    {
+        return;
+    }
+
+    // Отрисовываемая область текстуры.
+    SDL_Rect source_rect;
+    source_rect.w = SPRITE_SIZE;
+    source_rect.h = SPRITE_SIZE;
+    source_rect.x = _enemy->a.current_frame * SPRITE_SIZE;
+    source_rect.y = 0;
+
+    // Область вывода на поверхности клиентской части окна.
+    SDL_Rect destination_rect;
+    destination_rect.w = SPRITE_SIZE;
+    destination_rect.h = SPRITE_SIZE;
+    destination_rect.x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2;
+    destination_rect.y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2;
+
+    if (SDL_RenderCopy(render, _enemy->texture, &source_rect, &destination_rect) != 0)
+    {
+        crash("scene_game.c, enemy_draw(), не удалось отрисовать врага.\nSDL_GetError() : %s",
+              SDL_GetError());
     }
 }

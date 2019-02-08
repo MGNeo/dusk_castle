@@ -16,8 +16,6 @@
 
 typedef struct s_enemy_unit
 {
-    uint8_t active;
-
     float x, y,
           vx, vy;
 
