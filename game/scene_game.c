@@ -672,7 +672,7 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         if (_enemy->vx > 0.f)
         {
             const int i_nx = f_nx + 1;
-            // Если призрак напоролся справа на правый край экрана или на не пустоту.
+            // Если призрак напоролся справа на правый край карты или на не пустоту.
             if ( (i_nx >= MAP_WIDTH) || (map[i_nx][i_ny] != U_EMPTY) )
             {
                 _enemy->vx = -_enemy->vx;
@@ -681,7 +681,7 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         } else {
             // Если празрак движется влево.
             const int i_nx = f_nx;
-            // Если призрак напоролся слева на левый край экрана или на не пустоту.
+            // Если призрак напоролся слева на левый край карты или на не пустоту.
             if ( (i_nx < 0) || (map[i_nx][i_ny] != U_EMPTY) )
             {
                 _enemy->vx = -_enemy->vx;
@@ -701,7 +701,7 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         if (_enemy->vy > 0.f)
         {
             const int i_ny = f_ny + 1;
-            // Если летучая мышь напоролась снизу на нижний край экрана или на не пустоту.
+            // Если летучая мышь напоролась снизу на нижний край карты или на не пустоту.
             if ( (i_ny >= MAP_HEIGHT) || (map[i_nx][i_ny] != U_EMPTY) )
             {
                 _enemy->vy = -_enemy->vy;
@@ -710,7 +710,7 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         } else {
             // Если летучая мышь движется вверх.
             const int i_ny = f_ny;
-            // Если летучая мышь напоролась снизу на нижний край экрана или на не пустоту.
+            // Если летучая мышь напоролась снизу на нижний край карты или на не пустоту.
             if ( (i_ny < 0) || (map[i_nx][i_ny] != U_EMPTY) )
             {
                 _enemy->vy = -_enemy->vy;
