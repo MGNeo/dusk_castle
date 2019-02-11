@@ -525,7 +525,7 @@
 
 1548850204 D
 
-1549555998 source:c:\users\mgneo\desktop\dusk_castle\game\boot.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\boot.c
 	"boot.h"
 	"window.h"
 	"render.h"
@@ -536,34 +536,34 @@
 	"systems.h"
 	<stdlib.h>
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\boot.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\boot.h
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\window.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\window.h
 	<SDL.h>
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\render.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\render.h
 	<SDL.h>
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\glyphs.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\glyphs.h
 	"SDL.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\textures.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\textures.h
 	"SDL.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\crash.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\crash.h
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\sprite.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\sprite.h
 
-1549555999 c:\users\mgneo\desktop\dusk_castle\game\frames.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\frames.h
 
-1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\crash.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\crash.c
 	<windows.h>
 	<stdlib.h>
 	<stdio.h>
 	"crash.h"
 	"hwnd.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\hwnd.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\hwnd.h
 	<windows.h>
 
 1549122104 source:c:\users\mgneo\desktop\dusk_castle\game\draw.c
@@ -583,24 +583,24 @@
 
 1548947094 c:\users\mgneo\desktop\dusk_castle\game\draw.h
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\text.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\text.h
 	<stdlib.h>
 
 1548947095 c:\users\mgneo\desktop\dusk_castle\game\menu.h
 	<stdlib.h>
 
-1549555999 c:\users\mgneo\desktop\dusk_castle\game\player.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\player.h
 	<stdlib.h>
 	"animation.h"
 
-1549647444 c:\users\mgneo\desktop\dusk_castle\game\animation.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\animation.h
 	<stdlib.h>
 
-1549299060 source:c:\users\mgneo\desktop\dusk_castle\game\game.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\game.c
 	"game.h"
 	"scene_menu.h"
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\game.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\game.h
 
 1549202219 c:\users\mgneo\desktop\dusk_castle\game\scenes.h
 	"scene_return_value.h"
@@ -608,7 +608,7 @@
 1548947095 c:\users\mgneo\desktop\dusk_castle\game\processing.h
 	<SDL.h>
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\glyphs.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\glyphs.c
 	"glyphs.h"
 	"crash.h"
 	"render.h"
@@ -616,19 +616,19 @@
 	<stdlib.h>
 	<windows.h>
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\hwnd.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\hwnd.c
 	"SDL_syswm.h"
 	"window.h"
 	"crash.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\main.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\main.c
 	"game.h"
 	"boot.h"
 
 1549134077 source:c:\users\mgneo\desktop\dusk_castle\game\map.c
 	"map.h"
 
-1549555999 c:\users\mgneo\desktop\dusk_castle\game\map.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\map.h
 	<stdint.h>
 
 1548947095 source:c:\users\mgneo\desktop\dusk_castle\game\menu.c
@@ -646,12 +646,12 @@
 	"frames.h"
 	<math.h>
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\render.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\render.c
 	"render.h"
 	"window.h"
 	"crash.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\textures.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\textures.c
 	"textures.h"
 	"frames.h"
 	"sprite.h"
@@ -659,23 +659,23 @@
 	"crash.h"
 	<string.h>
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\window.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\window.c
 	"window.h"
 	"crash.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\text.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\text.c
 	"text.h"
 	"render.h"
 	"glyphs.h"
 	"crash.h"
 	<string.h>
 
-1549651770 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\animation.c
 	"animation.h"
 	"crash.h"
 	"frames.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\systems.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\systems.c
 	"systems.h"
 	"crash.h"
 	<stdlib.h>
@@ -685,7 +685,7 @@
 	<windows.h>
 	<SDL_ttf.h>
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\systems.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\systems.h
 
 1549202413 source:c:\users\mgneo\desktop\dusk_castle\game\scenes.c
 	"scenes.h"
@@ -834,20 +834,20 @@
 1549134077 c:\users\mgneo\desktop\dusk_castle\game\level.h
 	<stdlib.h>
 
-1549555998 source:c:\users\mgneo\desktop\dusk_castle\game\dt.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\dt.c
 	"dt.h"
 	<SDL.h>
 	<stdlib.h>
 
-1549555998 c:\users\mgneo\desktop\dusk_castle\game\dt.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\dt.h
 
-1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_return_value.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_return_value.h
 	<stdlib.h>
 
-1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_menu.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_menu.h
 	"scene_return_value.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_menu.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\scene_menu.c
 	"scene_menu.h"
 	"SDL.h"
 	"window.h"
@@ -1918,7 +1918,7 @@
 1549435294 c:\users\nb529\desktop\dusk_castle_master\game\enemy.h
 	"animation.h"
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_authors.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\scene_authors.c
 	"scene_authors.h"
 	"scene_menu.h"
 	"dt.h"
@@ -1931,12 +1931,12 @@
 	<math.h>
 	<time.h>
 
-1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_authors.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_authors.h
 	"scene_return_value.h"
 
-1549555998 c:\users\mgneo\desktop\dusk_castle\game\fps.h
+1549910439 c:\users\mgneo\desktop\dusk_castle\game\fps.h
 
-1549555999 source:c:\users\mgneo\desktop\dusk_castle\game\scene_help.c
+1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\scene_help.c
 	"scene_menu.h"
 	"units.h"
 	"scene_menu.h"
@@ -1948,16 +1948,16 @@
 	"fps.h"
 	<SDL.h>
 
-1549134077 c:\users\mgneo\desktop\dusk_castle\game\units.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\units.h
 	<limits.h>
 
-1549559837 c:\users\mgneo\desktop\dusk_castle\game\scene_game.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_game.h
 	"scene_return_value.h"
 
-1549299060 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
 	"scene_return_value.h"
 
-1549652387 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
+1549911777 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
 	"scene_game.h"
 	"map.h"
 	"crash.h"
@@ -1976,7 +1976,7 @@
 	<stdio.h>
 	<SDL.h>
 
-1549648135 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
+1549894327 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
 	"animation.h"
 	<SDL.h>
 

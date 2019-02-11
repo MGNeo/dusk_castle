@@ -77,8 +77,6 @@ static void map_draw(void);
 
 // Обработка врагов (вся).
 static void enemies_processing(const float _dt);
-// Контроль врага.
-static void enemy_control(enemy_unit *const _enemy);
 // Анимация врага.
 static void enemy_animation(enemy_unit *const _enemy, const float _dt);
 // Движение врага.
@@ -426,8 +424,8 @@ static void map_draw(void)
     SDL_GetWindowSize(window, &w, &h);
 
     // Определяем, сколько клеток карты умещается по ширине и высоте клиентской области.
-    const int x_count = w / SPRITE_SIZE;
-    const int y_count = h / SPRITE_SIZE;
+    const int x_count = w / SPRITE_SIZE + 1;
+    const int y_count = h / SPRITE_SIZE + 1;
 
     // Определяем, сколько клеток умещается между игроком и краями экрана по ширине и высоте.
     const int half_x_count = x_count / 2;
@@ -482,8 +480,8 @@ static void map_draw(void)
             SDL_Rect destination_rect;
             destination_rect.w = SPRITE_SIZE;
             destination_rect.h = SPRITE_SIZE;
-            destination_rect.x = (x - (player.x + 0.5f)) * SPRITE_SIZE + w / 2;
-            destination_rect.y = (y - (player.y + 0.5f)) * SPRITE_SIZE + h / 2;
+            destination_rect.x = (x - player.x) * SPRITE_SIZE + w / 2.f - SPRITE_SIZE / 2.f + 0.5f;
+            destination_rect.y = (y - player.y) * SPRITE_SIZE + h / 2.f - SPRITE_SIZE / 2.f + 0.5f;
 
             // Выбираем текстуру и область на ней в соответствии с типом клетки.
             switch (map[x][y])
@@ -599,8 +597,8 @@ static void player_draw(void)
     SDL_GetWindowSize(window, &w, &h);
 
     // Определяем точку вывода.
-    const int x = w / 2 - SPRITE_SIZE / 2;
-    const int y = h / 2 - SPRITE_SIZE / 2;
+    const int x = w / 2 - SPRITE_SIZE / 2 + 0.5f;
+    const int y = h / 2 - SPRITE_SIZE / 2 + 0.5f;
 
     // Отрисовываемая область текстуры.
     SDL_Rect source_rect;
@@ -631,8 +629,6 @@ static void enemies_processing(const float _dt)
 {
     for (size_t e = 0; e < enemies_count; ++e)
     {
-        // Контролируем врага.
-        enemy_control(&enemies[e]);
         // Анимируем врага.
         enemy_animation(&enemies[e], _dt);
         // Движение врага.
@@ -641,15 +637,7 @@ static void enemies_processing(const float _dt)
         enemy_draw(&enemies[e]);
     }
 }
-// Контроль врага.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void enemy_control(enemy_unit *const _enemy)
-{
-    if (_enemy == NULL)
-    {
-        crash("scene_game.c, enemy_control(), _enemy == NULL");
-    }
-}
+
 // Анимация врага.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 static void enemy_animation(enemy_unit *const _enemy, const float _dt)
@@ -668,6 +656,70 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
     {
         crash("scene_game.c, enemy_move(), _enemy == NULL");
     }
+
+    /* Потенциально, излишне.
+    if ( (_enemy->x < 0) || (_enemy->x >= MAP_WIDTH) || (_enemy->y < 0) || (_enemy->y >= MAP_HEIGHT) )
+    {
+    }
+    */
+
+    // Враг движется по x (призрак).
+    if (_enemy->vx != 0.f)
+    {
+        const float f_nx = _enemy->x + _enemy->vx * _dt;
+        const int i_ny = _enemy->y;
+        // Если призрак движется вправо.
+        if (_enemy->vx > 0.f)
+        {
+            const int i_nx = f_nx + 1;
+            // Если призрак напоролся справа на правый край экрана или на не пустоту.
+            if ( (i_nx >= MAP_WIDTH) || (map[i_nx][i_ny] != U_EMPTY) )
+            {
+                _enemy->vx = -_enemy->vx;
+                return;
+            }
+        } else {
+            // Если празрак движется влево.
+            const int i_nx = f_nx;
+            // Если призрак напоролся слева на левый край экрана или на не пустоту.
+            if ( (i_nx < 0) || (map[i_nx][i_ny] != U_EMPTY) )
+            {
+                _enemy->vx = -_enemy->vx;
+                return;
+            }
+        }
+        _enemy->x = f_nx;
+        return;
+    }
+
+    // Враг движется по y (летучая мышь).
+    if (_enemy->vy != 0.f)
+    {
+        const float f_ny = _enemy->y + _enemy->vy * _dt;
+        const int i_nx = _enemy->x;
+        // Если летучая мышь движется вниз.
+        if (_enemy->vy > 0.f)
+        {
+            const int i_ny = f_ny + 1;
+            // Если летучая мышь напоролась снизу на нижний край экрана или на не пустоту.
+            if ( (i_ny >= MAP_HEIGHT) || (map[i_nx][i_ny] != U_EMPTY) )
+            {
+                _enemy->vy = -_enemy->vy;
+                return;
+            }
+        } else {
+            // Если летучая мышь движется вверх.
+            const int i_ny = f_ny;
+            // Если летучая мышь напоролась снизу на нижний край экрана или на не пустоту.
+            if ( (i_ny < 0) || (map[i_nx][i_ny] != U_EMPTY) )
+            {
+                _enemy->vy = -_enemy->vy;
+                return;
+            }
+        }
+        _enemy->y = f_ny;
+        return;
+    }
 }
 // Отрисовка врага.
 // В случае критической ошибки показывает инфорацию о причине сбоя и крашит программу.
@@ -675,7 +727,7 @@ static void enemy_draw(enemy_unit *const _enemy)
 {
     if (_enemy == NULL)
     {
-        crash("scene_game.c, enemy_draw()m _enemy == NULL");
+        crash("scene_game.c, enemy_draw(), _enemy == NULL");
     }
 
     // Определяем размеры клиентской области экрана.
@@ -683,12 +735,12 @@ static void enemy_draw(enemy_unit *const _enemy)
     SDL_GetWindowSize(window, &w, &h);
 
     // Определяем точку вывода.
-    const int x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2;
-    const int y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2;
+    const int x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2 - SPRITE_SIZE / 2 + 0.5f;
+    const int y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2 - SPRITE_SIZE / 2 + 0.5f;
 
     // Рисуем только в том случае, если видно хотя бы кусочек врага.
     // Можно проверять быстрее..............................................................
-    if ( (x < SPRITE_SIZE) || (x > w) || (y < SPRITE_SIZE) || (y > MAP_HEIGHT) )
+    if ( (x < SPRITE_SIZE) || (x > w) || (y < SPRITE_SIZE) || (y > h) )
     {
         return;
     }
@@ -704,8 +756,8 @@ static void enemy_draw(enemy_unit *const _enemy)
     SDL_Rect destination_rect;
     destination_rect.w = SPRITE_SIZE;
     destination_rect.h = SPRITE_SIZE;
-    destination_rect.x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2;
-    destination_rect.y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2;
+    destination_rect.x = x;
+    destination_rect.y = y;
 
     if (SDL_RenderCopy(render, _enemy->texture, &source_rect, &destination_rect) != 0)
     {
@@ -713,3 +765,6 @@ static void enemy_draw(enemy_unit *const _enemy)
               SDL_GetError());
     }
 }
+
+
+// Тщательнее разобраться со всеми этими +0.5f и .f смещениями.
