@@ -59,12 +59,10 @@ static void player_add(const float _x,
 
 // Обработка игрока (вся).
 static size_t player_processing(const float _dt);
-// Контроль игрока.
-static size_t player_control(void);
-// Анимации игрока.
-static void player_animation(const float _dt);
 // Движение игрока.
 static void player_move(const float _dt);
+// Анимации игрока.
+static void player_animation(const float _dt);
 // Отрисовка игрока.
 static void player_draw(void);
 
@@ -77,10 +75,10 @@ static void map_draw(void);
 
 // Обработка врагов (вся).
 static void enemies_processing(const float _dt);
-// Анимация врага.
-static void enemy_animation(enemy_unit *const _enemy, const float _dt);
 // Движение врага.
 static void enemy_move(enemy_unit *const _enemy, const float _dt);
+// Анимация врага.
+static void enemy_animation(enemy_unit *const _enemy, const float _dt);
 // Отрисовка врага.
 static void enemy_draw(enemy_unit *const _enemy);
 
@@ -133,6 +131,18 @@ extern scene_return_value scene_game(const size_t _param)
 
     while (1)
     {
+        // Обрабатываем все события.
+
+        // DEBUG
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                exit(0);
+            }
+        }
+
         // Определяем, пришло ли время обрабатывать очередной кадр.
         const float dt = dt_get();
         if (dt > SPF)
@@ -548,30 +558,14 @@ static void map_draw(void)
 // Обработка игрока.
 static size_t player_processing(const float _dt)
 {
-    // Контроль игрока.
-    player_control();
-    // Анимация игрока.
-    player_animation(_dt);
     // Движение игрока.
     player_move(_dt);
+    // Анимация игрока.
+    player_animation(_dt);
     // Отрисовка игрока.
     player_draw();
 
     return 0;
-}
-
-// Контроль игрока.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static size_t player_control(void)
-{
-    SDL_Event event;
-    while (SDL_PollEvent(&event) != 0)
-    {
-        if (event.type == SDL_QUIT)
-        {
-            exit(0);
-        }
-    }
 }
 
 // Просчет анимации игрока.
@@ -582,10 +576,84 @@ static void player_animation(const float _dt)
 }
 
 // Движение игрока.
-// В случае критической ошибки показывает информацию о причине ошибки и крашит программу.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 static void player_move(const float _dt)
 {
-    // ...
+    // Получаем текущее состояние клавиш (обязательно, после обработки всех событий).
+    const Uint8 *const states = SDL_GetKeyboardState(NULL);
+
+    //if (states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT]);
+
+    // Проверка индексов на валидность.
+    // В случае валидности индексов возвращает 1, иначе 0.
+    size_t check_x_y(const int _x,
+                     const int _y)
+    {
+        if ( (_x >= 0) && (_x < MAP_WIDTH) && (_y >= 0) && (_y < MAP_HEIGHT) )
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    // DEBUG без учета лестниц.
+
+    // Ускорение влево.
+    if ( states[SDL_SCANCODE_A] || states[SDL_SCANCODE_LEFT] )
+    {
+        player.vx -= PLAYER_ACCELERATION * _dt;
+        if (player.vx < -PLAYER_SPEED)
+        {
+            player.vx = -PLAYER_SPEED;
+        }
+    }
+
+    // Ускорение вправо.
+    if ( states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT] )
+    {
+        player.vx += PLAYER_ACCELERATION * _dt;
+        if (player.vx > PLAYER_SPEED)
+        {
+            player.vx = PLAYER_SPEED;
+        }
+    }
+
+    // Прыжок.
+    if ( states[SDL_SCANCODE_SPACE] )
+    {
+        player.vy -= PLAYER_ACCELERATION * _dt;
+        if (player.vy <= PLAYER_SPEED)
+        {
+            player.vy = -PLAYER_SPEED;
+        }
+    } else {
+        player.vy += PLAYER_GRAVITY * _dt;
+    }
+
+    // Контроль столкновений (четыре опорные точки).
+
+    // Горизонтальные столкновения.
+    if (player.vx != 0)
+    {
+        const float f_nx = player.x + player.vx * _dt;
+        const float f_ny = player.y + player.vy * _dt;
+        // Игрок движется вправо.
+        if (player.vx > 0.f)
+        {
+            const int i_nx = f_nx + 1 - PLAYER_BODRDER
+            const int i_ny_a = f_ny + PLAYER_BORDER;
+            const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
+            // Если игрок напоролся справа на правый край карты или на стену.
+            if (i_nx >= MAP_WIDTH) || ()
+            // Oh, my brain...
+        }
+    }
+
+    // Вертикальные столкновения.
+
+    // Изменение позиции в соответствии со скоростью.
+    player.x += player.vx * _dt;
+    player.y += player.vy * _dt;
 }
 
 // Отрисовка игрока.
@@ -629,25 +697,15 @@ static void enemies_processing(const float _dt)
 {
     for (size_t e = 0; e < enemies_count; ++e)
     {
-        // Анимируем врага.
-        enemy_animation(&enemies[e], _dt);
         // Движение врага.
         enemy_move(&enemies[e], _dt);
+        // Анимируем врага.
+        enemy_animation(&enemies[e], _dt);
         // Отрисовка врага.
         enemy_draw(&enemies[e]);
     }
 }
 
-// Анимация врага.
-// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
-static void enemy_animation(enemy_unit *const _enemy, const float _dt)
-{
-    if (_enemy == NULL)
-    {
-        crash("scene_game.c, enemy_animation(), _enemy == NULL");
-    }
-    animation_processing(&_enemy->a, _dt);
-}
 // Движение врага.
 // В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
 static void enemy_move(enemy_unit *const _enemy, const float _dt)
@@ -721,6 +779,18 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         return;
     }
 }
+
+// Анимация врага.
+// В случае критической ошибки показывает информацию о причине сбоя и крашит программу.
+static void enemy_animation(enemy_unit *const _enemy, const float _dt)
+{
+    if (_enemy == NULL)
+    {
+        crash("scene_game.c, enemy_animation(), _enemy == NULL");
+    }
+    animation_processing(&_enemy->a, _dt);
+}
+
 // Отрисовка врага.
 // В случае критической ошибки показывает инфорацию о причине сбоя и крашит программу.
 static void enemy_draw(enemy_unit *const _enemy)
@@ -740,7 +810,7 @@ static void enemy_draw(enemy_unit *const _enemy)
 
     // Рисуем только в том случае, если видно хотя бы кусочек врага.
     // Можно проверять быстрее..............................................................
-    if ( (x < SPRITE_SIZE) || (x > w) || (y < SPRITE_SIZE) || (y > h) )
+    if ( (x < -SPRITE_SIZE) || (x > w) || (y < -SPRITE_SIZE) || (y > h) )
     {
         return;
     }
@@ -766,5 +836,5 @@ static void enemy_draw(enemy_unit *const _enemy)
     }
 }
 
-
-// Тщательнее разобраться со всеми этими +0.5f и .f смещениями.
+// TODO: Тщательнее разобраться со всеми этими +0.5f и .f смещениями.
+// TODO: Разные типы клеток карты имеют разный порядок вывода

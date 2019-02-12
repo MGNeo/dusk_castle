@@ -10,6 +10,11 @@
 #include <stdlib.h>
 #include "animation.h"
 
+#define PLAYER_GRAVITY         5
+#define PLAYER_SPEED           4
+#define PLAYER_ACCELERATION   10
+#define PLAYER_BORDER       0.1f
+
 typedef struct s_player_unit
 {
 

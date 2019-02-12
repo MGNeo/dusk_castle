@@ -589,7 +589,7 @@
 1548947095 c:\users\mgneo\desktop\dusk_castle\game\menu.h
 	<stdlib.h>
 
-1549894327 c:\users\mgneo\desktop\dusk_castle\game\player.h
+1549992716 c:\users\mgneo\desktop\dusk_castle\game\player.h
 	<stdlib.h>
 	"animation.h"
 
@@ -1957,7 +1957,7 @@
 1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
 	"scene_return_value.h"
 
-1549911777 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
+1549993231 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
 	"scene_game.h"
 	"map.h"
 	"crash.h"
