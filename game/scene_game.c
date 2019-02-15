@@ -630,26 +630,102 @@ static void player_move(const float _dt)
         player.vy += PLAYER_GRAVITY * _dt;
     }
 
-    // Контроль столкновений (четыре опорные точки).
-
+    // Контроль столкновений (по 2 опорные точки на каждое направление).
+    const float f_nx = player.x + player.vx * _dt;
+    const float f_ny = player.y + player.vy * _dt;
     // Горизонтальные столкновения.
     if (player.vx != 0)
     {
-        const float f_nx = player.x + player.vx * _dt;
-        const float f_ny = player.y + player.vy * _dt;
+        const int i_ny_a = f_ny + PLAYER_BORDER;
+        const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
         // Игрок движется вправо.
         if (player.vx > 0.f)
         {
-            const int i_nx = f_nx + 1 - PLAYER_BODRDER
-            const int i_ny_a = f_ny + PLAYER_BORDER;
-            const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
-            // Если игрок напоролся справа на правый край карты или на стену.
-            if (i_nx >= MAP_WIDTH) || ()
-            // Oh, my brain...
+            const int i_nx = f_nx + 1 - PLAYER_BORDER;
+            if (check_x_y(i_nx, i_ny_a) == 1)
+            {
+                if (map[i_nx][i_ny_a] == U_WALL)
+                {
+                    player.vx = 0.f;
+                    return;
+                }
+            }
+            if (check_x_y(i_nx, i_ny_b) == 1)
+            {
+                if (map[i_nx][i_ny_b] == U_WALL)
+                {
+                    player.vx = 0.f;
+                    return;
+                }
+            }
+        } else {
+            // Игрок движется влево.
+            const int i_nx = f_nx + PLAYER_BORDER;
+            if (check_x_y(i_nx, i_ny_a) == 1)
+            {
+                if (map[i_nx][i_ny_a] == U_WALL)
+                {
+                    player.vx = 0.f;
+                    return;
+                }
+            }
+            if (check_x_y(i_nx, i_ny_a) == 1)
+            {
+                if (map[i_nx][i_ny_b] == U_WALL)
+                {
+                    player.vx = 0.f;
+                    return;
+                }
+            }
         }
     }
 
     // Вертикальные столкновения.
+    if (player.vy != 0.f)
+    {
+        const int i_nx_a = f_nx + PLAYER_BORDER;
+        const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
+        // Игрок движется вниз.
+        if (player.vy > 0.f)
+        {
+            const int i_ny = f_ny + 1 - PLAYER_BORDER;
+            if (check_x_y(i_nx_a, i_ny) == 1)
+            {
+                if (map[i_nx_a][i_ny] == U_WALL)
+                {
+                    player.vy = 0.f;
+                    return;
+                }
+            }
+            if (check_x_y(i_nx_b, i_ny) == 1)
+            {
+                if (map[i_nx_b][i_ny] == U_WALL)
+                {
+                    player.vy = 0.f;
+                    return;
+                }
+            }
+        } else {
+            // Игрок движется вверх.
+            const int i_ny = f_ny + PLAYER_BORDER;
+            if (check_x_y(i_nx_a, i_ny) == 1)
+            {
+                if (map[i_nx_a][i_ny] == U_WALL)
+                {
+                    player.vy = 0.f;
+                    return;
+                }
+            }
+            if (check_x_y(i_nx_b, i_ny) == 1)
+            {
+                if (map[i_nx_b][i_ny] == U_WALL)
+                {
+                    player.vy = 0.f;
+                    return;
+                }
+            }
+        }
+    }
 
     // Изменение позиции в соответствии со скоростью.
     player.x += player.vx * _dt;
