@@ -650,6 +650,8 @@ static void player_move(const float _dt)
                 {
                     player.vx = 0.f;
                 }
+            } else {
+                player.vx = 0.f;
             }
             if (check_x_y(i_nx, i_ny_b) == 1)
             {
@@ -657,6 +659,8 @@ static void player_move(const float _dt)
                 {
                     player.vx = 0.f;
                 }
+            } else {
+                player.vx = 0.f;
             }
         } else {
             // Игрок движется влево.
@@ -667,6 +671,8 @@ static void player_move(const float _dt)
                 {
                     player.vx = 0.f;
                 }
+            } else {
+                player.vx = 0.f;
             }
             if (check_x_y(i_nx, i_ny_a) == 1)
             {
@@ -674,6 +680,8 @@ static void player_move(const float _dt)
                 {
                     player.vx = 0.f;
                 }
+            } else {
+                player.vx = 0.f;
             }
         }
     }
@@ -696,6 +704,8 @@ static void player_move(const float _dt)
                 {
                     player.vy = 0.f;
                 }
+            } else {
+                player.vy = 0.f;
             }
             if (check_x_y(i_nx_b, i_ny) == 1)
             {
@@ -703,6 +713,8 @@ static void player_move(const float _dt)
                 {
                     player.vy = 0.f;
                 }
+            } else {
+                player.vy = 0.f;
             }
         } else {
             // Игрок движется вверх.
@@ -713,6 +725,8 @@ static void player_move(const float _dt)
                 {
                     player.vy = 0.f;
                 }
+            } else {
+                player.vy = 0.f;
             }
 
             if (check_x_y(i_nx_b, i_ny) == 1)
@@ -721,6 +735,8 @@ static void player_move(const float _dt)
                 {
                     player.vy = 0.f;
                 }
+            } else {
+                player.vy = 0.f;
             }
         }
     }
