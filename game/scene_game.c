@@ -631,11 +631,13 @@ static void player_move(const float _dt)
     }
 
     // Контроль столкновений (по 2 опорные точки на каждое направление).
-    const float f_nx = player.x + player.vx * _dt;
-    const float f_ny = player.y + player.vy * _dt;
+
     // Горизонтальные столкновения.
     if (player.vx != 0)
     {
+        const float f_nx = player.x + player.vx * _dt;
+        const float f_ny = player.y;
+
         const int i_ny_a = f_ny + PLAYER_BORDER;
         const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
         // Игрок движется вправо.
@@ -647,7 +649,6 @@ static void player_move(const float _dt)
                 if (map[i_nx][i_ny_a] == U_WALL)
                 {
                     player.vx = 0.f;
-                    return;
                 }
             }
             if (check_x_y(i_nx, i_ny_b) == 1)
@@ -655,7 +656,6 @@ static void player_move(const float _dt)
                 if (map[i_nx][i_ny_b] == U_WALL)
                 {
                     player.vx = 0.f;
-                    return;
                 }
             }
         } else {
@@ -666,7 +666,6 @@ static void player_move(const float _dt)
                 if (map[i_nx][i_ny_a] == U_WALL)
                 {
                     player.vx = 0.f;
-                    return;
                 }
             }
             if (check_x_y(i_nx, i_ny_a) == 1)
@@ -674,7 +673,6 @@ static void player_move(const float _dt)
                 if (map[i_nx][i_ny_b] == U_WALL)
                 {
                     player.vx = 0.f;
-                    return;
                 }
             }
         }
@@ -683,6 +681,9 @@ static void player_move(const float _dt)
     // Вертикальные столкновения.
     if (player.vy != 0.f)
     {
+        const float f_nx = player.x;
+        const float f_ny = player.y + player.vy * _dt;
+
         const int i_nx_a = f_nx + PLAYER_BORDER;
         const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
         // Игрок движется вниз.
@@ -694,7 +695,6 @@ static void player_move(const float _dt)
                 if (map[i_nx_a][i_ny] == U_WALL)
                 {
                     player.vy = 0.f;
-                    return;
                 }
             }
             if (check_x_y(i_nx_b, i_ny) == 1)
@@ -702,7 +702,6 @@ static void player_move(const float _dt)
                 if (map[i_nx_b][i_ny] == U_WALL)
                 {
                     player.vy = 0.f;
-                    return;
                 }
             }
         } else {
@@ -713,15 +712,14 @@ static void player_move(const float _dt)
                 if (map[i_nx_a][i_ny] == U_WALL)
                 {
                     player.vy = 0.f;
-                    return;
                 }
             }
+
             if (check_x_y(i_nx_b, i_ny) == 1)
             {
                 if (map[i_nx_b][i_ny] == U_WALL)
                 {
                     player.vy = 0.f;
-                    return;
                 }
             }
         }
