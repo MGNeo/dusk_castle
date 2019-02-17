@@ -145,6 +145,10 @@ extern scene_return_value scene_game(const size_t _param)
 
         // Определяем, пришло ли время обрабатывать очередной кадр.
         const float dt = dt_get();
+
+        // TODO: В случае ощутимого пролага (fps < 20), не производить просчет, чтобы
+        // игрок и враги не проваливались сквозь стены, и чтобы все просчеты были корректными.
+
         if (dt > SPF)
         {
             // DEBUG
@@ -153,11 +157,11 @@ extern scene_return_value scene_game(const size_t _param)
             // Обрабатываем карту.
             map_processing(dt);
 
-            // Обрабатываем игрока.
-            player_processing(dt);
-
             // Обрабатываем врагов.
             enemies_processing(dt);
+
+            // Обрабатываем игрока.
+            player_processing(dt);
 
             // Устанавливаем точку отсчета времени.
             dt_reset();
@@ -596,38 +600,159 @@ static void player_move(const float _dt)
         return 0;
     }
 
-    // DEBUG без учета лестниц.
+    // Действие гравитации.
+    // TODO: на лестнице гравитация не действует.
+    player.vy += PLAYER_GRAVITY * _dt;
 
-    // Ускорение влево.
-    if ( states[SDL_SCANCODE_A] || states[SDL_SCANCODE_LEFT] )
+    // Обработка управления.
     {
-        player.vx -= PLAYER_ACCELERATION * _dt;
-        if (player.vx < -PLAYER_SPEED)
+        const float f_nx = player.x;
+        const float f_ny = player.y + player.vy * _dt;
+
+        const int i_nx_a = f_nx + PLAYER_BORDER;
+        const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
+        const int i_ny = f_ny + 1 - PLAYER_BORDER;
+
+        // Ускорение влево.
+        if ( states[SDL_SCANCODE_A] || states[SDL_SCANCODE_LEFT] )
         {
-            player.vx = -PLAYER_SPEED;
-        }
-    }
+            if (check_x_y(i_nx_a, i_ny) == 1)
+            {
+                if (map[i_nx_a][i_ny] == U_WALL)
+                {
+                    player.vx -= PLAYER_ACCELERATION * _dt;
+                }
+            } else {
+                player.vx -= PLAYER_ACCELERATION * _dt;
+            }
 
-    // Ускорение вправо.
-    if ( states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT] )
-    {
-        player.vx += PLAYER_ACCELERATION * _dt;
+            // Нужно избавиться от дублирования кода.
+
+            if (check_x_y(i_nx_b, i_ny) == 1)
+            {
+                if (map[i_nx_b][i_ny] == U_WALL)
+                {
+                    player.vx -= PLAYER_ACCELERATION * _dt;
+                }
+            } else {
+                player.vx -= PLAYER_ACCELERATION * _dt;
+            }
+        }
+
+        // Ускорение вправо.
+        if ( states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT] )
+        {
+            if (check_x_y(i_nx_a, i_ny) == 1)
+            {
+                if (map[i_nx_a][i_ny] == U_WALL)
+                {
+                    player.vx += PLAYER_ACCELERATION * _dt;
+                }
+            } else {
+                player.vx += PLAYER_ACCELERATION * _dt;
+            }
+
+            if (check_x_y(i_nx_b, i_ny) == 1)
+            {
+                if (map[i_nx_b][i_ny] == U_WALL)
+                {
+                    player.vx += PLAYER_ACCELERATION * _dt;
+                }
+            } else {
+                player.vx + PLAYER_ACCELERATION * _dt;
+            }
+        }
+
+        // Торможение, если никакая кнопка не нажата.
+        int deceleration = 0;
+        if ( !states[SDL_SCANCODE_A] &&
+             !states[SDL_SCANCODE_LEFT] &&
+             !states[SDL_SCANCODE_D] &&
+             !states[SDL_SCANCODE_RIGHT] )
+        {
+            if (check_x_y(i_nx_a, i_ny) == 1)
+            {
+                if (map[i_nx_a][i_ny] == U_WALL)
+                {
+                    deceleration = 1;
+                }
+            } else {
+                deceleration = 1;
+            }
+
+            if (check_x_y(i_nx_b, i_ny) == 1)
+            {
+                if (map[i_nx_b][i_ny] == U_WALL)
+                {
+                    deceleration = 1;
+                }
+            } else {
+                deceleration = 1;
+            }
+
+            if (deceleration)
+            {
+                if (player.vx != 0.f)
+                {
+                    if (player.vx > 0.f)
+                    {
+                        player.vx -= PLAYER_ACCELERATION * _dt;
+                        if (player.vx < 0.f)
+                        {
+                            player.vx = 0.f;
+                        }
+                    } else {
+                        player.vx += PLAYER_ACCELERATION * _dt;
+                        if (player.vx > 0.f)
+                        {
+                            player.vx = 0.f;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Ограничение максимальной скорости.
         if (player.vx > PLAYER_SPEED)
         {
             player.vx = PLAYER_SPEED;
         }
+        if (player.vx < - PLAYER_SPEED)
+        {
+            player.vx = - PLAYER_SPEED;
+        }
     }
+
+    // TODO: Если не нажаты кнопки управления, и под игроком есть стена, то он замедляется со своим ускорением.
 
     // Прыжок.
     if ( states[SDL_SCANCODE_SPACE] )
     {
-        player.vy -= PLAYER_ACCELERATION * _dt;
-        if (player.vy <= PLAYER_SPEED)
+        const float f_nx = player.x;
+        const float f_ny = player.y + player.vy * _dt;
+
+        const int i_nx_a = f_nx + PLAYER_BORDER;
+        const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
+        const int i_ny = f_ny + 1 - PLAYER_BORDER;
+
+        if (check_x_y(i_nx_a, i_ny) == 1)
         {
-            player.vy = -PLAYER_SPEED;
+            if (map[i_nx_a][i_ny] == U_WALL)
+            {
+                player.vy = -PLAYER_JUMP;
+            }
+        } else {
+            player.vy = -PLAYER_JUMP;
         }
-    } else {
-        player.vy += PLAYER_GRAVITY * _dt;
+        if (check_x_y(i_nx_b, i_ny) == 1)
+        {
+            if (map[i_nx_b][i_ny] == U_WALL)
+            {
+                player.vy = -PLAYER_JUMP;
+            }
+        } else {
+            player.vy = -PLAYER_JUMP;
+        }
     }
 
     // Контроль столкновений (по 2 опорные точки на каждое направление).
@@ -755,8 +880,8 @@ static void player_draw(void)
     SDL_GetWindowSize(window, &w, &h);
 
     // Определяем точку вывода.
-    const int x = w / 2 - SPRITE_SIZE / 2 + 0.5f;
-    const int y = h / 2 - SPRITE_SIZE / 2 + 0.5f;
+    const int x = w / 2.f - SPRITE_SIZE / 2.f + 0.5f;
+    const int y = h / 2.f - SPRITE_SIZE / 2.f + 0.5f;
 
     // Отрисовываемая область текстуры.
     SDL_Rect source_rect;
@@ -811,6 +936,18 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
     }
     */
 
+    // Проверка свободности ячейки.
+    // Если ячейка свободна, возвращает 1, иначе 0.
+    int check_free_cell(const uint8_t _cell_state)
+    {
+        if ( (_cell_state == U_BORDER) || (_cell_state == U_WALL) ||
+             (_cell_state == U_STAKES) || (_cell_state == U_TOXIC) )
+        {
+            return 0;
+        }
+        return 1;
+    }
+
     // Враг движется по x (призрак).
     if (_enemy->vx != 0.f)
     {
@@ -820,8 +957,8 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         if (_enemy->vx > 0.f)
         {
             const int i_nx = f_nx + 1;
-            // Если призрак напоролся справа на правый край карты или на не пустоту.
-            if ( (i_nx >= MAP_WIDTH) || (map[i_nx][i_ny] != U_EMPTY) )
+            // Если призрак напоролся справа на правый край карты или на несвободную для него ячейку.
+            if ( (i_nx >= MAP_WIDTH) || (check_free_cell(map[i_nx][i_ny]) == 0) )
             {
                 _enemy->vx = -_enemy->vx;
                 return;
@@ -829,8 +966,8 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         } else {
             // Если празрак движется влево.
             const int i_nx = f_nx;
-            // Если призрак напоролся слева на левый край карты или на не пустоту.
-            if ( (i_nx < 0) || (map[i_nx][i_ny] != U_EMPTY) )
+            // Если призрак напоролся слева на левый край карты или на несвободную для него ячейку.
+            if ( (i_nx < 0) || (check_free_cell(map[i_nx][i_ny]) == 0) )
             {
                 _enemy->vx = -_enemy->vx;
                 return;
@@ -849,8 +986,8 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         if (_enemy->vy > 0.f)
         {
             const int i_ny = f_ny + 1;
-            // Если летучая мышь напоролась снизу на нижний край карты или на не пустоту.
-            if ( (i_ny >= MAP_HEIGHT) || (map[i_nx][i_ny] != U_EMPTY) )
+            // Если летучая мышь напоролась снизу на нижний край карты или на несвободную для нее ячейку.
+            if ( (i_ny >= MAP_HEIGHT) || (check_free_cell(map[i_nx][i_ny]) == 0) )
             {
                 _enemy->vy = -_enemy->vy;
                 return;
@@ -858,8 +995,8 @@ static void enemy_move(enemy_unit *const _enemy, const float _dt)
         } else {
             // Если летучая мышь движется вверх.
             const int i_ny = f_ny;
-            // Если летучая мышь напоролась снизу на нижний край карты или на не пустоту.
-            if ( (i_ny < 0) || (map[i_nx][i_ny] != U_EMPTY) )
+            // Если летучая мышь напоролась снизу на нижний край карты или на несвободную для нее ячейку.
+            if ( (i_ny < 0) || (check_free_cell(map[i_nx][i_ny]) == 0) )
             {
                 _enemy->vy = -_enemy->vy;
                 return;
@@ -895,8 +1032,8 @@ static void enemy_draw(enemy_unit *const _enemy)
     SDL_GetWindowSize(window, &w, &h);
 
     // Определяем точку вывода.
-    const int x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2 - SPRITE_SIZE / 2 + 0.5f;
-    const int y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2 - SPRITE_SIZE / 2 + 0.5f;
+    const int x = (_enemy->x - player.x) * SPRITE_SIZE + w / 2.f - SPRITE_SIZE / 2.f + 0.5f;
+    const int y = (_enemy->y - player.y) * SPRITE_SIZE + h / 2.f - SPRITE_SIZE / 2.f + 0.5f;
 
     // Рисуем только в том случае, если видно хотя бы кусочек врага.
     // Можно проверять быстрее..............................................................
@@ -926,5 +1063,6 @@ static void enemy_draw(enemy_unit *const _enemy)
     }
 }
 
-// TODO: Тщательнее разобраться со всеми этими +0.5f и .f смещениями.
+// TODO: на лестнице игрок не падает.
+// TODO: прыжок игрока должен осуществляться только со стен.
 // TODO: Разные типы клеток карты имеют разный порядок вывода
