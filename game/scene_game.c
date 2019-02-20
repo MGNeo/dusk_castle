@@ -600,8 +600,9 @@ static void player_move(const float _dt)
         return 0;
     }
 
-    // Действие гравитации.
     // TODO: на лестнице гравитация не действует.
+
+    // Действие гравитации.
     player.vy += PLAYER_GRAVITY * _dt;
 
     // Обработка управления.
