@@ -38,9 +38,18 @@ extern scene_return_value scene_authors(const size_t _param)
             return next_scene();
         }
 
-        // Обработка отрисовки.
-        if (dt_get() > SPF)
+        // Определяем время, прошедшее с обработки последнего кадра.
+        float dt = dt_get();
+
+        // Если пришло время обрабатывать кадр.
+        if (dt > SPF)
         {
+            // Слишком большие dt (при пролаге) приводим к допустимой величине.
+            if (dt > MAX_SPF)
+            {
+                dt = MAX_SPF;
+            }
+
             draw();
             dt_reset();
         }

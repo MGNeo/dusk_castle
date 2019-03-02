@@ -40,9 +40,16 @@ extern scene_return_value scene_help(const size_t _param)
             return next_scene();
         }
 
-        // Рисуем.
-        if (dt_get() > SPF)
+        // Определяем время, прошедшее с обработки последнего кадра.
+        float dt = dt_get();
+
+        if (dt > SPF)
         {
+            // Слишком большие dt (при пролаге) приводим к допустимой величине.
+            if (dt > MAX_SPF)
+            {
+                dt = MAX_SPF;
+            }
             draw();
             dt_reset();
         }

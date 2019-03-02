@@ -143,14 +143,18 @@ extern scene_return_value scene_game(const size_t _param)
             }
         }
 
-        // Определяем, пришло ли время обрабатывать очередной кадр.
-        const float dt = dt_get();
+        // Определяем время, прошедшее с обработки последнего кадра.
+        float dt = dt_get();
 
-        // TODO: В случае ощутимого пролага (fps < 20), не производить просчет, чтобы
-        // игрок и враги не проваливались сквозь стены, и чтобы все просчеты были корректными.
-
+        // Если пора обрабатывать кадр.
         if (dt > SPF)
         {
+            // Слишком большие dt (при пролаге) приводим к допустимой величине.
+            if (dt > MAX_SPF)
+            {
+                dt = MAX_SPF;
+            }
+
             // DEBUG
             SDL_RenderClear(render);
 
@@ -602,10 +606,39 @@ static void player_move(const float _dt)
 
     // TODO: на лестнице гравитация не действует.
 
-    // Действие гравитации.
-    player.vy += PLAYER_GRAVITY * _dt;
+    // Контроль ползанья по лестницам.
+    {
+        const float f_x = player.x;
+        const float f_y = player.y;
 
-    // Обработка управления.
+        const int i_x = f_x + 0.5f;
+
+        const int i_y_a = f_y + PLAYER_BORDER;
+        const int i_y_b = f_y + 1 - PLAYER_BORDER;
+
+        // Если игрок хотя бы одной из своих точек находится на лестнице.
+        if ( ((check_x_y(i_x, i_y_a) == 1) && (map[i_x][i_y_a] == U_LADDER)) ||
+             ((check_x_y(i_x, i_y_b) == 1) && (map[i_x][i_y_b] == U_LADDER)) )
+        {
+            // Его вертикальная скорость сбрасывается.
+            player.vy = 0.f;
+
+            if ( states[SDL_SCANCODE_W] || states[SDL_SCANCODE_UP] )
+            {
+                player.vy = -1;
+            }
+
+            if ( states[SDL_SCANCODE_S] || states[SDL_SCANCODE_DOWN] )
+            {
+                player.vy = 1;
+            }
+        } else {
+            // Действие гравитации.
+            player.vy += PLAYER_GRAVITY * _dt;
+        }
+    }
+
+    // Обработка горизонтального управления.
     {
         const float f_nx = player.x;
         const float f_ny = player.y + player.vy * _dt;
@@ -619,7 +652,7 @@ static void player_move(const float _dt)
         {
             if (check_x_y(i_nx_a, i_ny) == 1)
             {
-                if (map[i_nx_a][i_ny] == U_WALL)
+                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
                 {
                     player.vx -= PLAYER_ACCELERATION * _dt;
                 }
@@ -631,7 +664,7 @@ static void player_move(const float _dt)
 
             if (check_x_y(i_nx_b, i_ny) == 1)
             {
-                if (map[i_nx_b][i_ny] == U_WALL)
+                if ( (map[i_nx_b][i_ny] == U_WALL) || (map[i_nx_b][i_ny] == U_LADDER) )
                 {
                     player.vx -= PLAYER_ACCELERATION * _dt;
                 }
@@ -645,7 +678,7 @@ static void player_move(const float _dt)
         {
             if (check_x_y(i_nx_a, i_ny) == 1)
             {
-                if (map[i_nx_a][i_ny] == U_WALL)
+                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
                 {
                     player.vx += PLAYER_ACCELERATION * _dt;
                 }
@@ -655,25 +688,26 @@ static void player_move(const float _dt)
 
             if (check_x_y(i_nx_b, i_ny) == 1)
             {
-                if (map[i_nx_b][i_ny] == U_WALL)
+                if ( (map[i_nx_b][i_ny] == U_WALL) || (map[i_nx_b][i_ny] == U_LADDER) )
                 {
                     player.vx += PLAYER_ACCELERATION * _dt;
                 }
             } else {
-                player.vx + PLAYER_ACCELERATION * _dt;
+                player.vx += PLAYER_ACCELERATION * _dt;
             }
         }
 
-        // Торможение, если никакая кнопка не нажата.
-        int deceleration = 0;
-        if ( !states[SDL_SCANCODE_A] &&
-             !states[SDL_SCANCODE_LEFT] &&
-             !states[SDL_SCANCODE_D] &&
-             !states[SDL_SCANCODE_RIGHT] )
+        // Торможение, если нет команды влево или вправо, и если под игроком есть стена или лестница...
+        if (!states[SDL_SCANCODE_A] &&
+            !states[SDL_SCANCODE_LEFT] &&
+            !states[SDL_SCANCODE_D] &&
+            !states[SDL_SCANCODE_RIGHT])
         {
+            int deceleration = 0;
+
             if (check_x_y(i_nx_a, i_ny) == 1)
             {
-                if (map[i_nx_a][i_ny] == U_WALL)
+                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
                 {
                     deceleration = 1;
                 }
@@ -683,7 +717,7 @@ static void player_move(const float _dt)
 
             if (check_x_y(i_nx_b, i_ny) == 1)
             {
-                if (map[i_nx_b][i_ny] == U_WALL)
+                if ( (map[i_nx_b][i_ny] == U_WALL) || ((map[i_nx_b][i_ny] == U_WALL)) )
                 {
                     deceleration = 1;
                 }
@@ -713,7 +747,7 @@ static void player_move(const float _dt)
             }
         }
 
-        // Ограничение максимальной скорости.
+        // Ограничение максимальной горизонтальной скорости.
         if (player.vx > PLAYER_SPEED)
         {
             player.vx = PLAYER_SPEED;
@@ -724,9 +758,7 @@ static void player_move(const float _dt)
         }
     }
 
-    // TODO: Если не нажаты кнопки управления, и под игроком есть стена, то он замедляется со своим ускорением.
-
-    // Прыжок.
+    // Обработка прыжка.
     if ( states[SDL_SCANCODE_SPACE] )
     {
         const float f_nx = player.x;
@@ -756,7 +788,7 @@ static void player_move(const float _dt)
         }
     }
 
-    // Контроль столкновений (по 2 опорные точки на каждое направление).
+    // Контроль столкновений (по 2 опорные точки на каждое из четырех направлений).
 
     // Горизонтальные столкновения.
     if (player.vx != 0)
@@ -766,6 +798,7 @@ static void player_move(const float _dt)
 
         const int i_ny_a = f_ny + PLAYER_BORDER;
         const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
+
         // Игрок движется вправо.
         if (player.vx > 0.f)
         {
