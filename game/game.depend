@@ -1934,7 +1934,7 @@
 1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_authors.h
 	"scene_return_value.h"
 
-1551558274 c:\users\mgneo\desktop\dusk_castle\game\fps.h
+1551620511 c:\users\mgneo\desktop\dusk_castle\game\fps.h
 
 1551558842 source:c:\users\mgneo\desktop\dusk_castle\game\scene_help.c
 	"scene_menu.h"
@@ -1957,7 +1957,7 @@
 1549894327 c:\users\mgneo\desktop\dusk_castle\game\scene_help.h
 	"scene_return_value.h"
 
-1551563244 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
+1551622278 source:c:\users\mgneo\desktop\dusk_castle\game\scene_game.c
 	"scene_game.h"
 	"map.h"
 	"crash.h"
@@ -1975,6 +1975,7 @@
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
+	<math.h>
 
 1549894327 c:\users\mgneo\desktop\dusk_castle\game\enemy.h
 	"animation.h"

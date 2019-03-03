@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL.h>
+#include <math.h>
 
 #define MAX_LEVEL 99
 
@@ -604,6 +605,24 @@ static void player_move(const float _dt)
         return 0;
     }
 
+    // Проверка столкновения со стенами и краями карты.
+    // В случае столкновения возвращает 1, иначе 0.
+    size_t check_collision(const int _x,
+                           const int _y)
+    {
+        if (check_x_y(_x, _y) == 1)
+        {
+            if (map[_x][_y] == U_WALL)
+            {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 1;
+        }
+    }
+
     // TODO: на лестнице гравитация не действует.
 
     // Контроль ползанья по лестницам.
@@ -640,108 +659,38 @@ static void player_move(const float _dt)
 
     // Обработка горизонтального управления.
     {
-        const float f_nx = player.x;
-        const float f_ny = player.y + player.vy * _dt;
-
-        const int i_nx_a = f_nx + PLAYER_BORDER;
-        const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
-        const int i_ny = f_ny + 1 - PLAYER_BORDER;
-
         // Ускорение влево.
         if ( states[SDL_SCANCODE_A] || states[SDL_SCANCODE_LEFT] )
         {
-            if (check_x_y(i_nx_a, i_ny) == 1)
-            {
-                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
-                {
-                    player.vx -= PLAYER_ACCELERATION * _dt;
-                }
-            } else {
-                player.vx -= PLAYER_ACCELERATION * _dt;
-            }
-
-            // Нужно избавиться от дублирования кода.
-
-            if (check_x_y(i_nx_b, i_ny) == 1)
-            {
-                if ( (map[i_nx_b][i_ny] == U_WALL) || (map[i_nx_b][i_ny] == U_LADDER) )
-                {
-                    player.vx -= PLAYER_ACCELERATION * _dt;
-                }
-            } else {
-                player.vx -= PLAYER_ACCELERATION * _dt;
-            }
+            player.vx -= PLAYER_ACCELERATION * _dt;
         }
 
         // Ускорение вправо.
         if ( states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT] )
         {
-            if (check_x_y(i_nx_a, i_ny) == 1)
-            {
-                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
-                {
-                    player.vx += PLAYER_ACCELERATION * _dt;
-                }
-            } else {
-                player.vx += PLAYER_ACCELERATION * _dt;
-            }
-
-            if (check_x_y(i_nx_b, i_ny) == 1)
-            {
-                if ( (map[i_nx_b][i_ny] == U_WALL) || (map[i_nx_b][i_ny] == U_LADDER) )
-                {
-                    player.vx += PLAYER_ACCELERATION * _dt;
-                }
-            } else {
-                player.vx += PLAYER_ACCELERATION * _dt;
-            }
+            player.vx += PLAYER_ACCELERATION * _dt;
         }
 
-        // Торможение, если нет команды влево или вправо, и если под игроком есть стена или лестница...
+        // Торможение, если нет команды влево или вправо...
         if (!states[SDL_SCANCODE_A] &&
             !states[SDL_SCANCODE_LEFT] &&
             !states[SDL_SCANCODE_D] &&
             !states[SDL_SCANCODE_RIGHT])
         {
-            int deceleration = 0;
-
-            if (check_x_y(i_nx_a, i_ny) == 1)
+            if (player.vx != 0.f)
             {
-                if ( (map[i_nx_a][i_ny] == U_WALL) || (map[i_nx_a][i_ny] == U_LADDER) )
-                {
-                    deceleration = 1;
-                }
-            } else {
-                deceleration = 1;
-            }
-
-            if (check_x_y(i_nx_b, i_ny) == 1)
-            {
-                if ( (map[i_nx_b][i_ny] == U_WALL) || ((map[i_nx_b][i_ny] == U_WALL)) )
-                {
-                    deceleration = 1;
-                }
-            } else {
-                deceleration = 1;
-            }
-
-            if (deceleration)
-            {
-                if (player.vx != 0.f)
-                {
+                if (player.vx > 0.f)
+                   {
+                    player.vx -= PLAYER_ACCELERATION * _dt * 0.25f;
+                    if (player.vx < 0.f)
+                    {
+                        player.vx = 0.f;
+                    }
+                } else {
+                    player.vx += PLAYER_ACCELERATION * _dt * 0.25f;
                     if (player.vx > 0.f)
                     {
-                        player.vx -= PLAYER_ACCELERATION * _dt;
-                        if (player.vx < 0.f)
-                        {
-                            player.vx = 0.f;
-                        }
-                    } else {
-                        player.vx += PLAYER_ACCELERATION * _dt;
-                        if (player.vx > 0.f)
-                        {
-                            player.vx = 0.f;
-                        }
+                        player.vx = 0.f;
                     }
                 }
             }
@@ -788,121 +737,97 @@ static void player_move(const float _dt)
         }
     }
 
-    // Контроль столкновений (по 2 опорные точки на каждое из четырех направлений).
+    // Контроль столкновений (4 опроные точки).
 
-    // Горизонтальные столкновения.
-    if (player.vx != 0)
+    const float dx = player.vx * _dt;
+    const float dy = player.vy * _dt;
+    const float v = sqrt( pow(dx, 2) + pow(dy, 2) );
+
+    float current_dx = 0.f;
+    float current_dy = 0.f;
+
+    if (v != 0.f)
     {
-        const float f_nx = player.x + player.vx * _dt;
-        const float f_ny = player.y;
+        float step_x = dx / (v / 0.0001f);// ?
+        float step_y = dy / (v / 0.0001f);// ?
 
-        const int i_ny_a = f_ny + PLAYER_BORDER;
-        const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
-
-        // Игрок движется вправо.
-        if (player.vx > 0.f)
+        while ((step_x != 0.f) || (step_y != 0.f))
         {
-            const int i_nx = f_nx + 1 - PLAYER_BORDER;
-            if (check_x_y(i_nx, i_ny_a) == 1)
+            // Шаг обработки по x.
+            if (step_x != 0.f)
             {
-                if (map[i_nx][i_ny_a] == U_WALL)
-                {
-                    player.vx = 0.f;
-                }
-            } else {
-                player.vx = 0.f;
-            }
-            if (check_x_y(i_nx, i_ny_b) == 1)
-            {
-                if (map[i_nx][i_ny_b] == U_WALL)
-                {
-                    player.vx = 0.f;
-                }
-            } else {
-                player.vx = 0.f;
-            }
-        } else {
-            // Игрок движется влево.
-            const int i_nx = f_nx + PLAYER_BORDER;
-            if (check_x_y(i_nx, i_ny_a) == 1)
-            {
-                if (map[i_nx][i_ny_a] == U_WALL)
-                {
-                    player.vx = 0.f;
-                }
-            } else {
-                player.vx = 0.f;
-            }
-            if (check_x_y(i_nx, i_ny_a) == 1)
-            {
-                if (map[i_nx][i_ny_b] == U_WALL)
-                {
-                    player.vx = 0.f;
-                }
-            } else {
-                player.vx = 0.f;
-            }
-        }
-    }
+                current_dx += step_x;
 
-    // Вертикальные столкновения.
-    if (player.vy != 0.f)
-    {
-        const float f_nx = player.x;
-        const float f_ny = player.y + player.vy * _dt;
+                const float f_nx = player.x + current_dx;
+                const float f_ny = player.y + current_dy;
 
-        const int i_nx_a = f_nx + PLAYER_BORDER;
-        const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
-        // Игрок движется вниз.
-        if (player.vy > 0.f)
-        {
-            const int i_ny = f_ny + 1 - PLAYER_BORDER;
-            if (check_x_y(i_nx_a, i_ny) == 1)
-            {
-                if (map[i_nx_a][i_ny] == U_WALL)
+                const int i_nx_a = f_nx + PLAYER_BORDER;
+                const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
+                const int i_ny_a = f_ny + PLAYER_BORDER;
+                const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
+
+                // Этот код можно вынести в функцию и теребить его при vx и vy.
+                if ( (check_collision(i_nx_a, i_ny_a) == 1) ||
+                     (check_collision(i_nx_b, i_ny_a) == 1) ||
+                     (check_collision(i_nx_a, i_ny_b) == 1) ||
+                     (check_collision(i_nx_b, i_ny_b) == 1) )
                 {
-                    player.vy = 0.f;
+                    current_dx -= step_x;// Пофиксить этот костыль.
+                    step_x = 0.f;
+                    player.vx = 0.f;
                 }
-            } else {
-                player.vy = 0.f;
-            }
-            if (check_x_y(i_nx_b, i_ny) == 1)
-            {
-                if (map[i_nx_b][i_ny] == U_WALL)
-                {
-                    player.vy = 0.f;
-                }
-            } else {
-                player.vy = 0.f;
-            }
-        } else {
-            // Игрок движется вверх.
-            const int i_ny = f_ny + PLAYER_BORDER;
-            if (check_x_y(i_nx_a, i_ny) == 1)
-            {
-                if (map[i_nx_a][i_ny] == U_WALL)
-                {
-                    player.vy = 0.f;
-                }
-            } else {
-                player.vy = 0.f;
             }
 
-            if (check_x_y(i_nx_b, i_ny) == 1)
+            // Шаг обработки по y.
+            if (step_y != 0.f)
             {
-                if (map[i_nx_b][i_ny] == U_WALL)
+                current_dy += step_y;
+
+                const float f_nx = player.x + current_dx;
+                const float f_ny = player.y + current_dy;
+
+                const int i_nx_a = f_nx + PLAYER_BORDER;
+                const int i_nx_b = f_nx + 1 - PLAYER_BORDER;
+                const int i_ny_a = f_ny + PLAYER_BORDER;
+                const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
+
+                // Этот код можно вынести в функцию и теребить его при vx и vy.
+                if ( (check_collision(i_nx_a, i_ny_a) == 1) ||
+                     (check_collision(i_nx_b, i_ny_a) == 1) ||
+                     (check_collision(i_nx_a, i_ny_b) == 1) ||
+                     (check_collision(i_nx_b, i_ny_b) == 1) )
                 {
+                    current_dy -= step_y;
+                    step_y = 0.f;
                     player.vy = 0.f;
                 }
-            } else {
-                player.vy = 0.f;
+            }
+
+            // Если прошли необходимое расстояние по x.
+            if ((dx > 0.f) && (current_dx >= dx))
+            {
+                step_x = 0.f;
+            }
+            if ((dx < 0.f) && (current_dx <= dx))
+            {
+                step_x = 0.f;
+            }
+
+            // Если прошли необходимое расстояние по y.
+            if ((dy > 0.f) && (current_dy >= dy))
+            {
+                step_y = 0.f;
+            }
+            if ((dy < 0.f) && (current_dy <= dy))
+            {
+                step_y = 0.f;
             }
         }
     }
 
     // Изменение позиции в соответствии со скоростью.
-    player.x += player.vx * _dt;
-    player.y += player.vy * _dt;
+    player.x += current_dx;
+    player.y += current_dy;
 }
 
 // Отрисовка игрока.
