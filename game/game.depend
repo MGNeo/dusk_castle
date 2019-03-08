@@ -554,7 +554,7 @@
 
 1549894327 c:\users\mgneo\desktop\dusk_castle\game\sprite.h
 
-1549894327 c:\users\mgneo\desktop\dusk_castle\game\frames.h
+1552080647 c:\users\mgneo\desktop\dusk_castle\game\frames.h
 
 1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\crash.c
 	<windows.h>
@@ -593,7 +593,7 @@
 	<stdlib.h>
 	"animation.h"
 
-1549894327 c:\users\mgneo\desktop\dusk_castle\game\animation.h
+1552077434 c:\users\mgneo\desktop\dusk_castle\game\animation.h
 	<stdlib.h>
 
 1549894327 source:c:\users\mgneo\desktop\dusk_castle\game\game.c

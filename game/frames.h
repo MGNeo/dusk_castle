@@ -30,10 +30,10 @@
 #define TOXIC_FRAMES_COUNT 10
 
 // Призрак.
-#define GHOST_FRAMES_COUNT 5
+#define GHOST_FRAMES_COUNT 12
 
 // Летучая мышь.
-#define BAT_FRAMES_COUNT 5
+#define BAT_FRAMES_COUNT 10
 
 // Серебряная монетка.
 #define SILVER_COIN_FRAMES_COUNT 10

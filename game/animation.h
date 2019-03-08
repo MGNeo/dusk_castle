@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 
-#define ANIMATIONS_FPS 3
+#define ANIMATIONS_FPS 20.f
 
 typedef struct s_animation
 {
