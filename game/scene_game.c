@@ -644,16 +644,27 @@ static void player_move(const float _dt)
 
             if ( states[SDL_SCANCODE_W] || states[SDL_SCANCODE_UP] )
             {
-                player.vy = -1;
+                player.vy = -PLAYER_CLIMB_SPEED;
             }
 
             if ( states[SDL_SCANCODE_S] || states[SDL_SCANCODE_DOWN] )
             {
-                player.vy = 1;
+                player.vy = PLAYER_CLIMB_SPEED;
             }
         } else {
             // Действие гравитации.
-            player.vy += PLAYER_GRAVITY * _dt;
+            player.vy += PLAYER_GRAVITY_ACCELERATION * _dt;
+        }
+
+        // Ограничитель максимальной вертикальной скорости.
+        if (player.vy > PLAYER_Y_MAX_SPEED)
+        {
+            player.vy = PLAYER_Y_MAX_SPEED;
+        }
+
+        if (player.vy < -PLAYER_Y_MAX_SPEED)
+        {
+            player.vy = -PLAYER_Y_MAX_SPEED;
         }
     }
 
@@ -662,13 +673,13 @@ static void player_move(const float _dt)
         // Ускорение влево.
         if ( states[SDL_SCANCODE_A] || states[SDL_SCANCODE_LEFT] )
         {
-            player.vx -= PLAYER_ACCELERATION * _dt;
+            player.vx -= PLAYER_WALK_ACCELERATION * _dt;
         }
 
         // Ускорение вправо.
         if ( states[SDL_SCANCODE_D] || states[SDL_SCANCODE_RIGHT] )
         {
-            player.vx += PLAYER_ACCELERATION * _dt;
+            player.vx += PLAYER_WALK_ACCELERATION * _dt;
         }
 
         // Торможение, если нет команды влево или вправо...
@@ -681,13 +692,13 @@ static void player_move(const float _dt)
             {
                 if (player.vx > 0.f)
                    {
-                    player.vx -= PLAYER_ACCELERATION * _dt * 0.25f;
+                    player.vx -= PLAYER_WALK_ACCELERATION * _dt * PLAYER_PASSIVE_BRAKING;
                     if (player.vx < 0.f)
                     {
                         player.vx = 0.f;
                     }
                 } else {
-                    player.vx += PLAYER_ACCELERATION * _dt * 0.25f;
+                    player.vx += PLAYER_WALK_ACCELERATION * _dt * PLAYER_PASSIVE_BRAKING;
                     if (player.vx > 0.f)
                     {
                         player.vx = 0.f;
@@ -697,13 +708,13 @@ static void player_move(const float _dt)
         }
 
         // Ограничение максимальной горизонтальной скорости.
-        if (player.vx > PLAYER_SPEED)
+        if (player.vx > PLAYER_X_MAX_SPEED)
         {
-            player.vx = PLAYER_SPEED;
+            player.vx = PLAYER_X_MAX_SPEED;
         }
-        if (player.vx < - PLAYER_SPEED)
+        if (player.vx < -PLAYER_X_MAX_SPEED)
         {
-            player.vx = - PLAYER_SPEED;
+            player.vx = -PLAYER_X_MAX_SPEED;
         }
     }
 
@@ -721,19 +732,19 @@ static void player_move(const float _dt)
         {
             if (map[i_nx_a][i_ny] == U_WALL)
             {
-                player.vy = -PLAYER_JUMP;
+                player.vy = -PLAYER_JUMP_SPEED;
             }
         } else {
-            player.vy = -PLAYER_JUMP;
+            player.vy = -PLAYER_JUMP_SPEED;
         }
         if (check_x_y(i_nx_b, i_ny) == 1)
         {
             if (map[i_nx_b][i_ny] == U_WALL)
             {
-                player.vy = -PLAYER_JUMP;
+                player.vy = -PLAYER_JUMP_SPEED;
             }
         } else {
-            player.vy = -PLAYER_JUMP;
+            player.vy = -PLAYER_JUMP_SPEED;
         }
     }
 
@@ -741,16 +752,27 @@ static void player_move(const float _dt)
 
     const float dx = player.vx * _dt;
     const float dy = player.vy * _dt;
-    const float v = sqrt( pow(dx, 2) + pow(dy, 2) );
+    const float d = sqrt( pow(dx, 2) + pow(dy, 2) );
 
-    float current_dx = 0.f;
-    float current_dy = 0.f;
-
-    if (v != 0.f)
+    if (d != 0.f)
     {
-        float step_x = dx / (v / 0.0001f);// ?
-        float step_y = dy / (v / 0.0001f);// ?
+        float current_dx = 0.f;
+        float current_dy = 0.f;
 
+        float step_x;
+        float step_y;
+
+        if (fabs(d) <= PLAYER_COLLISION_DETECT_MAX_STEP)
+        {
+            step_x = dx;
+            step_y = dy;
+        } else {
+            const float hd = d / PLAYER_COLLISION_DETECT_MAX_STEP;
+            step_x = dx / hd;
+            step_y = dy / hd;
+        }
+
+        // Цикл шагового детектирования коллизий.
         while ((step_x != 0.f) || (step_y != 0.f))
         {
             // Шаг обработки по x.
@@ -766,13 +788,13 @@ static void player_move(const float _dt)
                 const int i_ny_a = f_ny + PLAYER_BORDER;
                 const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
 
-                // Этот код можно вынести в функцию и теребить его при vx и vy.
+                // Проверяем возможное столкновение.
                 if ( (check_collision(i_nx_a, i_ny_a) == 1) ||
                      (check_collision(i_nx_b, i_ny_a) == 1) ||
                      (check_collision(i_nx_a, i_ny_b) == 1) ||
                      (check_collision(i_nx_b, i_ny_b) == 1) )
                 {
-                    current_dx -= step_x;// Пофиксить этот костыль.
+                    current_dx -= step_x;
                     step_x = 0.f;
                     player.vx = 0.f;
                 }
@@ -791,7 +813,7 @@ static void player_move(const float _dt)
                 const int i_ny_a = f_ny + PLAYER_BORDER;
                 const int i_ny_b = f_ny + 1 - PLAYER_BORDER;
 
-                // Этот код можно вынести в функцию и теребить его при vx и vy.
+                // Проверяем возможное столкновение.
                 if ( (check_collision(i_nx_a, i_ny_a) == 1) ||
                      (check_collision(i_nx_b, i_ny_a) == 1) ||
                      (check_collision(i_nx_a, i_ny_b) == 1) ||
@@ -804,30 +826,25 @@ static void player_move(const float _dt)
             }
 
             // Если прошли необходимое расстояние по x.
-            if ((dx > 0.f) && (current_dx >= dx))
-            {
-                step_x = 0.f;
-            }
-            if ((dx < 0.f) && (current_dx <= dx))
+            if ( ((dx > 0.f) && (current_dx >= dx)) ||
+                 ((dx < 0.f) && (current_dx <= dx)) )
             {
                 step_x = 0.f;
             }
 
             // Если прошли необходимое расстояние по y.
-            if ((dy > 0.f) && (current_dy >= dy))
-            {
-                step_y = 0.f;
-            }
-            if ((dy < 0.f) && (current_dy <= dy))
+            if ( ((dy > 0.f) && (current_dy >= dy)) ||
+                 ((dy < 0.f) && (current_dy <= dy)) )
             {
                 step_y = 0.f;
             }
         }
+        // Изменение позиции в соответствии со скоростью.
+        player.x += current_dx;
+        player.y += current_dy;
     }
 
-    // Изменение позиции в соответствии со скоростью.
-    player.x += current_dx;
-    player.y += current_dy;
+
 }
 
 // Отрисовка игрока.
