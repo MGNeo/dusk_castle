@@ -95,7 +95,7 @@ extern void animation_ghost_init(animation *const _animation)
 
     _animation->t = (rand() % 100) / 100.f;
     _animation->first_frame = 0;
-    _animation->current_frame = 0;//rand() % GHOST_FRAMES_COUNT;
+    _animation->current_frame = rand() % GHOST_FRAMES_COUNT;
     _animation->last_frame = GHOST_FRAMES_COUNT - 1;
 }
 
@@ -110,7 +110,7 @@ extern void animation_bat_init(animation *const _animation)
 
     _animation->t = (rand() % 100) / 100.f;
     _animation->first_frame = 0;
-    _animation->current_frame = 0;//rand() % BAT_FRAMES_COUNT;
+    _animation->current_frame = rand() % BAT_FRAMES_COUNT;
     _animation->last_frame = BAT_FRAMES_COUNT - 1;
 }
 

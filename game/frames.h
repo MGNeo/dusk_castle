@@ -36,9 +36,9 @@
 #define BAT_FRAMES_COUNT 10
 
 // Серебряная монетка.
-#define SILVER_COIN_FRAMES_COUNT 10
+#define SILVER_COIN_FRAMES_COUNT 12
 
 // Золотая монетка.
-#define GOLD_COIN_FRAMES_COUNT 10
+#define GOLD_COIN_FRAMES_COUNT 12
 
 #endif
